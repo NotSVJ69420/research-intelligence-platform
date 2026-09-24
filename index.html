@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Research Intelligence Engine — A Scholarly Apparatus</title>
+  <script>
+    (function() {
+      var t = localStorage.getItem('theme');
+      if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
+      else document.documentElement.setAttribute('data-theme', 'light');
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+
+<body class="antialiased">
+
+  <!-- Paper texture overlay -->
+  <div class="paper-texture"></div>
+
+  <!-- Vignette -->
+  <div class="vignette"></div>
+
+  <!-- ========================= -->
+  <!-- HEADER / NAVIGATION       -->
+  <!-- ========================= -->
+  <header class="fixed w-full z-50 bg-parchment/95 backdrop-blur-sm border-b border-sepia/20">
+    <div class="w-full px-8 py-6">
+      <nav class="flex justify-between items-center">
+
+        <!-- Left: Back/Forward + Settings -->
+        <div class="flex items-center gap-2">
+
+          <!-- Back / Forward navigation buttons -->
+          <div class="nav-history-btns flex items-center gap-1">
+            <button type="button" id="navBack" class="nav-history-btn" aria-label="Go back" title="Back" disabled>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"/>
+              </svg>
+            </button>
+            <button type="button" id="navForward" class="nav-history-btn" aria-label="Go forward" title="Forward" disabled>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"/>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Settings Button -->
+          <button type="button" id="settingsBtn" class="nav-history-btn ml-1.5" aria-label="Open settings" title="API Settings">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Right: nav links + theme toggle -->
+        <div class="flex items-center gap-6">
+          <div class="hidden md:flex space-x-6 text-sm font-display tracking-wider uppercase text-sepia">
+            <button type="button" data-nav-view="home" class="nav-link hover:text-burgundy transition-colors duration-300">Home</button>
+            <span class="text-sepia/30">•</span>
+            <button type="button" data-nav-view="library" class="nav-link hover:text-burgundy transition-colors duration-300">Library</button>
+            <span class="text-sepia/30">•</span>
+            <button type="button" data-nav-view="fetcher" class="nav-link hover:text-burgundy transition-colors duration-300">Fetcher</button>
+            <span class="text-sepia/30">•</span>
+            <button type="button" data-nav-view="analysis" class="nav-link hover:text-burgundy transition-colors duration-300">Analysis</button>
+            <span class="text-sepia/30">•</span>
+            <button type="button" data-nav-view="editor" class="nav-link hover:text-burgundy transition-colors duration-300">Editor</button>
+            <span class="text-sepia/30">•</span>
+            <a href="#features" data-scroll-to="features" class="nav-link hover:text-burgundy transition-colors duration-300">Features</a>
+            <span class="text-sepia/30">•</span>
+            <a href="#methodology" data-scroll-to="methodology" class="nav-link hover:text-burgundy transition-colors duration-300">Methodology</a>
+          </div>
+          <button type="button" id="themeToggle" class="theme-toggle" aria-label="Switch to dark theme" title="Switch theme">
+            <span class="icon-sun" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+            </span>
+            <span class="icon-moon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </span>
+          </button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========================= -->
+  <!-- MAIN CONTENT WRAPPER      -->
+  <!-- Acts as the "home" view   -->
+  <!-- ========================= -->
+  <div id="view-home" class="app-view app-view--active">
+
+    <!-- ========================= -->
+    <!-- HERO SECTION              -->
+    <!-- ========================= -->
+    <section class="min-h-screen flex items-center justify-center px-8 pt-32 pb-20 hero-section">
+      <div class="max-w-4xl mx-auto text-center">
+        
+        <!-- Top ornament -->
+        <div class="ornament-top mb-12">
+          <svg class="w-32 h-8 mx-auto opacity-40" viewBox="0 0 200 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 20 Q50 10, 100 20 T200 20" stroke="currentColor" stroke-width="0.5" fill="none"/>
+            <path d="M0 22 Q50 12, 100 22 T200 22" stroke="currentColor" stroke-width="0.5" fill="none"/>
+          </svg>
+        </div>
+
+        <!-- Main title with drop cap effect -->
+        <div class="hero-title-container mb-8">
+          <h1 class="font-display text-6xl md:text-7xl leading-tight text-charcoal mb-6">
+            <span class="drop-cap">R</span><span class="tracking-wider">ESEARCH</span><br>
+            <span class="text-5xl md:text-6xl font-light tracking-widest">INTELLIGENCE</span><br>
+            <span class="text-4xl md:text-5xl font-normal tracking-wide">• <span class="font-serif italic">Engine</span> •</span>
+          </h1>
+        </div>
+
+        <!-- Subtitle -->
+        <div class="max-w-2xl mx-auto mb-12">
+          <p class="font-serif text-xl leading-relaxed text-sepia italic">
+            A continuous research intelligence platform that ingests, processes, and structures 
+            global academic output into actionable insight.
+          </p>
+          <p class="font-display text-sm uppercase tracking-widest text-sepia/60 mt-4 mb-8">
+            Ex Libris • In Perpetuum
+          </p>
+        </div>
+
+        <!-- Call to action buttons -->
+        <div class="flex flex-col sm:flex-row justify-center gap-6 mb-12">
+          <button type="button" data-nav-view="library" class="classical-btn primary">
+            <span>Open Library</span>
+            <div class="btn-border"></div>
+          </button>
+          <a href="#features" data-scroll-to="features" class="classical-btn primary">
+            <span>Explore the System</span>
+            <div class="btn-border"></div>
+          </a>
+          <a href="#methodology" data-scroll-to="methodology" class="classical-btn secondary">
+            <span>Read Methodology</span>
+            <div class="btn-border"></div>
+          </a>
+        </div>
+
+        <!-- Bottom ornament -->
+        <div class="ornament-bottom mt-12">
+          <svg class="w-32 h-8 mx-auto opacity-40" viewBox="0 0 200 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M200 20 Q150 30, 100 20 T0 20" stroke="currentColor" stroke-width="0.5" fill="none"/>
+            <path d="M200 18 Q150 28, 100 18 T0 18" stroke="currentColor" stroke-width="0.5" fill="none"/>
+          </svg>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================= -->
+    <!-- FEATURES SECTION          -->
+    <!-- ========================= -->
+    <section id="features" class="py-24 px-8 bg-cream/30">
+      <div class="max-w-5xl mx-auto">
+        
+        <!-- Section header -->
+        <div class="text-center mb-20">
+          <div class="section-divider mb-6"></div>
+          <h2 class="font-display text-4xl md:text-5xl text-charcoal mb-4 tracking-wide">
+            <span class="roman-numeral">I.</span> FEATURES
+          </h2>
+          <div class="section-divider mt-6"></div>
+          <p class="font-serif text-lg text-sepia italic mt-8 max-w-2xl mx-auto">
+            A comprehensive apparatus for scholarly investigation and knowledge synthesis.
+          </p>
+        </div>
+
+        <!-- Feature grid -->
+        <div class="grid md:grid-cols-2 gap-16 mb-16">
+          
+          <!-- Feature 1 -->
+          <article class="feature-card" data-aos="fade-up">
+            <div class="feature-card-inner">
+              <div class="feature-icon mb-6">
+                <svg class="w-16 h-16 mx-auto" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="0.5">
+                  <path d="M32 8 L32 56 M16 16 L48 16 M16 32 L48 32 M16 48 L48 48" />
+                  <circle cx="32" cy="32" r="28" />
+                </svg>
+              </div>
+              <h3 class="font-display text-2xl text-burgundy mb-4 text-center tracking-wide">
+                AUTOMATED INGESTION
+              </h3>
+              <div class="ornamental-divider-small mb-4"></div>
+              <p class="font-serif text-base text-sepia leading-relaxed mb-6 text-center">
+                Continuous retrieval of newly published research from arXiv, Semantic Scholar, 
+                and scholarly repositories.
+              </p>
+              <ul class="feature-list space-y-3">
+                <li><span class="list-marker">i.</span> Keyword scoring system</li>
+                <li><span class="list-marker">ii.</span> Cross-source deduplication</li>
+                <li><span class="list-marker">iii.</span> Metadata normalization</li>
+                <li><span class="list-marker">iv.</span> Citation-aware filtering</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Feature 2 -->
+          <article class="feature-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="feature-card-inner">
+              <div class="feature-icon mb-6">
+                <svg class="w-16 h-16 mx-auto" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="0.5">
+                  <rect x="16" y="12" width="32" height="40" rx="2" />
+                  <path d="M24 20 L40 20 M24 28 L40 28 M24 36 L40 36 M24 44 L36 44" />
+                </svg>
+              </div>
+              <h3 class="font-display text-2xl text-burgundy mb-4 text-center tracking-wide">
+                STRUCTURED EXTRACTION
+              </h3>
+              <div class="ornamental-divider-small mb-4"></div>
+              <p class="font-serif text-base text-sepia leading-relaxed mb-6 text-center">
+                Advanced language models parse unstructured research into comprehensible 
+                taxonomies and relationships.
+              </p>
+              <ul class="feature-list space-y-3">
+                <li><span class="list-marker">i.</span> JSON-enforced formatting</li>
+                <li><span class="list-marker">ii.</span> Retry handling protocols</li>
+                <li><span class="list-marker">iii.</span> Confidence scoring metrics</li>
+                <li><span class="list-marker">iv.</span> Lacuna detection systems</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Feature 3 -->
+          <article class="feature-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="feature-card-inner">
+              <div class="feature-icon mb-6">
+                <svg class="w-16 h-16 mx-auto" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="0.5">
+                  <circle cx="32" cy="32" r="24" />
+                  <path d="M32 8 L32 32 L48 40" />
+                  <path d="M16 32 Q32 16, 48 32" />
+                </svg>
+              </div>
+              <h3 class="font-display text-2xl text-burgundy mb-4 text-center tracking-wide">
+                TEMPORAL ANALYSIS
+              </h3>
+              <div class="ornamental-divider-small mb-4"></div>
+              <p class="font-serif text-base text-sepia leading-relaxed mb-6 text-center">
+                Research velocity tracking identifies emergent trends and opportunity gaps 
+                within academic discourse.
+              </p>
+              <ul class="feature-list space-y-3">
+                <li><span class="list-marker">i.</span> Keyword prevalence tracking</li>
+                <li><span class="list-marker">ii.</span> Popularity visualization</li>
+                <li><span class="list-marker">iii.</span> Topic emergence alerts</li>
+                <li><span class="list-marker">iv.</span> Comparative time analysis</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Feature 4 -->
+          <article class="feature-card" data-aos="fade-up" data-aos-delay="300">
+            <div class="feature-card-inner">
+              <div class="feature-icon mb-6">
+                <svg class="w-16 h-16 mx-auto" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="0.5">
+                  <rect x="8" y="20" width="48" height="32" rx="2" />
+                  <path d="M16 28 L24 40 L32 32 L40 44 L48 36" />
+                  <path d="M8 44 L56 44" />
+                </svg>
+              </div>
+              <h3 class="font-display text-2xl text-burgundy mb-4 text-center tracking-wide">
+                ANALYTIC INTERFACE
+              </h3>
+              <div class="ornamental-divider-small mb-4"></div>
+              <p class="font-serif text-base text-sepia leading-relaxed mb-6 text-center">
+                Interactive exploration dashboard for navigating synthesized research 
+                with temporal and categorical dimensions.
+              </p>
+              <ul class="feature-list space-y-3">
+                <li><span class="list-marker">i.</span> Multi-dimensional filtering</li>
+                <li><span class="list-marker">ii.</span> Citation network graphs</li>
+                <li><span class="list-marker">iii.</span> Export capabilities</li>
+                <li><span class="list-marker">iv.</span> Collaborative annotations</li>
+              </ul>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================= -->
+    <!-- METHODOLOGY SECTION       -->
+    <!-- ========================= -->
+    <section id="methodology" class="py-24 px-8 border-y border-sepia/20">
+      <div class="max-w-5xl mx-auto">
+        
+        <!-- Section header -->
+        <div class="text-center mb-20">
+          <div class="section-divider mb-6"></div>
+          <h2 class="font-display text-4xl md:text-5xl text-charcoal mb-4 tracking-wide">
+            <span class="roman-numeral">II.</span> METHODOLOGY
+          </h2>
+          <div class="section-divider mt-6"></div>
+          <p class="font-serif text-lg text-sepia italic mt-8 max-w-2xl mx-auto">
+            A systematic approach to automated scholarly intelligence.
+          </p>
+        </div>
+
+        <!-- Process steps -->
+        <div class="grid md:grid-cols-4 gap-8">
+          
+          <div class="process-step" data-aos="fade-up">
+            <div class="process-number">I</div>
+            <h3 class="font-display text-xl text-burgundy mb-3 tracking-wide text-center">
+              ACQUISITION
+            </h3>
+            <p class="font-serif text-sm text-sepia text-center leading-relaxed">
+              Automated retrieval from scholarly repositories via programmatic interfaces.
+            </p>
+          </div>
+
+          <div class="process-step" data-aos="fade-up" data-aos-delay="100">
+            <div class="process-number">II</div>
+            <h3 class="font-display text-xl text-burgundy mb-3 tracking-wide text-center">
+              CURATION
+            </h3>
+            <p class="font-serif text-sm text-sepia text-center leading-relaxed">
+              Filtering and deduplication through relevance scoring and metadata validation.
+            </p>
+          </div>
+
+          <div class="process-step" data-aos="fade-up" data-aos-delay="200">
+            <div class="process-number">III</div>
+            <h3 class="font-display text-xl text-burgundy mb-3 tracking-wide text-center">
+              SYNTHESIS
+            </h3>
+            <p class="font-serif text-sm text-sepia text-center leading-relaxed">
+              Structured extraction via advanced language models with validation protocols.
+            </p>
+          </div>
+
+          <div class="process-step" data-aos="fade-up" data-aos-delay="300">
+            <div class="process-number">IV</div>
+            <h3 class="font-display text-xl text-burgundy mb-3 tracking-wide text-center">
+              PRESENTATION
+            </h3>
+            <p class="font-serif text-sm text-sepia text-center leading-relaxed">
+              Interactive visualization through temporal and categorical analytics.
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Detailed explanation -->
+        <div class="mt-20 max-w-3xl mx-auto">
+          <div class="scholarly-quote">
+            <p class="font-serif text-lg text-sepia leading-relaxed italic">
+              "The accumulation of knowledge proceeds not through mere aggregation, 
+              but through systematic synthesis and contextual understanding. This apparatus 
+              endeavors to automate such synthesis whilst preserving the rigor demanded 
+              by scholarly discourse."
+            </p>
+            <cite class="font-display text-sm text-sepia/70 not-italic tracking-wider mt-4 block text-right">
+              — FOUNDATIONAL PRINCIPLE
+            </cite>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================= -->
+    <!-- TECHNICAL SPECIFICATIONS  -->
+    <!-- ========================= -->
+    <section class="py-24 px-8 bg-cream/30">
+      <div class="max-w-4xl mx-auto">
+        
+        <div class="text-center mb-16">
+          <div class="section-divider mb-6"></div>
+          <h2 class="font-display text-4xl md:text-5xl text-charcoal mb-4 tracking-wide">
+            <span class="roman-numeral">III.</span> SPECIFICATIONS
+          </h2>
+          <div class="section-divider mt-6"></div>
+        </div>
+
+        <div class="technical-details">
+          <div class="grid md:grid-cols-2 gap-12">
+            
+            <div class="spec-category">
+              <h3 class="font-display text-xl text-burgundy mb-6 tracking-wide border-b border-sepia/20 pb-2">
+                DATA SOURCES
+              </h3>
+              <ul class="font-serif text-base text-sepia space-y-3 leading-relaxed">
+                <li>• arXiv Repository</li>
+                <li>• Semantic Scholar API</li>
+                <li>• CrossRef Metadata</li>
+                <li>• PubMed Central</li>
+              </ul>
+            </div>
+
+            <div class="spec-category">
+              <h3 class="font-display text-xl text-burgundy mb-6 tracking-wide border-b border-sepia/20 pb-2">
+                PROCESSING
+              </h3>
+              <ul class="font-serif text-base text-sepia space-y-3 leading-relaxed">
+                <li>• Language Model Extraction</li>
+                <li>• Natural Language Processing</li>
+                <li>• Citation Network Analysis</li>
+                <li>• Temporal Pattern Recognition</li>
+              </ul>
+            </div>
+
+            <div class="spec-category">
+              <h3 class="font-display text-xl text-burgundy mb-6 tracking-wide border-b border-sepia/20 pb-2">
+                ARCHITECTURE
+              </h3>
+              <ul class="font-serif text-base text-sepia space-y-3 leading-relaxed">
+                <li>• RESTful API Design</li>
+                <li>• Relational Database</li>
+                <li>• Asynchronous Processing</li>
+                <li>• Modular Component System</li>
+              </ul>
+            </div>
+
+            <div class="spec-category">
+              <h3 class="font-display text-xl text-burgundy mb-6 tracking-wide border-b border-sepia/20 pb-2">
+                INTERFACE
+              </h3>
+              <ul class="font-serif text-base text-sepia space-y-3 leading-relaxed">
+                <li>• Responsive Web Application</li>
+                <li>• Interactive Visualizations</li>
+                <li>• Export Functionality</li>
+                <li>• User Authentication</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================= -->
+    <!-- CONTACT / DEMO SECTION    -->
+    <!-- ========================= -->
+    <section id="contact" class="py-32 px-8 text-center border-t border-sepia/20">
+      <div class="max-w-3xl mx-auto">
+        
+        <div class="ornament-top mb-12">
+          <svg class="w-32 h-8 mx-auto opacity-40" viewBox="0 0 200 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 20 Q50 10, 100 20 T200 20" stroke="currentColor" stroke-width="0.5" fill="none"/>
+            <path d="M0 22 Q50 12, 100 22 T200 22" stroke="currentColor" stroke-width="0.5" fill="none"/>
+          </svg>
+        </div>
+
+        <h2 class="font-display text-5xl md:text-6xl text-charcoal mb-8 tracking-wide">
+          A TOOL FOR<br/>ACADEMIC INQUIRY
+        </h2>
+
+        <p class="font-serif text-xl text-sepia italic mb-12 max-w-2xl mx-auto leading-relaxed">
+          Developed as a semester-end project demonstrating full-stack web development, 
+          API integration, and artificial intelligence orchestration.
+        </p>
+
+        <a href="#" class="classical-btn primary inline-block">
+          <span>Request Demonstration</span>
+          <div class="btn-border"></div>
+        </a>
+
+        <div class="ornament-bottom mt-16">
+          <svg class="w-32 h-8 mx-auto opacity-40" viewBox="0 0 200 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M200 20 Q150 30, 100 20 T0 20" stroke="currentColor" stroke-width="0.5" fill="none"/>
+            <path d="M200 18 Q150 28, 100 18 T0 18" stroke="currentColor" stroke-width="0.5" fill="none"/>
+          </svg>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================= -->
+    <!-- FOOTER                    -->
+    <!-- ========================= -->
+    <footer class="py-12 px-8 border-t border-sepia/20 bg-cream/30">
+      <div class="max-w-5xl mx-auto text-center">
+        <div class="ornamental-divider-small mb-6"></div>
+        <p class="font-display text-sm uppercase tracking-widest text-sepia/60 mb-4">
+          Research Intelligence Engine
+        </p>
+        <p class="font-serif text-sm text-sepia/70">
+          © MMXXVI — Suryavansh Jaggi
+        </p>
+        <p class="font-serif text-xs text-sepia/50 italic mt-4">
+          Ad Astra Per Aspera
+        </p>
+      </div>
+    </footer>
+
+  </div><!-- /#view-home -->
+
+
+  <!-- ========================= -->
+  <!-- LIBRARY VIEW / PANEL      -->
+  <!-- ========================= -->
+  <div id="view-library" class="app-view" aria-hidden="true">
+
+    <!-- Panel inner wrapper (scrollable, below fixed header) -->
+    <div class="library-panel">
+
+      <!-- Panel header -->
+      <div class="library-panel-header">
+        <div class="text-center">
+          <div class="section-divider mb-6"></div>
+          <h2 class="font-display text-4xl md:text-5xl text-charcoal mb-2 tracking-wide">
+            LIBRARY
+          </h2>
+          <p class="font-serif text-base text-sepia italic mb-2">
+            Your local research archive. Add papers, attach PDFs, open them in-app.
+          </p>
+          <div class="section-divider mt-6"></div>
+        </div>
+      </div>
+
+      <!-- Panel body: two columns on wide screens -->
+      <div class="library-panel-body">
+
+        <!-- LEFT: Add paper form -->
+        <aside class="library-panel-form-col">
+          <h3 class="font-display text-xl text-burgundy mb-5 tracking-wide flex items-center gap-3">
+            <svg class="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/>
+            </svg>
+            Add Paper
+          </h3>
+
+          <form id="libraryAddForm" class="library-form">
+            <div class="library-field">
+              <label for="paperTitle" class="library-label">Title <span class="text-burgundy">*</span></label>
+              <input type="text" id="paperTitle" name="title" required
+                class="library-input"
+                placeholder="Paper title" />
+            </div>
+
+            <div class="library-field">
+              <label for="paperAuthors" class="library-label">Authors</label>
+              <input type="text" id="paperAuthors" name="authors"
+                class="library-input"
+                placeholder="Author names" />
+            </div>
+
+            <div class="library-field">
+              <label for="paperYear" class="library-label">Year</label>
+              <input type="text" id="paperYear" name="year" maxlength="4"
+                class="library-input"
+                placeholder="e.g. 2024" />
+            </div>
+
+            <div class="library-field">
+              <label class="library-label">PDF File <span class="text-burgundy">*</span></label>
+              <button type="button" id="librarySelectPdf" class="library-file-btn">
+                <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+                <span id="libraryPdfLabel">Choose PDF file</span>
+              </button>
+            </div>
+
+            <p id="libraryFormError" class="library-form-error hidden"></p>
+
+            <button type="submit" id="librarySubmit" class="classical-btn primary library-submit-btn">
+              <span>Add to Library</span>
+              <div class="btn-border"></div>
+            </button>
+          </form>
+        </aside>
+
+        <!-- RIGHT: Papers list + detail -->
+        <main class="library-panel-list-col">
+          <h3 class="font-display text-xl text-burgundy mb-5 tracking-wide flex items-center gap-3">
+            <svg class="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+            </svg>
+            Papers
+          </h3>
+
+          <div id="libraryPaperList" class="library-paper-list"></div>
+          <p id="libraryEmpty" class="font-serif text-sepia italic py-8 text-center hidden">
+            No papers yet. Add one to begin your archive.
+          </p>
+
+          <!-- Paper detail pane -->
+          <div id="libraryDetail" class="library-detail hidden">
+            <div class="library-detail-header">
+              <h4 class="font-display text-base text-burgundy tracking-wide uppercase">Selected Paper</h4>
+            </div>
+            <div class="library-detail-body">
+              <dl class="library-detail-dl">
+                <dt>Title</dt>
+                <dd id="libraryDetailTitle"></dd>
+                <dt>Authors</dt>
+                <dd id="libraryDetailAuthors"></dd>
+                <dt>Year</dt>
+                <dd id="libraryDetailYear"></dd>
+              </dl>
+              <button type="button" id="libraryOpenPdfBtn" class="classical-btn primary library-open-btn">
+                <span>Open PDF</span>
+                <div class="btn-border"></div>
+              </button>
+            </div>
+          </div>
+        </main>
+
+      </div><!-- /.library-panel-body -->
+
+    </div><!-- /.library-panel -->
+
+  </div><!-- /#view-library -->
+
+
+  <!-- ========================= -->
+  <!-- FETCHER VIEW / PANEL      -->
+  <!-- ========================= -->
+  <div id="view-fetcher" class="app-view" aria-hidden="true">
+
+    <div class="fetcher-panel">
+
+      <!-- Panel header -->
+      <div class="fetcher-panel-header">
+        <div class="text-center">
+          <div class="section-divider mb-6"></div>
+          <h2 class="font-display text-4xl md:text-5xl text-charcoal mb-2 tracking-wide">
+            PAPER FETCHER
+          </h2>
+          <p class="font-serif text-base text-sepia italic mb-2">
+            Search and retrieve research papers from scholarly repositories.
+          </p>
+          <div class="section-divider mt-6"></div>
+        </div>
+      </div>
+
+      <!-- Fallback for non-Electron -->
+      <div id="fetcherFallback" class="fetcher-fallback hidden">
+        <p class="font-serif text-sepia italic text-center py-12">
+          Paper fetching requires the Electron desktop application.
+        </p>
+      </div>
+
+      <!-- Panel body: two columns -->
+      <div id="fetcherBody" class="fetcher-panel-body">
+
+        <!-- LEFT: Search controls -->
+        <aside class="fetcher-form-col">
+          <h3 class="font-display text-xl text-burgundy mb-5 tracking-wide flex items-center gap-3">
+            <svg class="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            Search Parameters
+          </h3>
+
+          <form id="fetcherSearchForm" class="library-form">
+            <!-- Keyword -->
+            <div class="library-field">
+              <label for="fetcherKeyword" class="library-label">Keyword <span class="text-burgundy">*</span></label>
+              <input type="text" id="fetcherKeyword" name="keyword" required
+                class="library-input"
+                placeholder="e.g. transformer attention mechanism" />
+            </div>
+
+            <!-- Sources -->
+            <div class="library-field">
+              <label class="library-label">Sources</label>
+              <div id="fetcherSourceList" class="fetcher-source-list">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+
+            <!-- Limit -->
+            <div class="library-field">
+              <label for="fetcherLimit" class="library-label">Result Limit</label>
+              <input type="number" id="fetcherLimit" name="limit" min="1" max="100" value="20"
+                class="library-input" />
+            </div>
+
+            <!-- Sort by -->
+            <div class="library-field">
+              <label for="fetcherSortBy" class="library-label">Sort By</label>
+              <select id="fetcherSortBy" name="sortBy" class="library-input fetcher-select">
+                <option value="date" selected>Newest First</option>
+                <option value="citations">Most Cited</option>
+              </select>
+            </div>
+
+            <!-- Download directory -->
+            <div class="library-field">
+              <label class="library-label">Download Directory</label>
+              <button type="button" id="fetcherDirBtn" class="fetcher-dir-btn">
+                <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                </svg>
+                <span id="fetcherDirLabel">Choose directory…</span>
+              </button>
+            </div>
+
+            <!-- Error -->
+            <p id="fetcherFormError" class="library-form-error hidden"></p>
+
+            <!-- Buttons -->
+            <div class="fetcher-btn-row">
+              <button type="submit" id="fetcherSubmitBtn" class="classical-btn primary fetcher-submit-btn">
+                <span>Fetch Papers</span>
+                <div class="btn-border"></div>
+              </button>
+              <button type="button" id="fetcherStopBtn" class="classical-btn secondary fetcher-stop-btn" disabled>
+                <span>Stop</span>
+                <div class="btn-border"></div>
+              </button>
+            </div>
+          </form>
+        </aside>
+
+        <!-- RIGHT: Results -->
+        <main class="fetcher-results-col">
+
+          <!-- Status bar -->
+          <div class="fetcher-status-bar">
+            <div class="fetcher-status-dot" id="fetcherStatusDot"></div>
+            <span id="fetcherStatusText" class="font-serif text-sm text-sepia">Idle — enter a keyword to begin.</span>
+          </div>
+
+          <!-- Toolbar -->
+          <div class="fetcher-toolbar">
+            <h3 class="font-display text-xl text-burgundy tracking-wide flex items-center gap-3">
+              <svg class="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+              </svg>
+              Results
+            </h3>
+            <button type="button" id="fetcherDetailToggle" class="fetcher-detail-toggle">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+              </svg>
+              <span>Detailed Info</span>
+            </button>
+          </div>
+
+          <!-- Results list -->
+          <div id="fetcherResultList" class="fetcher-result-list"></div>
+          <p id="fetcherEmpty" class="font-serif text-sepia italic py-8 text-center">
+            No results yet. Configure your search and click <strong>Fetch Papers</strong>.
+          </p>
+
+        </main>
+
+      </div><!-- /.fetcher-panel-body -->
+
+    </div><!-- /.fetcher-panel -->
+
+  </div><!-- /#view-fetcher -->
+
+
+  <!-- ========================= -->
+  <!-- ANALYSIS VIEW / PANEL     -->
+  <!-- ========================= -->
+  <div id="view-analysis" class="app-view" aria-hidden="true">
+
+    <div class="fetcher-panel">
+
+      <!-- Panel header -->
+      <div class="fetcher-panel-header">
+        <div class="text-center">
+          <div class="section-divider mb-6"></div>
+          <h2 class="font-display text-4xl md:text-5xl text-charcoal mb-2 tracking-wide">
+            AI ANALYSIS
+          </h2>
+          <p class="font-serif text-base text-sepia italic mb-2">
+            Synthesize research papers using Gemini LLM.
+          </p>
+          <div class="section-divider mt-6"></div>
+        </div>
+      </div>
+
+      <!-- Panel body -->
+      <div class="fetcher-panel-body">
+
+        <!-- LEFT: Controls -->
+        <aside class="fetcher-form-col">
+          <h3 class="font-display text-xl text-burgundy mb-5 tracking-wide flex items-center gap-3">
+            <svg class="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+            </svg>
+            Analysis Parameters
+          </h3>
+
+          <div class="library-form">
+             <div class="library-field">
+              <label class="library-label">Target Papers</label>
+              <p class="font-serif text-sm text-sepia italic mb-2">Analysis will be performed on papers from your latest Fetcher results.</p>
+              <div id="analysisPaperCount" class="font-display text-sm text-burgundy tracking-wide uppercase">0 Papers Selected</div>
+            </div>
+
+            <div class="library-field">
+              <label for="analysisPrompt" class="library-label">Analysis Directive</label>
+              <textarea id="analysisPrompt" class="library-input min-h-[120px] py-3" 
+                placeholder="Enter custom directive or use default...">For the following research paper, provide a concise Summary, a detailed Methodology, and potential Future Work. Format the output as Markdown.</textarea>
+            </div>
+
+            <button type="button" id="analysisStartBtn" class="classical-btn primary fetcher-submit-btn">
+              <span>Run AI Pipeline</span>
+              <div class="btn-border"></div>
+            </button>
+          </div>
+        </aside>
+
+        <!-- RIGHT: Live Output / History -->
+        <main class="fetcher-results-col">
+          <div class="fetcher-status-bar">
+            <div class="fetcher-status-dot" id="analysisStatusDot"></div>
+            <span id="analysisStatusText" class="font-serif text-sm text-sepia">Idle — click run to begin synthesis.</span>
+          </div>
+
+          <div class="fetcher-toolbar">
+            <h3 class="font-display text-xl text-burgundy tracking-wide flex items-center gap-3">
+              <svg class="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+              </svg>
+              Synthesis Log
+            </h3>
+          </div>
+
+          <div id="analysisLog" class="fetcher-result-list font-serif text-sepia text-sm space-y-2 p-4 border border-sepia/10 bg-parchment/30 rounded min-h-[300px] overflow-y-auto">
+            <!-- Log entries will appear here -->
+          </div>
+        </main>
+
+      </div>
+    </div>
+
+  </div><!-- /#view-analysis -->
+
+
+
+  <!-- Background audio (muted by default for autoplay policy; unmute via button) -->
+
+  <audio id="bgAudio" src="./audio.mp3" loop muted playsinline></audio>
+
+  <!-- Audio control: mute / unmute -->
+  <button type="button" id="audioToggle" class="audio-toggle" aria-label="Unmute background audio" title="Unmute">
+    <span class="audio-toggle-inner">
+      <svg class="icon-volume-off" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+        <line x1="23" y1="9" x2="17" y2="15"/>
+        <line x1="17" y1="9" x2="23" y2="15"/>
+      </svg>
+      <svg class="icon-volume-on" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+      </svg>
+    </span>
+  </button>
+
+  <!-- ========================= -->
+  <!-- SETTINGS MODAL            -->
+  <!-- ========================= -->
+  <div id="settingsModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" style="background: rgba(28, 28, 28, 0.55); backdrop-filter: blur(4px);">
+    <div class="relative w-full max-w-md bg-parchment border border-sepia/30 p-6 shadow-2xl">
+      <div class="flex justify-between items-center mb-5 pb-3 border-b border-sepia/20">
+        <h2 class="font-display text-lg font-semibold text-burgundy tracking-wider uppercase">API & System Settings</h2>
+        <button type="button" id="closeSettingsBtn" class="text-sepia hover:text-burgundy transition-colors p-1" aria-label="Close settings">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <form id="settingsForm" class="space-y-4 font-serif">
+        <div>
+          <label class="block text-xs uppercase tracking-wider text-sepia font-display mb-1" for="settingOpenAlex">
+            OpenAlex API Key
+          </label>
+          <div class="relative">
+            <input type="password" id="settingOpenAlex" class="w-full pr-10 px-3 py-2 border border-sepia/30 bg-cream/30 text-charcoal text-sm focus:outline-none focus:border-burgundy font-mono" placeholder="Paste OpenAlex key..." autocomplete="off">
+            <button type="button" class="toggle-password-btn absolute right-2 top-1/2 -translate-y-1/2 text-sepia/60 hover:text-burgundy transition-colors p-1" data-target="settingOpenAlex" aria-label="Toggle password visibility" title="Show/Hide key">
+              <svg class="eye-open w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+              <svg class="eye-closed w-4 h-4 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                <line x1="1" y1="1" x2="23" y2="23"></line>
+              </svg>
+            </button>
+          </div>
+          <p class="text-xs text-sepia/60 mt-1 italic">Optional. Grants 100k requests/day from openalex.org.</p>
+        </div>
+
+        <div>
+          <label class="block text-xs uppercase tracking-wider text-sepia font-display mb-1" for="settingGroq">
+            Groq API Key (AI Synthesis)
+          </label>
+          <div class="relative">
+            <input type="password" id="settingGroq" class="w-full pr-10 px-3 py-2 border border-sepia/30 bg-cream/30 text-charcoal text-sm focus:outline-none focus:border-burgundy font-mono" placeholder="Paste Groq key (gsk_...)" autocomplete="off">
+            <button type="button" class="toggle-password-btn absolute right-2 top-1/2 -translate-y-1/2 text-sepia/60 hover:text-burgundy transition-colors p-1" data-target="settingGroq" aria-label="Toggle password visibility" title="Show/Hide key">
+              <svg class="eye-open w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+              <svg class="eye-closed w-4 h-4 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                <line x1="1" y1="1" x2="23" y2="23"></line>
+              </svg>
+            </button>
+          </div>
+          <p class="text-xs text-sepia/60 mt-1 italic">Required for AI paper summaries (Llama-3.3-70B).</p>
+        </div>
+
+        <div>
+          <label class="block text-xs uppercase tracking-wider text-sepia font-display mb-1" for="settingArxiv">
+            arXiv Endpoint / Key
+          </label>
+          <input type="text" id="settingArxiv" class="w-full px-3 py-2 border border-sepia/30 bg-cream/30 text-charcoal text-sm focus:outline-none focus:border-burgundy font-mono" placeholder="Public API (No key required)" autocomplete="off">
+          <p class="text-xs text-sepia/60 mt-1 italic">arXiv API is free and public; no key required.</p>
+        </div>
+
+        <div id="settingsStatus" class="text-xs text-forest-green font-medium hidden"></div>
+
+        <div class="flex justify-end gap-3 pt-3 border-t border-sepia/15">
+          <button type="button" id="cancelSettingsBtn" class="px-4 py-2 text-xs uppercase tracking-wider font-display text-sepia border border-sepia/30 hover:border-burgundy hover:text-burgundy transition-colors">
+            Cancel
+          </button>
+          <button type="submit" class="px-5 py-2 text-xs uppercase tracking-wider font-display text-parchment bg-burgundy hover:bg-burgundy-hover transition-colors font-medium">
+            Save Settings
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+
+</body>
+</html>

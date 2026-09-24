@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Markdown Editor — Research Intelligence Engine</title>
+  <script>
+    (function() {
+      var t = localStorage.getItem('theme');
+      if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
+      else document.documentElement.setAttribute('data-theme', 'light');
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden; /* Editor handles its own scroll */
+      height: 100vh;
+    }
+  </style>
+</head>
+<body class="antialiased">
+  <div class="paper-texture"></div>
+  <div class="vignette"></div>
+  
+  <div id="view-editor" class="app-view app-view--active" style="height: 100vh; width: 100vw; display: flex;"></div>
+  
+  <script type="module" src="/src/editor-main.js"></script>
+</body>
+</html>
