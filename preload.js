@@ -9,9 +9,15 @@ contextBridge.exposeInMainWorld('electronAPI', {
     selectDownloadDir: () => ipcRenderer.invoke('dialog:selectDirectory'),
   },
   papers: {
+    getWorkspaceConfig: () => ipcRenderer.invoke('papers:getWorkspaceConfig'),
     getSources: () => ipcRenderer.invoke('papers:getSources'),
     search: (query, sources, limit, sortBy) => ipcRenderer.invoke('papers:search', { query, sources, limit, sortBy }),
-    downloadPdf: (url, directory, filename) => ipcRenderer.invoke('papers:downloadPdf', { url, directory, filename }),
+    downloadPdf: (param1, param2, param3) => {
+      const payload = (typeof param1 === 'object' && param1 !== null)
+        ? param1
+        : { url: param1, directory: param2, filename: param3 };
+      return ipcRenderer.invoke('papers:downloadPdf', payload);
+    },
     getAll: (limit) => ipcRenderer.invoke('papers:getAll', limit),
     getById: (id) => ipcRenderer.invoke('papers:getById', id),
     delete: (id) => ipcRenderer.invoke('papers:delete', id),

@@ -43,10 +43,11 @@ async function runTests() {
   }
 
   // ──── Test 1: searchAndStore ────
-  console.log('\n═══ Test 1: searchAndStore("compiler design", ["openalex"], 5) ═══');
+  console.log('\n═══ Test 1: searchAndStore("compiler design", ["arxiv"], 5) ═══');
   let papers = [];
   try {
-    papers = await searchAndStore('compiler design', ['openalex'], 5);
+    const res = await searchAndStore('compiler design', ['arxiv'], 5);
+    papers = res.succeeded || [];
     assert('Returns array', Array.isArray(papers));
     assert(`Returns ≤ 5 papers (got ${papers.length})`, papers.length <= 5 && papers.length > 0);
 
@@ -62,7 +63,8 @@ async function runTests() {
   // ──── Test 2: ID consistency (re-run same search) ────
   console.log('\n═══ Test 2: ID consistency (same search again) ═══');
   try {
-    const papers2 = await searchAndStore('compiler design', ['openalex'], 5);
+    const res2 = await searchAndStore('compiler design', ['arxiv'], 5);
+    const papers2 = res2.succeeded || [];
 
     // IDs should match first run (DB dedup returns same rows)
     if (papers.length > 0 && papers2.length > 0) {

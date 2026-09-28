@@ -76,29 +76,11 @@ function createWindow() {
 
 // ---------- IPC: Library ----------
 ipcMain.handle('library:getPapers', async () => {
-  return readPapers();
+  return paperService.getLibraryPapers();
 });
 
-ipcMain.handle('library:addPaper', async (_event, { title, authors, year, pdfPath }) => {
-  if (!title || !pdfPath) {
-    throw new Error('Title and PDF are required');
-  }
-  await ensureLibraryDir();
-  const papers = await readPapers();
-  const id = `paper-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
-  const ext = path.extname(pdfPath) || '.pdf';
-  const destPath = path.join(getLibraryPaths().libraryDir, `${id}${ext}`);
-  await fs.copyFile(pdfPath, destPath);
-  const paper = {
-    id,
-    title: String(title).trim(),
-    authors: String(authors || '').trim(),
-    year: year ? String(year).trim() : '',
-    pdfPath: destPath,
-  };
-  papers.push(paper);
-  await writePapers(papers);
-  return paper;
+ipcMain.handle('library:addPaper', async (_event, payload) => {
+  return paperService.addManualPaper(payload);
 });
 
 ipcMain.handle('library:openPdf', async (_event, pdfPath) => {
@@ -132,6 +114,10 @@ ipcMain.handle('dialog:selectPdf', async () => {
 });
 
 // ---------- IPC: Papers (Service Layer) ----------
+ipcMain.handle('papers:getWorkspaceConfig', async () => {
+  return paperService.getWorkspaceConfig();
+});
+
 ipcMain.handle('papers:getSources', async () => {
   return getSourceNames();
 });
@@ -140,40 +126,15 @@ ipcMain.handle('papers:search', async (_event, { query, sources, limit, sortBy }
   return paperService.searchAndStore(query, sources, limit, sortBy);
 });
 
-ipcMain.handle('papers:downloadPdf', async (_event, { url, directory, filename }) => {
-  if (!url || !directory) throw new Error('URL and directory are required');
-
-  // Sanitize filename: strip non-filesystem-safe chars, add .pdf
-  const safeName = (filename || 'paper')
-    .replace(/[^a-zA-Z0-9_\- ]/g, '')
-    .replace(/\s+/g, '_')
-    .slice(0, 120);
-  const destPath = path.join(directory, `${safeName}.pdf`);
-
-  try {
-    const response = await fetch(url);
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-    const contentType = response.headers.get('content-type') || '';
-    if (contentType.includes('text/html')) {
-      throw new Error(`Invalid content-type "${contentType}": URL returned HTML instead of PDF`);
-    }
-
-    const arrayBuffer = await response.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
-
-    // Magic-byte check: all valid PDF files begin with '%PDF-'
-    if (buffer.length < 5 || buffer.toString('ascii', 0, 5) !== '%PDF-') {
-      throw new Error('Downloaded file is not a valid PDF (missing %PDF- header)');
-    }
-
-    await fs.writeFile(destPath, buffer);
-    return destPath;
-  } catch (err) {
-    // Clean up partial file
-    await fs.unlink(destPath).catch(() => {});
-    throw new Error(`Download failed: ${err.message}`);
-  }
+ipcMain.handle('papers:downloadPdf', async (_event, params) => {
+  const payload = typeof params === 'object' && params !== null ? params : {};
+  const downloadResult = await paperService.downloadPaperPdf({
+    paperId: payload.paperId || null,
+    url: payload.url,
+    targetDirectory: payload.targetDirectory || payload.directory || null,
+    filename: payload.filename,
+  });
+  return downloadResult.localPath;
 });
 
 ipcMain.handle('papers:getAll', async (_event, limit) => {
@@ -289,6 +250,9 @@ app.whenReady().then(async () => {
   } catch (err) {
     console.warn('[startup] Database init failed:', err.message);
   }
+  paperService.ensureRawPapersDir().catch(err => {
+    console.warn('[startup] Failed to create raw_papers dir:', err.message);
+  });
   ensureLibraryDir().catch(() => {});
   registerDocumentIpcHandlers();
   createWindow();

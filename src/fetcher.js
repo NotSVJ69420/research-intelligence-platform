@@ -26,6 +26,9 @@
   let _isFetching = false;
   let _cancelled  = false;
   let _results    = [];
+  let _destMode   = 'default'; // 'default' | 'custom'
+  let _defaultDir = null;
+  let _customDir  = null;
   let _downloadDir = null;
 
   // ── Element refs ──────────────────────────────────────────────────────
@@ -35,6 +38,10 @@
     sourceList: null,
     limit: null,
     sortBy: null,
+    destModeDefault: null,
+    destModeCustom: null,
+    defaultDirLabel: null,
+    customDirRow: null,
     dirBtn: null,
     dirLabel: null,
     formError: null,
@@ -50,21 +57,25 @@
   function $(id) { return document.getElementById(id); }
 
   function bindElements() {
-    els.form         = $('fetcherSearchForm');
-    els.keyword      = $('fetcherKeyword');
-    els.sourceList   = $('fetcherSourceList');
-    els.limit        = $('fetcherLimit');
-    els.sortBy       = $('fetcherSortBy');
-    els.dirBtn       = $('fetcherDirBtn');
-    els.dirLabel     = $('fetcherDirLabel');
-    els.formError    = $('fetcherFormError');
-    els.submitBtn    = $('fetcherSubmitBtn');
-    els.stopBtn      = $('fetcherStopBtn');
-    els.statusDot    = $('fetcherStatusDot');
-    els.statusText   = $('fetcherStatusText');
-    els.detailToggle = $('fetcherDetailToggle');
-    els.resultList   = $('fetcherResultList');
-    els.emptyMsg     = $('fetcherEmpty');
+    els.form            = $('fetcherSearchForm');
+    els.keyword         = $('fetcherKeyword');
+    els.sourceList      = $('fetcherSourceList');
+    els.limit           = $('fetcherLimit');
+    els.sortBy          = $('fetcherSortBy');
+    els.destModeDefault = $('destModeDefault');
+    els.destModeCustom  = $('destModeCustom');
+    els.defaultDirLabel = $('fetcherDefaultDirLabel');
+    els.customDirRow    = $('fetcherCustomDirRow');
+    els.dirBtn          = $('fetcherDirBtn');
+    els.dirLabel        = $('fetcherDirLabel');
+    els.formError       = $('fetcherFormError');
+    els.submitBtn       = $('fetcherSubmitBtn');
+    els.stopBtn         = $('fetcherStopBtn');
+    els.statusDot       = $('fetcherStatusDot');
+    els.statusText      = $('fetcherStatusText');
+    els.detailToggle    = $('fetcherDetailToggle');
+    els.resultList      = $('fetcherResultList');
+    els.emptyMsg        = $('fetcherEmpty');
   }
 
   // ── Helpers ───────────────────────────────────────────────────────────
@@ -146,18 +157,58 @@
     return Array.from(checked).map(cb => cb.value);
   }
 
-  // ── Directory picker ──────────────────────────────────────────────────
+  // ── Destination Mode & Directory Picker ──────────────────────────────
+
+  async function initDestination() {
+    try {
+      if (papersAPI.getWorkspaceConfig) {
+        const config = await papersAPI.getWorkspaceConfig();
+        if (config?.rawPapersDir) {
+          _defaultDir = config.rawPapersDir;
+          if (els.defaultDirLabel) {
+            els.defaultDirLabel.textContent = config.rawPapersDir;
+            els.defaultDirLabel.title = config.rawPapersDir;
+          }
+          if (_destMode === 'default') {
+            _downloadDir = _defaultDir;
+          }
+        }
+      }
+    } catch (err) {
+      console.warn('[fetcher] could not load workspace config:', err.message);
+    }
+  }
+
+  function setDestinationMode(mode) {
+    _destMode = mode;
+    if (mode === 'default') {
+      _downloadDir = _defaultDir;
+      if (els.destModeDefault) els.destModeDefault.checked = true;
+      if (els.customDirRow) {
+        els.customDirRow.classList.add('opacity-50', 'pointer-events-none');
+      }
+      showError('');
+    } else {
+      _downloadDir = _customDir;
+      if (els.destModeCustom) els.destModeCustom.checked = true;
+      if (els.customDirRow) {
+        els.customDirRow.classList.remove('opacity-50', 'pointer-events-none');
+      }
+    }
+  }
 
   async function onSelectDir() {
     try {
       const dir = await libraryAPI.selectDownloadDir();
       if (dir) {
+        _customDir = dir;
         _downloadDir = dir;
         const short = dir.length > 40 ? '…' + dir.slice(-38) : dir;
         if (els.dirLabel) {
           els.dirLabel.textContent = short;
           els.dirLabel.title = dir;
         }
+        setDestinationMode('custom');
         showError('');
       }
     } catch (err) {
@@ -177,16 +228,23 @@
     }
 
     try {
-      const localPath = await papersAPI.downloadPdf(
-        paper.pdf_url,
-        _downloadDir,
-        paper.title || 'paper'
-      );
+      const result = await papersAPI.downloadPdf({
+        paperId: paper.id,
+        url: paper.pdf_url,
+        targetDirectory: _downloadDir,
+        filename: paper.title || 'paper'
+      });
+      const localPath = typeof result === 'string' ? result : (result?.localPath || '');
+      const already = typeof result === 'object' && result?.alreadyExists;
+
       if (statusEl) {
-        statusEl.textContent = '✓ Downloaded';
+        statusEl.textContent = already ? '✓ Available (Indexed)' : '✓ Downloaded';
         statusEl.className = 'fetcher-dl-status is-downloaded';
         statusEl.title = localPath;
       }
+
+      // Notify library to refresh auto-discovery
+      document.dispatchEvent(new CustomEvent('app:libraryUpdated'));
     } catch (err) {
       console.warn('[fetcher] PDF download failed:', err.message);
       if (statusEl) {
@@ -356,6 +414,11 @@
     e.preventDefault();
     showError('');
 
+    if (_destMode === 'custom' && !_customDir) {
+      showError('Please choose a custom destination directory or use the Default Research Workspace.');
+      return;
+    }
+
     const keyword = els.keyword?.value?.trim();
     if (!keyword) {
       showError('Please enter a keyword.');
@@ -441,6 +504,17 @@
     if (!els.resultList) return;
 
     loadSources();
+    initDestination();
+
+    if (els.destModeDefault) {
+      els.destModeDefault.addEventListener('change', () => setDestinationMode('default'));
+    }
+    if (els.destModeCustom) {
+      els.destModeCustom.addEventListener('change', () => {
+        setDestinationMode('custom');
+        if (!_customDir) onSelectDir();
+      });
+    }
 
     if (els.form)         els.form.addEventListener('submit', onSearch);
     if (els.stopBtn)      els.stopBtn.addEventListener('click', onStop);

@@ -41,5 +41,9 @@ export async function initializeDatabase() {
       ON papers(created_at DESC);
   `);
 
+  await query(`
+    ALTER TABLE papers ADD COLUMN IF NOT EXISTS local_pdf_path TEXT;
+  `);
+
   console.log('[schema] Database initialized');
 }

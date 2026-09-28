@@ -573,16 +573,25 @@
 
         <!-- RIGHT: Papers list + detail -->
         <main class="library-panel-list-col">
-          <h3 class="font-display text-xl text-burgundy mb-5 tracking-wide flex items-center gap-3">
-            <svg class="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-            </svg>
-            Papers
+          <h3 class="font-display text-xl text-burgundy mb-5 tracking-wide flex items-center justify-between">
+            <span class="flex items-center gap-3">
+              <svg class="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+              </svg>
+              Papers
+            </span>
+            <button type="button" id="libraryRefreshBtn" class="text-xs font-serif italic text-sepia/70 hover:text-burgundy flex items-center gap-1.5 transition-colors border border-sepia/20 px-2.5 py-1 rounded bg-cream/40" title="Scan raw_papers/ now">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="23 4 23 10 17 10"></polyline>
+                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+              </svg>
+              <span>Scan Workspace</span>
+            </button>
           </h3>
 
           <div id="libraryPaperList" class="library-paper-list"></div>
           <p id="libraryEmpty" class="font-serif text-sepia italic py-8 text-center hidden">
-            No papers yet. Add one to begin your archive.
+            No papers found in raw_papers/. Ingest papers or drop PDFs into raw_papers/ to begin.
           </p>
 
           <!-- Paper detail pane -->
@@ -598,6 +607,10 @@
                 <dd id="libraryDetailAuthors"></dd>
                 <dt>Year</dt>
                 <dd id="libraryDetailYear"></dd>
+                <dt>Source</dt>
+                <dd id="libraryDetailSource">—</dd>
+                <dt>DOI</dt>
+                <dd id="libraryDetailDoi">—</dd>
               </dl>
               <button type="button" id="libraryOpenPdfBtn" class="classical-btn primary library-open-btn">
                 <span>Open PDF</span>
@@ -687,15 +700,37 @@
               </select>
             </div>
 
-            <!-- Download directory -->
+            <!-- Save papers to (Destination Mode) -->
             <div class="library-field">
-              <label class="library-label">Download Directory</label>
-              <button type="button" id="fetcherDirBtn" class="fetcher-dir-btn">
-                <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
-                </svg>
-                <span id="fetcherDirLabel">Choose directory…</span>
-              </button>
+              <label class="library-label">Save Papers To</label>
+              <div class="space-y-3 mt-2 font-serif text-sm">
+                <!-- Mode 1: Default Research Workspace -->
+                <label class="flex items-start gap-2.5 cursor-pointer">
+                  <input type="radio" name="destMode" id="destModeDefault" value="default" checked
+                    class="mt-1 accent-burgundy cursor-pointer" />
+                  <div>
+                    <span class="font-display font-medium text-charcoal text-xs uppercase tracking-wider block">Default Research Workspace</span>
+                    <span id="fetcherDefaultDirLabel" class="text-xs text-sepia/80 font-mono block break-all">raw_papers/</span>
+                  </div>
+                </label>
+
+                <!-- Mode 2: Custom Directory -->
+                <label class="flex items-start gap-2.5 cursor-pointer">
+                  <input type="radio" name="destMode" id="destModeCustom" value="custom"
+                    class="mt-1 accent-burgundy cursor-pointer" />
+                  <div class="w-full">
+                    <span class="font-display font-medium text-charcoal text-xs uppercase tracking-wider block">Choose Your Directory</span>
+                    <div id="fetcherCustomDirRow" class="mt-1.5 opacity-50 pointer-events-none transition-opacity">
+                      <button type="button" id="fetcherDirBtn" class="fetcher-dir-btn">
+                        <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                        </svg>
+                        <span id="fetcherDirLabel">Select directory…</span>
+                      </button>
+                    </div>
+                  </div>
+                </label>
+              </div>
             </div>
 
             <!-- Error -->

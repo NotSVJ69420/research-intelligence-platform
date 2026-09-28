@@ -1,6 +1,7 @@
 /**
  * Library feature: Local Research Library (Electron only).
- * Handles UI for the library panel: adding papers, listing, and opening PDFs via IPC.
+ * Automatically scans and indexes raw_papers/ using PostgreSQL metadata,
+ * while allowing manual additions as a secondary workflow.
  */
 (function () {
   if (typeof window.electronAPI === 'undefined' || !window.electronAPI.library) {
@@ -20,12 +21,15 @@
     pdfLabel: null,
     submitBtn: null,
     formError: null,
+    refreshBtn: null,
     paperList: null,
     emptyMsg: null,
     detail: null,
     detailTitle: null,
     detailAuthors: null,
     detailYear: null,
+    detailSource: null,
+    detailDoi: null,
     openPdfBtn: null,
   };
 
@@ -42,12 +46,15 @@
     els.pdfLabel = getEl('libraryPdfLabel');
     els.submitBtn = getEl('librarySubmit');
     els.formError = getEl('libraryFormError');
+    els.refreshBtn = getEl('libraryRefreshBtn');
     els.paperList = getEl('libraryPaperList');
     els.emptyMsg = getEl('libraryEmpty');
     els.detail = getEl('libraryDetail');
     els.detailTitle = getEl('libraryDetailTitle');
     els.detailAuthors = getEl('libraryDetailAuthors');
     els.detailYear = getEl('libraryDetailYear');
+    els.detailSource = getEl('libraryDetailSource');
+    els.detailDoi = getEl('libraryDetailDoi');
     els.openPdfBtn = getEl('libraryOpenPdfBtn');
   }
 
@@ -61,21 +68,43 @@
     if (els.pdfLabel) els.pdfLabel.textContent = filename || 'Choose PDF file';
   }
 
+  function formatAuthors(authors) {
+    if (!authors) return '—';
+    if (Array.isArray(authors)) {
+      if (authors.length === 0) return '—';
+      return authors.map(a => (typeof a === 'string' ? a : a?.name || '?')).join(', ');
+    }
+    return String(authors);
+  }
+
   function renderPapers(papers) {
     if (!els.paperList || !els.emptyMsg) return;
     els.paperList.innerHTML = '';
     if (!papers || papers.length === 0) {
       els.emptyMsg.classList.remove('hidden');
+      if (els.detail) els.detail.classList.add('hidden');
       return;
     }
     els.emptyMsg.classList.add('hidden');
+
     papers.forEach((paper) => {
       const row = document.createElement('div');
       row.className = 'library-paper-row';
       row.setAttribute('data-id', paper.id);
+
+      const authStr = formatAuthors(paper.authors);
+      const yearStr = paper.year ? ` <span class="library-paper-year">(${escapeHtml(String(paper.year))})</span>` : '';
+      const sourceBadge = paper.isExternal
+        ? '<span class="fetcher-source-badge" style="opacity: 0.85;">External File</span>'
+        : (paper.source ? `<span class="fetcher-source-badge">${escapeHtml(paper.source)}</span>` : '');
+
       row.innerHTML = `
-        <div class="library-paper-title">${escapeHtml(paper.title)}</div>
-        <div class="library-paper-meta">${escapeHtml(paper.authors || '—')}${paper.year ? ' <span class="library-paper-year">(' + escapeHtml(paper.year) + ')</span>' : ''}</div>
+        <div class="library-paper-title">${escapeHtml(paper.title || 'Untitled Document')}</div>
+        <div class="library-paper-meta flex items-center gap-2">
+          ${sourceBadge}
+          <span>${escapeHtml(authStr)}</span>
+          ${yearStr}
+        </div>
       `;
       row.addEventListener('click', () => selectPaper(paper, row));
       els.paperList.appendChild(row);
@@ -97,8 +126,12 @@
 
     if (els.detail) els.detail.classList.remove('hidden');
     if (els.detailTitle) els.detailTitle.textContent = paper.title || '—';
-    if (els.detailAuthors) els.detailAuthors.textContent = paper.authors || '—';
+    if (els.detailAuthors) els.detailAuthors.textContent = formatAuthors(paper.authors);
     if (els.detailYear) els.detailYear.textContent = paper.year || '—';
+    if (els.detailSource) {
+      els.detailSource.textContent = paper.isExternal ? 'Unindexed (raw_papers/)' : (paper.source || 'Database');
+    }
+    if (els.detailDoi) els.detailDoi.textContent = paper.doi || '—';
   }
 
   async function loadPapers() {
@@ -158,9 +191,10 @@
   }
 
   async function onOpenPdf() {
-    if (!selectedPaper?.pdfPath) return;
+    const pdfPath = selectedPaper?.local_pdf_path || selectedPaper?.pdfPath;
+    if (!pdfPath) return;
     try {
-      await api.openPdf(selectedPaper.pdfPath);
+      await api.openPdf(pdfPath);
     } catch (e) {
       console.error('Library: open PDF failed', e);
       showFormError('Could not open PDF.');
@@ -176,13 +210,19 @@
     if (els.selectPdfBtn) els.selectPdfBtn.addEventListener('click', onSelectPdf);
     if (els.form) els.form.addEventListener('submit', onSubmit);
     if (els.openPdfBtn) els.openPdfBtn.addEventListener('click', onOpenPdf);
+    if (els.refreshBtn) els.refreshBtn.addEventListener('click', () => loadPapers());
   }
 
-  // Re-run loadPapers whenever the library panel becomes active, so the list stays fresh.
+  // Auto-reload when switching to library view
   document.addEventListener('app:viewChanged', (e) => {
     if (e.detail?.view === 'library') {
       loadPapers();
     }
+  });
+
+  // Auto-reload when new papers are downloaded/ingested
+  document.addEventListener('app:libraryUpdated', () => {
+    loadPapers();
   });
 
   if (document.readyState === 'loading') {

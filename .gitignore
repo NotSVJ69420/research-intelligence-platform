@@ -20,6 +20,7 @@ papers.json
 # Local research test dumps and artifacts
 artifacts/
 analysis/
+raw_papers/
 research/
 research/analysis/
 *.pdf
