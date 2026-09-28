@@ -198,7 +198,7 @@ ipcMain.handle('ai:processPipeline', async (_event, { papers, prompt }) => {
 });
 
 ipcMain.handle('ai:saveAnalysis', async (_event, { title, content }) => {
-  const analysisDir = path.join(app.getPath('userData'), 'analysis');
+  const analysisDir = path.join(process.cwd(), 'analysis');
   await fs.mkdir(analysisDir, { recursive: true });
   
   const safeTitle = title.replace(/[^a-zA-Z0-9_\- ]/g, '').replace(/\s+/g, '_').slice(0, 100);

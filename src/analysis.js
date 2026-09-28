@@ -75,7 +75,7 @@
       }
 
       setStatus('done', `Finished. Processed ${count}/${_papers.length} papers.`);
-      log(`Pipeline complete. Results stored in research/analysis/`, 'success');
+      log(`Pipeline complete. Results stored in analysis/`, 'success');
     } catch (err) {
       log(`Critical error: ${err.message}`, 'error');
       setStatus('error', 'Pipeline failed.');
