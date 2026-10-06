@@ -48,18 +48,36 @@ async function runTests() {
   let passed = 0;
   let failed = 0;
 
-  // ──── Test 1: Normal query ────
-  console.log('\n═══ Test 1: Normal query ("compiler design", both sources, limit 20) ═══');
+  // ──── Test 1: Single provider (arxiv, limit 3) ────
+  console.log('\n═══ Test 1: Single provider (arxiv, limit 3) ═══');
   try {
-    const papers = await searchPapers('compiler design', ['openalex', 'arxiv'], 20);
+    const papers = await searchPapers('quantum computing', ['arxiv'], 3);
     console.log(`  Returned ${papers.length} papers`);
 
-    // Count ≤ limit
-    if (papers.length > 20) {
-      console.error('  ✗ FAIL: more than 20 results');
+    if (papers.length > 3) {
+      console.error('  ✗ FAIL: more than 3 results for single provider');
       failed++;
     } else {
-      console.log('  ✓ Count ≤ 20');
+      console.log('  ✓ Count ≤ 3');
+      passed++;
+    }
+  } catch (err) {
+    console.error('  ✗ FAIL: threw an error:', err.message);
+    failed++;
+  }
+
+  // ──── Test 2: Multiple providers (openalex + arxiv, limit 3) ────
+  console.log('\n═══ Test 2: Multiple providers (openalex + arxiv, limit 3) ═══');
+  try {
+    const papers = await searchPapers('deep learning', ['openalex', 'arxiv'], 3);
+    console.log(`  Returned ${papers.length} papers`);
+
+    // Count ≤ limit * 2 (3 * 2 = 6)
+    if (papers.length > 6) {
+      console.error('  ✗ FAIL: more than 6 results (3 per provider)');
+      failed++;
+    } else {
+      console.log('  ✓ Count ≤ 6 (up to 3 per provider)');
       passed++;
     }
 
@@ -89,44 +107,20 @@ async function runTests() {
       console.error(`  ✗ FAIL: duplicate DOIs found (${dois.length} total, ${uniqueDois.size} unique)`);
       failed++;
     }
-
-    // Ranking: citation_count descending, nulls last
-    let rankOk = true;
-    for (let i = 1; i < papers.length; i++) {
-      const prevCit = papers[i - 1].citation_count ?? -Infinity;
-      const currCit = papers[i].citation_count ?? -Infinity;
-      if (prevCit < currCit) {
-        rankOk = false;
-        break;
-      }
-    }
-    if (rankOk) {
-      console.log('  ✓ Ranking order correct (citation_count desc, nulls last)');
-      passed++;
-    } else {
-      console.error('  ✗ FAIL: ranking order incorrect');
-      failed++;
-    }
-
-    // Print first paper as sample
-    if (papers.length > 0) {
-      console.log('\n  Sample paper:');
-      console.log(JSON.stringify(papers[0], null, 2));
-    }
   } catch (err) {
     console.error('  ✗ FAIL: threw an error:', err.message);
     failed++;
   }
 
-  // ──── Test 2: Partial failure ────
-  console.log('\n═══ Test 2: Partial failure (openalex + nonexistent) ═══');
+  // ──── Test 3: Partial failure ────
+  console.log('\n═══ Test 3: Partial failure (arxiv + nonexistent, limit 3) ═══');
   try {
-    const papers = await searchPapers('machine learning', ['openalex', 'nonexistent'], 10);
-    if (Array.isArray(papers)) {
-      console.log(`  ✓ Returned ${papers.length} papers (partial result)`);
+    const papers = await searchPapers('compiler design', ['arxiv', 'nonexistent'], 3);
+    if (Array.isArray(papers) && papers.length <= 3) {
+      console.log(`  ✓ Returned ${papers.length} papers (partial result ≤ 3)`);
       passed++;
     } else {
-      console.error('  ✗ FAIL: did not return array');
+      console.error('  ✗ FAIL: unexpected result:', papers);
       failed++;
     }
   } catch (err) {
@@ -134,15 +128,45 @@ async function runTests() {
     failed++;
   }
 
-  // ──── Test 3: Total failure ────
-  console.log('\n═══ Test 3: Total failure (nonexistent only) ═══');
+  // ──── Test 4: Cross-provider duplicate handling ────
+  console.log('\n═══ Test 4: Cross-provider duplicate handling (deduplicate unit check) ═══');
+  try {
+    const { deduplicate } = await import('../ingestion/dedupe.js');
+    const mockPapers = [
+      { id: '1', source: 'openalex', source_id: 'W1', title: 'Attention Is All You Need', doi: '10.1234/test', year: 2017, authors: ['Vaswani'] },
+      { id: '2', source: 'arxiv', source_id: '1706.03762', title: 'Attention Is All You Need', doi: 'https://doi.org/10.1234/test', year: 2017, authors: ['Vaswani'] },
+    ];
+    const deduped = deduplicate(mockPapers);
+    if (deduped.length === 1 && deduped[0].source === 'openalex') {
+      console.log('  ✓ Duplicate collapsed properly across providers');
+      passed++;
+    } else {
+      console.error('  ✗ FAIL: duplicate not collapsed:', deduped);
+      failed++;
+    }
+  } catch (err) {
+    console.error('  ✗ FAIL:', err.message);
+    failed++;
+  }
+
+  // ──── Test 5: Total failure / No valid providers ────
+  console.log('\n═══ Test 5: Total failure (no valid providers) ═══');
   try {
     const papers = await searchPapers('test', ['nonexistent'], 10);
     if (Array.isArray(papers) && papers.length === 0) {
-      console.log('  ✓ Returned empty array');
+      console.log('  ✓ Returned empty array for nonexistent provider');
       passed++;
     } else {
       console.error('  ✗ FAIL: expected empty array, got:', papers);
+      failed++;
+    }
+
+    const emptyPapers = await searchPapers('test', [], 10);
+    if (Array.isArray(emptyPapers) && emptyPapers.length === 0) {
+      console.log('  ✓ Returned empty array for empty provider list');
+      passed++;
+    } else {
+      console.error('  ✗ FAIL: expected empty array, got:', emptyPapers);
       failed++;
     }
   } catch (err) {

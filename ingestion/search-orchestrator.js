@@ -46,7 +46,7 @@ export function getSourceNames() {
  *
  * @param {string} query - Search query string.
  * @param {string[]} sources - Array of source names (e.g., ["openalex", "arxiv"]).
- * @param {number} limit - Maximum number of results to return.
+ * @param {number} limit - Maximum number of results to fetch per provider.
  * @param {'date'|'citations'} sortBy - Sort strategy (default: 'date').
  * @returns {Promise<object[]>} Clean, deduplicated, ranked Paper objects with UUIDs.
  */
@@ -73,7 +73,7 @@ export async function searchPapers(query, sources = ['openalex', 'arxiv'], limit
     fetchPromises.map(fp => fp.promise)
   );
 
-  // Step 3: Collect successful results + normalize
+  // Step 3: Collect successful results + normalize + limit per provider
   let allPapers = [];
 
   for (let i = 0; i < results.length; i++) {
@@ -92,7 +92,9 @@ export async function searchPapers(query, sources = ['openalex', 'arxiv'], limit
 
     const normalizeFn = SOURCE_REGISTRY[sourceName].normalize;
     const normalized = rawItems.map(raw => normalizeFn(raw));
-    allPapers = allPapers.concat(normalized);
+    // Each provider yields up to limit papers (ranked by chosen strategy)
+    const providerPapers = rankPapers(normalized, sortBy).slice(0, limit);
+    allPapers = allPapers.concat(providerPapers);
   }
 
   if (allPapers.length === 0) return [];
@@ -105,9 +107,6 @@ export async function searchPapers(query, sources = ['openalex', 'arxiv'], limit
     paper.id = crypto.randomUUID();
   }
 
-  // Step 6: Rank
-  const ranked = rankPapers(deduped, sortBy);
-
-  // Step 7: Trim to limit
-  return ranked.slice(0, limit);
+  // Step 6: Rank full deduplicated set across all providers
+  return rankPapers(deduped, sortBy);
 }
