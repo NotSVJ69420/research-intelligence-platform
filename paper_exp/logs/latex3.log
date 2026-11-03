@@ -165,10 +165,6 @@ Underfull \hbox (badness 2119) in paragraph at lines 167--168
 Overfull \hbox (0.62907pt too wide) in paragraph at lines 182--183
 \T1/ptm/m/n/8 (-20) (\T1/pcr/m/n/9 run_all.sh\T1/ptm/m/n/8 (-20) )|  
 [5]
-Underfull \hbox (badness 1852) in paragraph at lines 220--221
-\T1/ptm/m/n/10 (+20) 2 in \T1/pcr/m/n/9 test-paper-service.js\T1/ptm/m/n/10 (+2
-0) ). The 20 as-ser-tions of
-
 Underfull \hbox (badness 10000) in paragraph at lines 251--252
 []\T1/ptm/m/n/10 (+20) All [S] mea-sure-ments be-low were pro-duced by
 
@@ -206,8 +202,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 424--425
 \T1/pcr/m/n/9 $title\nAbstract: $abstract\n\nTask: $prompt
 [9]
 Underfull \vbox (badness 1009) has occurred while \output is active
-Underfull \vbox (badness 10000) has occurred while \output is active [10 <./fig
-ures/fig_scaling.pdf> <./figures/fig_ai.pdf
+Underfull \vbox (badness 5652) has occurred while \output is active [10 <./figu
+res/fig_scaling.pdf> <./figures/fig_ai.pdf
 
 pdfTeX warning: pdflatex (file ./figures/fig_ai.pdf): PDF inclusion: multiple p
 dfs with page group included in a single page
@@ -249,5 +245,5 @@ nts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw
 /times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.
 pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (13 pages, 450660 bytes).
+Output written on main.pdf (13 pages, 450781 bytes).
 Transcript written on main.log.

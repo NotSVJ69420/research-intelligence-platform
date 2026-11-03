@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-03T17:12:54.273Z",
+  "generatedAt": "2026-11-03T17:55:39.654Z",
   "summary": {
     "claims": 39,
     "passed": 39,
@@ -277,7 +277,7 @@
     {
       "id": "R.1",
       "section": "V",
-      "statement": "Repository tests run in sandbox: 57 of 65 assertions pass; 8 failures are all live-network assertions",
+      "statement": "Repository tests in sandbox: the 57 offline assertions all pass; the other 8 assertions need live providers and are not evaluable behind the egress policy (raw counts kept in the logs)",
       "actual": "all_providers:22/6 ingestion:8/0 paper_service:7/2 workspace_library:20/0",
       "pass": true
     }

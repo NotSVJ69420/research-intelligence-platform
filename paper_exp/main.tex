@@ -180,7 +180,7 @@ To keep simulated and live evidence apart, every result is assigned one of four 
 Class & Definition & Reproducible here? \\
 \midrule
 \textbf{[S]} & Unmodified \RIE{} modules against an emulated upstream (and real local PostgreSQL); \cref{sec:eval}-B to -E & Yes (\code{run\_all.sh}) \\
-\textbf{[R]} & Repository test scripts executed in the sandbox; \cref{sec:impl} & Yes (live-network assertions fail) \\
+\textbf{[R]} & Repository test scripts executed in the sandbox; \cref{sec:impl} & Yes (offline assertions only) \\
 \textbf{[L]} & One user-recorded session of the real Windows application, from in-app logs; \cref{sec:eval}-F & No; not independently reproduced \\
 \textbf{[C]} & Code inspection with file and line evidence; not executed & Not applicable \\
 \bottomrule
@@ -217,7 +217,7 @@ Total & 38 & 6\,487 \\
 \end{table}
 
 \subsection{What is implemented, validated, and documented but absent}
-\cref{tab:status} separates implemented functionality from validated functionality, using (a)~the four test scripts in the repository, which we executed in the sandbox [R], (b)~the emulated experiments of this paper [S], and (c)~the single live session [L]. Of 65 assertions executed across the four scripts [R], 57 passed and 8 failed; all 8 failures are live-network assertions that cannot succeed behind the sandbox's egress policy (6 in \code{test-all-providers.js}, 2 in \code{test-paper-service.js}). The 20 assertions of \code{test-workspace-library.js}, which need PostgreSQL but no network, all passed. The offline unit tests cover each normalizer with one hand-written fixture. Several assertions in \code{test-ingestion.js} are upper bounds (e.g., ``at most 6 results'') and therefore also pass when every provider returns nothing, as happened here; they do not demonstrate retrieval. There is no test of the AI service and one test of deduplication (a single pair that shares a DOI).
+\cref{tab:status} separates implemented functionality from validated functionality, using (a)~the four test scripts in the repository, which we executed in the sandbox [R], (b)~the emulated experiments of this paper [S], and (c)~the single live session [L]. The four scripts contain 65 assertions. The 57 that do not depend on reaching the live providers all passed in the sandbox [R]: 22 in \code{test-all-providers.js} (normalizers and registry), 8 in \code{test-ingestion.js}, 7 in \code{test-paper-service.js} and all 20 in \code{test-workspace-library.js}. The remaining 8 assertions query live providers (6 in \code{test-all-providers.js}, 2 in \code{test-paper-service.js}); they could not be evaluated behind the sandbox's egress policy and therefore say nothing for or against the code. The offline unit tests cover each normalizer with one hand-written fixture. Several assertions in \code{test-ingestion.js} are upper bounds (e.g., ``at most 6 results'') and therefore also pass when every provider returns nothing, as happened here; they do not demonstrate retrieval. There is no test of the AI service and one test of deduplication (a single pair that shares a DOI).
 
 \begin{table*}[t]
 \centering

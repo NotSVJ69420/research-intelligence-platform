@@ -81,9 +81,169 @@ For additional information on amsmath, use the `?' option.
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msa.cfg)
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd)
-(/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msb.cfg) [1{/var/lib/texm
-f/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texlive/texmf-dist/fonts/enc/d
-vips/base/8r.enc}] (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msb.cfg)
+
+LaTeX Warning: Citation `priem2022openalex' on page 1 undefined on input line 4
+4.
+
+
+LaTeX Warning: Citation `lo2020s2orc' on page 1 undefined on input line 44.
+
+
+LaTeX Warning: Citation `kinney2023semantic' on page 1 undefined on input line 
+44.
+
+
+LaTeX Warning: Citation `hendricks2020crossref' on page 1 undefined on input li
+ne 44.
+
+
+LaTeX Warning: Citation `ferguson2021europepmc' on page 1 undefined on input li
+ne 44.
+
+
+LaTeX Warning: Citation `sayers2022eutilities' on page 1 undefined on input lin
+e 44.
+
+
+LaTeX Warning: Citation `arxivapi' on page 1 undefined on input line 44.
+
+
+LaTeX Warning: Citation `visser2021large' on page 1 undefined on input line 44.
+
+
+
+LaTeX Warning: Citation `gusenbauer2020which' on page 1 undefined on input line
+ 44.
+
+
+LaTeX Warning: Citation `alperin2024analysis' on page 1 undefined on input line
+ 44.
+
+
+LaTeX Warning: Citation `ji2023survey' on page 1 undefined on input line 44.
+
+
+LaTeX Warning: Citation `tang2025llmreview' on page 1 undefined on input line 4
+4.
+
+
+LaTeX Warning: Citation `fellegi1969theory' on page 1 undefined on input line 5
+8.
+
+
+LaTeX Warning: Citation `elmagarmid2007duplicate' on page 1 undefined on input 
+line 58.
+
+
+LaTeX Warning: Citation `christen2012data' on page 1 undefined on input line 58
+.
+
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texlive/texmf-
+dist/fonts/enc/dvips/base/8r.enc}]
+
+LaTeX Warning: Citation `priem2022openalex' on page 2 undefined on input line 6
+5.
+
+
+LaTeX Warning: Citation `lo2020s2orc' on page 2 undefined on input line 65.
+
+
+LaTeX Warning: Citation `kinney2023semantic' on page 2 undefined on input line 
+65.
+
+
+LaTeX Warning: Citation `hendricks2020crossref' on page 2 undefined on input li
+ne 65.
+
+
+LaTeX Warning: Citation `ferguson2021europepmc' on page 2 undefined on input li
+ne 65.
+
+
+LaTeX Warning: Citation `sayers2022eutilities' on page 2 undefined on input lin
+e 65.
+
+
+LaTeX Warning: Citation `visser2021large' on page 2 undefined on input line 65.
+
+
+
+LaTeX Warning: Citation `alperin2024analysis' on page 2 undefined on input line
+ 65.
+
+
+LaTeX Warning: Citation `gusenbauer2020which' on page 2 undefined on input line
+ 65.
+
+
+LaTeX Warning: Citation `piwowar2018state' on page 2 undefined on input line 65
+.
+
+
+LaTeX Warning: Citation `shokouhi2011federated' on page 2 undefined on input li
+ne 67.
+
+
+LaTeX Warning: Citation `cormack2009reciprocal' on page 2 undefined on input li
+ne 67.
+
+
+LaTeX Warning: Citation `dean2013tail' on page 2 undefined on input line 67.
+
+
+LaTeX Warning: Citation `fellegi1969theory' on page 2 undefined on input line 6
+9.
+
+
+LaTeX Warning: Citation `elmagarmid2007duplicate' on page 2 undefined on input 
+line 69.
+
+
+LaTeX Warning: Citation `christen2012data' on page 2 undefined on input line 69
+.
+
+
+LaTeX Warning: Citation `bramer2016dedup' on page 2 undefined on input line 69.
+
+
+
+LaTeX Warning: Citation `rathbone2015better' on page 2 undefined on input line 
+69.
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd)
+
+LaTeX Warning: Citation `lewis2020retrieval' on page 2 undefined on input line 
+71.
+
+
+LaTeX Warning: Citation `gao2023retrieval' on page 2 undefined on input line 71
+.
+
+
+LaTeX Warning: Citation `lala2023paperqa' on page 2 undefined on input line 71.
+
+
+
+LaTeX Warning: Citation `skarlinski2024language' on page 2 undefined on input l
+ine 71.
+
+
+LaTeX Warning: Citation `nicholson2021scite' on page 2 undefined on input line 
+71.
+
+
+LaTeX Warning: Citation `ji2023survey' on page 2 undefined on input line 71.
+
+
+LaTeX Warning: Citation `tang2025llmreview' on page 2 undefined on input line 7
+1.
+
+
+LaTeX Warning: Citation `openai2025gptoss' on page 2 undefined on input line 71
+.
+
+
 Underfull \hbox (badness 3623) in paragraph at lines 79--80
 \T1/ptm/m/n/10 (+20) ed-i-tor win-dow) run with \T1/pcr/m/n/9 contextIsolation 
 \T1/ptm/m/n/10 (+20) en-abled
@@ -165,10 +325,6 @@ Underfull \hbox (badness 2119) in paragraph at lines 167--168
 Overfull \hbox (0.62907pt too wide) in paragraph at lines 182--183
 \T1/ptm/m/n/8 (-20) (\T1/pcr/m/n/9 run_all.sh\T1/ptm/m/n/8 (-20) )|  
 [5]
-Underfull \hbox (badness 1852) in paragraph at lines 220--221
-\T1/ptm/m/n/10 (+20) 2 in \T1/pcr/m/n/9 test-paper-service.js\T1/ptm/m/n/10 (+2
-0) ). The 20 as-ser-tions of
-
 Underfull \hbox (badness 10000) in paragraph at lines 251--252
 []\T1/ptm/m/n/10 (+20) All [S] mea-sure-ments be-low were pro-duced by
 
@@ -206,12 +362,16 @@ Underfull \hbox (badness 10000) in paragraph at lines 424--425
 \T1/pcr/m/n/9 $title\nAbstract: $abstract\n\nTask: $prompt
 [9]
 Underfull \vbox (badness 1009) has occurred while \output is active
-Underfull \vbox (badness 10000) has occurred while \output is active [10 <./fig
-ures/fig_scaling.pdf> <./figures/fig_ai.pdf
+Underfull \vbox (badness 5652) has occurred while \output is active [10 <./figu
+res/fig_scaling.pdf> <./figures/fig_ai.pdf
 
 pdfTeX warning: pdflatex (file ./figures/fig_ai.pdf): PDF inclusion: multiple p
 dfs with page group included in a single page
 >]
+
+LaTeX Warning: Citation `dean2013tail' on page 11 undefined on input line 486.
+
+
 Underfull \vbox (badness 4001) has occurred while \output is active [11]
 Underfull \hbox (badness 3343) in paragraph at lines 509--510
 \T1/ptm/m/n/10 (+20) gen-er-a-tors, PDF con-ver-sions), \T1/pcr/m/n/9 experimen
@@ -231,7 +391,19 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[13] (./main.aux) )
+[13] (./main.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `main.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+ )
 (see the transcript file for additional information)</usr/share/texlive/texmf-d
 ist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fo
 nts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/ty
@@ -249,5 +421,5 @@ nts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw
 /times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.
 pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (13 pages, 450660 bytes).
+Output written on main.pdf (13 pages, 450592 bytes).
 Transcript written on main.log.

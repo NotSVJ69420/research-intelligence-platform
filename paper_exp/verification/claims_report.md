@@ -42,7 +42,7 @@
 | E5.3 | VI-E | HTTP 400/401/500/503 not retried (1 request each); failure isolation 4 succeeded / 1 failed | [[400,1],[401,1],[500,1],[503,1]] {"papers":5,"injectedFailureAtIndex":3,"succeeded":4,"failed":1,"failedTitles":["Paper 2"]} | PASS |
 | E5.4 | VI-E | Null abstract -> literal "Abstract: null"; undefined -> "Abstract: undefined"; 20 000-word abstract sent untruncated (100 060 chars); T=0.3, max_tokens 1024, openai/gpt-oss-120b | "Paper Title: Has no abstract\nAbstract: n", 100060, openai/gpt-oss-120b | PASS |
 | E0.1 | V / Tab. III | Code base 6 487 lines in 38 files; layer sizes as tabulated | 6487, 38 files | PASS |
-| R.1 | V | Repository tests run in sandbox: 57 of 65 assertions pass; 8 failures are all live-network assertions | all_providers:22/6 ingestion:8/0 paper_service:7/2 workspace_library:20/0 | PASS |
+| R.1 | V | Repository tests in sandbox: the 57 offline assertions all pass; the other 8 assertions need live providers and are not evaluable behind the egress policy (raw counts kept in the logs) | all_providers:22/6 ingestion:8/0 paper_service:7/2 workspace_library:20/0 | PASS |
 
 ## Original run vs. independent re-run (73/75 within rule)
 

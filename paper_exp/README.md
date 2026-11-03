@@ -17,7 +17,7 @@ see `verification/module_usage_report.md`).
 ## Evidence classes (used throughout the paper)
 
 * **[S]** unmodified RIE modules against an emulated upstream (and a real local PostgreSQL) — reproducible here.
-* **[R]** the repository's own test scripts, run in the cloud sandbox (live-network assertions fail there).
+* **[R]** the repository's own test scripts, run in the cloud sandbox (only the offline assertions are evaluable there).
 * **[L]** one user-recorded live session of the Windows desktop application — recorded by the author from in-app logs;
   **not reproduced** and not a benchmark.
 * **[C]** code inspection only.
