@@ -43,32 +43,38 @@ function fallbackKey(paper) {
 export function deduplicate(papers) {
   if (!Array.isArray(papers)) return [];
 
-  const seenDois = new Set();
-  const seenSourceIds = new Set();
-  const seenHashes = new Set();
   const result = [];
+  // Map of canonical key -> paper in result array for merging enriched metadata
+  const mapByKey = new Map();
 
   for (const paper of papers) {
-    // Tier 1: DOI
     const doi = normalizeDoi(paper.doi);
-    if (doi) {
-      if (seenDois.has(doi)) continue;
-      seenDois.add(doi);
-    }
-
-    // Tier 2: source + source_id
-    const sourceKey = `${paper.source}:${paper.source_id}`;
-    if (paper.source_id) {
-      if (seenSourceIds.has(sourceKey)) continue;
-      seenSourceIds.add(sourceKey);
-    }
-
-    // Tier 3: fallback hash
+    const sourceKey = paper.source_id ? `${paper.source}:${paper.source_id}` : null;
     const hash = fallbackKey(paper);
-    if (seenHashes.has(hash)) continue;
-    seenHashes.add(hash);
+
+    // Check if duplicate already seen
+    const existing =
+      (doi && mapByKey.get(`doi:${doi}`)) ||
+      (sourceKey && mapByKey.get(`src:${sourceKey}`)) ||
+      mapByKey.get(`hash:${hash}`);
+
+    if (existing) {
+      // Merge best fields into existing: especially pdf_url, abstract, venue, citation_count
+      if (!existing.pdf_url && paper.pdf_url) existing.pdf_url = paper.pdf_url;
+      if (!existing.abstract && paper.abstract) existing.abstract = paper.abstract;
+      if (!existing.venue && paper.venue) existing.venue = paper.venue;
+      if (!existing.doi && paper.doi) existing.doi = paper.doi;
+      if ((existing.citation_count == null) && (paper.citation_count != null)) {
+        existing.citation_count = paper.citation_count;
+      }
+      continue;
+    }
 
     result.push(paper);
+
+    if (doi) mapByKey.set(`doi:${doi}`, paper);
+    if (sourceKey) mapByKey.set(`src:${sourceKey}`, paper);
+    mapByKey.set(`hash:${hash}`, paper);
   }
 
   return result;

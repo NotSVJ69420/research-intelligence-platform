@@ -215,6 +215,9 @@ ipcMain.handle('settings:get', async () => {
     openalexApiKey: stored.openalexApiKey || process.env.OPENALEX_API_KEY || '',
     groqApiKey: stored.groqApiKey || process.env.GROQ_API_KEY || '',
     arxivApiKey: stored.arxivApiKey || '',
+    semanticScholarApiKey: stored.semanticScholarApiKey || process.env.SEMANTIC_SCHOLAR_API_KEY || '',
+    crossrefEmail: stored.crossrefEmail || process.env.CROSSREF_EMAIL || '',
+    pubmedApiKey: stored.pubmedApiKey || process.env.PUBMED_API_KEY || '',
   };
 });
 
@@ -230,6 +233,15 @@ ipcMain.handle('settings:save', async (_event, settings) => {
     process.env.GROQ_API_KEY = updated.groqApiKey;
     if (aiService) aiService.apiKey = updated.groqApiKey;
   }
+  if (updated.semanticScholarApiKey !== undefined) {
+    process.env.SEMANTIC_SCHOLAR_API_KEY = updated.semanticScholarApiKey;
+  }
+  if (updated.crossrefEmail !== undefined) {
+    process.env.CROSSREF_EMAIL = updated.crossrefEmail;
+  }
+  if (updated.pubmedApiKey !== undefined) {
+    process.env.PUBMED_API_KEY = updated.pubmedApiKey;
+  }
 
   return { success: true };
 });
@@ -242,6 +254,9 @@ app.whenReady().then(async () => {
       process.env.GROQ_API_KEY = stored.groqApiKey;
       if (aiService) aiService.apiKey = stored.groqApiKey;
     }
+    if (stored.semanticScholarApiKey) process.env.SEMANTIC_SCHOLAR_API_KEY = stored.semanticScholarApiKey;
+    if (stored.crossrefEmail) process.env.CROSSREF_EMAIL = stored.crossrefEmail;
+    if (stored.pubmedApiKey) process.env.PUBMED_API_KEY = stored.pubmedApiKey;
   } catch (err) {
     console.warn('[startup] Failed to load stored settings:', err.message);
   }

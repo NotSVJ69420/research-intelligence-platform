@@ -493,6 +493,9 @@ function initSettingsModal() {
   const cancelBtn = document.getElementById('cancelSettingsBtn');
   const form = document.getElementById('settingsForm');
   const openAlexInput = document.getElementById('settingOpenAlex');
+  const semanticScholarInput = document.getElementById('settingSemanticScholar');
+  const crossrefInput = document.getElementById('settingCrossref');
+  const pubmedInput = document.getElementById('settingPubmed');
   const groqInput = document.getElementById('settingGroq');
   const arxivInput = document.getElementById('settingArxiv');
   const statusEl = document.getElementById('settingsStatus');
@@ -510,8 +513,10 @@ function initSettingsModal() {
         const s = await window.electronAPI.settings.get();
         if (s) {
           if (openAlexInput) openAlexInput.value = s.openalexApiKey || '';
+          if (semanticScholarInput) semanticScholarInput.value = s.semanticScholarApiKey || '';
+          if (crossrefInput) crossrefInput.value = s.crossrefEmail || '';
+          if (pubmedInput) pubmedInput.value = s.pubmedApiKey || '';
           if (groqInput) groqInput.value = s.groqApiKey || '';
-          if (arxivInput) arxivInput.value = s.arxivApiKey || '';
         }
       } catch (err) {
         console.warn('Failed to load settings:', err);
@@ -545,8 +550,10 @@ function initSettingsModal() {
       e.preventDefault();
       const payload = {
         openalexApiKey: openAlexInput ? openAlexInput.value.trim() : '',
+        semanticScholarApiKey: semanticScholarInput ? semanticScholarInput.value.trim() : '',
+        crossrefEmail: crossrefInput ? crossrefInput.value.trim() : '',
+        pubmedApiKey: pubmedInput ? pubmedInput.value.trim() : '',
         groqApiKey: groqInput ? groqInput.value.trim() : '',
-        arxivApiKey: arxivInput ? arxivInput.value.trim() : '',
       };
 
       if (window.electronAPI?.settings?.save) {

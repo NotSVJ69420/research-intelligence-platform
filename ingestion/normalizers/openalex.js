@@ -70,6 +70,22 @@ export function normalize(raw) {
     const rawId = raw.id || '';
     const sourceId = rawId.replace('https://openalex.org/', '');
 
+    // Extract direct PDF link from open_access / locations.
+    // ScienceDirect / Elsevier requires institutional login or browser session for direct PDF downloads and returns 403 to server scripts.
+    // If an alternate open access repository copy (like arxiv.org or open repos) is available in locations, prefer it.
+    const allPdfCandidates = [
+      raw.best_oa_location?.pdf_url,
+      raw.primary_location?.pdf_url,
+      ...(raw.locations?.map(loc => loc?.pdf_url) || []),
+      (raw.open_access?.oa_url && /\.pdf($|\?)/i.test(raw.open_access.oa_url) ? raw.open_access.oa_url : null),
+    ].filter(Boolean);
+
+    // Prefer non-sciencedirect/non-paywall sources if available
+    const pdfUrl =
+      allPdfCandidates.find(u => !u.includes('sciencedirect.com')) ||
+      allPdfCandidates[0] ||
+      null;
+
     return {
       id: null,
       source: 'openalex',
@@ -81,7 +97,7 @@ export function normalize(raw) {
       venue: raw.primary_location?.source?.display_name || null,
       doi: normalizeDoi(raw.doi),
       url: typeof raw.id === 'string' ? raw.id : '',
-      pdf_url: raw.open_access?.oa_url || null,
+      pdf_url: pdfUrl,
       citation_count: typeof raw.cited_by_count === 'number' ? raw.cited_by_count : null,
     };
   } catch {

@@ -895,7 +895,7 @@
   <!-- SETTINGS MODAL            -->
   <!-- ========================= -->
   <div id="settingsModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" style="background: rgba(28, 28, 28, 0.55); backdrop-filter: blur(4px);">
-    <div class="relative w-full max-w-md bg-parchment border border-sepia/30 p-6 shadow-2xl">
+    <div class="relative w-full max-w-md max-h-[90vh] overflow-y-auto bg-parchment border border-sepia/30 p-6 shadow-2xl">
       <div class="flex justify-between items-center mb-5 pb-3 border-b border-sepia/20">
         <h2 class="font-display text-lg font-semibold text-burgundy tracking-wider uppercase">API & System Settings</h2>
         <button type="button" id="closeSettingsBtn" class="text-sepia hover:text-burgundy transition-colors p-1" aria-label="Close settings">
@@ -928,6 +928,54 @@
         </div>
 
         <div>
+          <label class="block text-xs uppercase tracking-wider text-sepia font-display mb-1" for="settingSemanticScholar">
+            Semantic Scholar API Key
+          </label>
+          <div class="relative">
+            <input type="password" id="settingSemanticScholar" class="w-full pr-10 px-3 py-2 border border-sepia/30 bg-cream/30 text-charcoal text-sm focus:outline-none focus:border-burgundy font-mono" placeholder="Paste Semantic Scholar key..." autocomplete="off">
+            <button type="button" class="toggle-password-btn absolute right-2 top-1/2 -translate-y-1/2 text-sepia/60 hover:text-burgundy transition-colors p-1" data-target="settingSemanticScholar" aria-label="Toggle password visibility" title="Show/Hide key">
+              <svg class="eye-open w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+              <svg class="eye-closed w-4 h-4 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                <line x1="1" y1="1" x2="23" y2="23"></line>
+              </svg>
+            </button>
+          </div>
+          <p class="text-xs text-sepia/60 mt-1 italic">Optional — increases rate allowance from shared pool to dedicated 1 rps.</p>
+        </div>
+
+        <div>
+          <label class="block text-xs uppercase tracking-wider text-sepia font-display mb-1" for="settingCrossref">
+            Crossref Contact Email (Polite Pool)
+          </label>
+          <input type="email" id="settingCrossref" class="w-full px-3 py-2 border border-sepia/30 bg-cream/30 text-charcoal text-sm focus:outline-none focus:border-burgundy font-mono" placeholder="researcher@example.org" autocomplete="off">
+          <p class="text-xs text-sepia/60 mt-1 italic">Optional. Grants access to Crossref Polite Pool with higher throughput.</p>
+        </div>
+
+        <div>
+          <label class="block text-xs uppercase tracking-wider text-sepia font-display mb-1" for="settingPubmed">
+            PubMed / NCBI API Key
+          </label>
+          <div class="relative">
+            <input type="password" id="settingPubmed" class="w-full pr-10 px-3 py-2 border border-sepia/30 bg-cream/30 text-charcoal text-sm focus:outline-none focus:border-burgundy font-mono" placeholder="Paste NCBI API key..." autocomplete="off">
+            <button type="button" class="toggle-password-btn absolute right-2 top-1/2 -translate-y-1/2 text-sepia/60 hover:text-burgundy transition-colors p-1" data-target="settingPubmed" aria-label="Toggle password visibility" title="Show/Hide key">
+              <svg class="eye-open w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+              <svg class="eye-closed w-4 h-4 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                <line x1="1" y1="1" x2="23" y2="23"></line>
+              </svg>
+            </button>
+          </div>
+          <p class="text-xs text-sepia/60 mt-1 italic">Optional — increases NCBI rate limit from 3 to 10 req/sec.</p>
+        </div>
+
+        <div>
           <label class="block text-xs uppercase tracking-wider text-sepia font-display mb-1" for="settingGroq">
             Groq API Key (AI Synthesis)
           </label>
@@ -935,7 +983,7 @@
             <input type="password" id="settingGroq" class="w-full pr-10 px-3 py-2 border border-sepia/30 bg-cream/30 text-charcoal text-sm focus:outline-none focus:border-burgundy font-mono" placeholder="Paste Groq key (gsk_...)" autocomplete="off">
             <button type="button" class="toggle-password-btn absolute right-2 top-1/2 -translate-y-1/2 text-sepia/60 hover:text-burgundy transition-colors p-1" data-target="settingGroq" aria-label="Toggle password visibility" title="Show/Hide key">
               <svg class="eye-open w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path>
                 <circle cx="12" cy="12" r="3"></circle>
               </svg>
               <svg class="eye-closed w-4 h-4 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -949,10 +997,10 @@
 
         <div>
           <label class="block text-xs uppercase tracking-wider text-sepia font-display mb-1" for="settingArxiv">
-            arXiv Endpoint / Key
+            arXiv / Europe PMC APIs
           </label>
-          <input type="text" id="settingArxiv" class="w-full px-3 py-2 border border-sepia/30 bg-cream/30 text-charcoal text-sm focus:outline-none focus:border-burgundy font-mono" placeholder="Public API (No key required)" autocomplete="off">
-          <p class="text-xs text-sepia/60 mt-1 italic">arXiv API is free and public; no key required.</p>
+          <input type="text" id="settingArxiv" class="w-full px-3 py-2 border border-sepia/30 bg-cream/30 text-charcoal text-sm focus:outline-none focus:border-burgundy font-mono" placeholder="Public APIs (No keys required)" disabled autocomplete="off">
+          <p class="text-xs text-sepia/60 mt-1 italic">arXiv and Europe PMC are free public REST APIs; no keys required.</p>
         </div>
 
         <div id="settingsStatus" class="text-xs text-forest-green font-medium hidden"></div>

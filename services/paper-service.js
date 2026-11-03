@@ -91,9 +91,14 @@ async function fetchDbRow(paper) {
 /**
  * Search papers via orchestrator, store in PostgreSQL, and return DB-consistent entities.
  */
-export async function searchAndStore(queryStr, sources = ['openalex', 'arxiv'], limit = 20, sortBy = 'date') {
+export async function searchAndStore(queryStr, sources, limit = 20, sortBy = 'date') {
   const papers = await orchestratorSearch(queryStr, sources, limit, sortBy);
-  if (papers.length === 0) return { succeeded: [], failed: [] };
+  const providerFailures = papers.providerFailures || [];
+  const providerStats = papers.providerStats || {};
+
+  if (papers.length === 0) {
+    return { succeeded: [], failed: [], providerFailures, providerStats };
+  }
 
   const succeeded = [];
   const failed = [];
@@ -132,7 +137,7 @@ export async function searchAndStore(queryStr, sources = ['openalex', 'arxiv'], 
     }
   }
 
-  return { succeeded, failed };
+  return { succeeded, failed, providerFailures, providerStats };
 }
 
 // ─── PDF Acquisition & Filesystem Contract ───────────────────────────
@@ -199,7 +204,12 @@ export async function downloadPaperPdf({ paperId, url, targetDirectory, filename
   const tempPath = path.join(os.tmpdir(), `rie-dl-${Date.now()}-${Math.random().toString(36).slice(2, 9)}.tmp`);
 
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+        'Accept': 'application/pdf,application/octet-stream,*/*',
+      },
+    });
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }

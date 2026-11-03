@@ -117,6 +117,15 @@
 
   // ── Source checkboxes ─────────────────────────────────────────────────
 
+  const SOURCE_LABELS = {
+    openalex: 'OpenAlex',
+    arxiv: 'arXiv',
+    semantic_scholar: 'Semantic Scholar',
+    crossref: 'Crossref',
+    europe_pmc: 'Europe PMC',
+    pubmed: 'PubMed',
+  };
+
   async function loadSources() {
     if (!els.sourceList) return;
     try {
@@ -139,7 +148,7 @@
         cb.checked = true;
 
         const span = document.createElement('span');
-        span.textContent = name;
+        span.textContent = SOURCE_LABELS[name] || name;
 
         label.appendChild(cb);
         label.appendChild(span);
@@ -338,7 +347,8 @@
 
       const authStr = formatAuthors(paper.authors);
       const yearStr = paper.year ? `<span class="fetcher-result-year">(${escapeHtml(String(paper.year))})</span>` : '';
-      const sourceStr = paper.source ? `<span class="fetcher-source-badge">${escapeHtml(paper.source)}</span>` : '';
+      const sourceLabel = SOURCE_LABELS[paper.source] || paper.source;
+      const sourceStr = paper.source ? `<span class="fetcher-source-badge">${escapeHtml(sourceLabel)}</span>` : '';
 
       // Download status indicator
       const hasPdf = !!paper.pdf_url;
@@ -460,9 +470,22 @@
         detail: { papers: _results }
       }));
 
+      const provFailures = Array.isArray(res?.providerFailures) ? res.providerFailures : [];
       const pdfCount = papers.filter(p => p.pdf_url).length;
       const failMsg = failed.length > 0 ? `, ${failed.length} failed to store in DB` : '';
-      setStatus('done', `Done — ${papers.length} paper${papers.length !== 1 ? 's' : ''} retrieved${failMsg} (${pdfCount} with PDF).`);
+      const provFailMsg = provFailures.length > 0
+        ? ` [Warning: ${provFailures.map(f => `${f.source} failed (${f.error})`).join('; ')}]`
+        : '';
+
+      if (papers.length === 0 && provFailures.length > 0) {
+        setStatus('error', `Search completed with provider errors: ${provFailures.map(f => `${f.source}: ${f.error}`).join('; ')}`);
+        showError(provFailures.map(f => `${f.source}: ${f.error}`).join('; '));
+      } else {
+        setStatus('done', `Done — ${papers.length} paper${papers.length !== 1 ? 's' : ''} retrieved${failMsg}${provFailMsg} (${pdfCount} with PDF).`);
+        if (provFailures.length > 0) {
+          showError(`Note: ${provFailures.map(f => `${f.source}: ${f.error}`).join('; ')}`);
+        }
+      }
 
       // Auto-download if directory is set
       if (_downloadDir && pdfCount > 0) {

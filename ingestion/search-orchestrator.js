@@ -18,8 +18,18 @@ import crypto from 'crypto';
 
 import { searchPapers as fetchOpenAlex } from './sources/openalex.js';
 import { searchPapers as fetchArxiv } from './sources/arxiv.js';
+import { searchPapers as fetchSemanticScholar } from './sources/semanticscholar.js';
+import { searchPapers as fetchCrossref } from './sources/crossref.js';
+import { searchPapers as fetchEuropePmc } from './sources/europepmc.js';
+import { searchPapers as fetchPubmed } from './sources/pubmed.js';
+
 import { normalize as normalizeOpenAlex } from './normalizers/openalex.js';
 import { normalize as normalizeArxiv } from './normalizers/arxiv.js';
+import { normalize as normalizeSemanticScholar } from './normalizers/semanticscholar.js';
+import { normalize as normalizeCrossref } from './normalizers/crossref.js';
+import { normalize as normalizeEuropePmc } from './normalizers/europepmc.js';
+import { normalize as normalizePubmed } from './normalizers/pubmed.js';
+
 import { deduplicate } from './dedupe.js';
 import { rankPapers } from './ranking.js';
 
@@ -28,8 +38,12 @@ import { rankPapers } from './ranking.js';
  * To add a new source, add an entry here with the corresponding modules.
  */
 const SOURCE_REGISTRY = {
-  openalex: { fetch: fetchOpenAlex, normalize: normalizeOpenAlex },
-  arxiv:    { fetch: fetchArxiv,    normalize: normalizeArxiv },
+  openalex:         { fetch: fetchOpenAlex,         normalize: normalizeOpenAlex },
+  arxiv:            { fetch: fetchArxiv,            normalize: normalizeArxiv },
+  semantic_scholar: { fetch: fetchSemanticScholar, normalize: normalizeSemanticScholar },
+  crossref:         { fetch: fetchCrossref,         normalize: normalizeCrossref },
+  europe_pmc:       { fetch: fetchEuropePmc,       normalize: normalizeEuropePmc },
+  pubmed:           { fetch: fetchPubmed,           normalize: normalizePubmed },
 };
 
 /**
@@ -50,7 +64,7 @@ export function getSourceNames() {
  * @param {'date'|'citations'} sortBy - Sort strategy (default: 'date').
  * @returns {Promise<object[]>} Clean, deduplicated, ranked Paper objects with UUIDs.
  */
-export async function searchPapers(query, sources = ['openalex', 'arxiv'], limit = 20, sortBy = 'date') {
+export async function searchPapers(query, sources = Object.keys(SOURCE_REGISTRY), limit = 20, sortBy = 'date') {
   // Step 1: Identify valid sources
   const validSources = sources.filter(name => {
     if (SOURCE_REGISTRY[name]) return true;
@@ -75,18 +89,24 @@ export async function searchPapers(query, sources = ['openalex', 'arxiv'], limit
 
   // Step 3: Collect successful results + normalize + limit per provider
   let allPapers = [];
+  const providerStats = {};
+  const providerFailures = [];
 
   for (let i = 0; i < results.length; i++) {
     const sourceName = fetchPromises[i].name;
     const result = results[i];
 
     if (result.status === 'rejected') {
-      console.warn(`[source=${sourceName}] failed:`, result.reason?.message || result.reason);
+      const errorMsg = String(result.reason?.message || result.reason || 'Unknown error');
+      console.warn(`[source=${sourceName}] failed:`, errorMsg);
+      providerFailures.push({ source: sourceName, error: errorMsg });
+      providerStats[sourceName] = { status: 'failed', raw: 0, count: 0, error: errorMsg };
       continue;
     }
 
     const rawItems = result.value;
     if (!Array.isArray(rawItems) || rawItems.length === 0) {
+      providerStats[sourceName] = { status: 'success', raw: 0, count: 0 };
       continue;
     }
 
@@ -95,9 +115,23 @@ export async function searchPapers(query, sources = ['openalex', 'arxiv'], limit
     // Each provider yields up to limit papers (ranked by chosen strategy)
     const providerPapers = rankPapers(normalized, sortBy).slice(0, limit);
     allPapers = allPapers.concat(providerPapers);
+    providerStats[sourceName] = { status: 'success', raw: rawItems.length, count: providerPapers.length };
   }
 
-  if (allPapers.length === 0) return [];
+  // Observability summary
+  console.log('[orchestrator] Search summary:', {
+    query,
+    validSources,
+    rawTotal: allPapers.length,
+    stats: providerStats,
+  });
+
+  if (allPapers.length === 0) {
+    const empty = [];
+    empty.providerStats = providerStats;
+    empty.providerFailures = providerFailures;
+    return empty;
+  }
 
   // Step 4: Deduplicate (in-memory)
   const deduped = deduplicate(allPapers);
@@ -108,5 +142,8 @@ export async function searchPapers(query, sources = ['openalex', 'arxiv'], limit
   }
 
   // Step 6: Rank full deduplicated set across all providers
-  return rankPapers(deduped, sortBy);
+  const ranked = rankPapers(deduped, sortBy);
+  ranked.providerStats = providerStats;
+  ranked.providerFailures = providerFailures;
+  return ranked;
 }
