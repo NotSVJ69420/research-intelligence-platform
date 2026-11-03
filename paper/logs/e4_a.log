@@ -1,0 +1,6 @@
+[schema] Database initialized
+[schema] Database initialized
+10 40 orch 5.1 total 33.4 repeat 17.7 db/paper 0.708 rows 40 stable true
+25 97 orch 7.5 total 67.5 repeat 31.9 db/paper 0.618 rows 97 stable true
+50 191 orch 10.6 total 118.3 repeat 60.3 db/paper 0.564 rows 191 stable true
+100 355 orch 19.6 total 207.2 repeat 109.9 db/paper 0.528 rows 355 stable true

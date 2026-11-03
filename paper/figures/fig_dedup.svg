@@ -54,9 +54,9 @@
 <text x="151" y="184.6" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="7.4" text-anchor="start" font-weight="normal" font-style="normal" fill="#D55E00">0.00</text>
 <text x="151" y="192.6" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="7.4" text-anchor="start" font-weight="normal" font-style="normal" fill="#0072B2">0.00</text>
 <text x="143" y="207.5" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="8.3" text-anchor="end" font-weight="normal" font-style="normal" fill="#1a1a1a">author diacritics folded</text>
-<rect x="148" y="198" width="97.2" height="7" fill="#D55E00"/>
+<rect x="148" y="198" width="0.0" height="7" fill="#D55E00"/>
 <rect x="148" y="206" width="170.0" height="7" fill="#0072B2"/>
-<text x="248.20744680851064" y="204.6" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="7.4" text-anchor="start" font-weight="normal" font-style="normal" fill="#D55E00">0.57</text>
+<text x="151" y="204.6" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="7.4" text-anchor="start" font-weight="normal" font-style="normal" fill="#D55E00">0.00</text>
 <text x="321" y="212.6" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="7.4" text-anchor="start" font-weight="normal" font-style="normal" fill="#0072B2">1.00</text>
 <text x="143" y="227.5" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="8.3" text-anchor="end" font-weight="normal" font-style="normal" fill="#1a1a1a">combined (Europe PMC-like)</text>
 <rect x="148" y="218" width="0.0" height="7" fill="#D55E00"/>

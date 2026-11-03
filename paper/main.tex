@@ -31,7 +31,7 @@ email@example.org}}
 \maketitle
 
 \begin{abstract}
-%%ABSTRACT%%
+Open scholarly-metadata services make it feasible to build local literature tools that query many providers at once, but little is known about how such clients behave when providers are slow, fail, or disagree about metadata. We study the Research Intelligence Engine (RIE), an open-source Electron/PostgreSQL desktop application that fans out searches to six providers, normalizes and deduplicates the results, stores them, and sends abstracts to a hosted LLM. Because the live APIs and the LLM endpoint were unreachable from our sandbox, we ran RIE's unmodified modules against a deterministic emulator of the upstream interfaces (injected latency and faults, a synthetic ground-truth corpus) and a real PostgreSQL server; no live-provider or LLM-quality results are claimed. Search latency matches the slowest adapter to within 11\,ms in a latency sweep, yet provider throttles impose a 350\,ms floor and up to $\approx$2.6\,s of delay for back-to-back searches, a hung provider blocks all results until its timeout (15--30\,s), and arXiv failures are reported as empty successes. The deduplicator is order dependent (1\,000 or 2\,000 output records for identical 3\,000 inputs) and merges DOI-less records only when metadata strings are identical up to case; a union-find resolver has the same cost and removes the order dependence, while a relaxed-key prototype recovers DOI-less duplicates at the price of measurable false merges. The AI client is serial, spaced by 2\,s, retries only HTTP~429, and sends the literal text ``null'' for missing abstracts. The contributions are engineering and empirical; the harness is released.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -176,7 +176,7 @@ With minimum start interval $\tau$ (default $2$\,s) and per-request latency $L_i
 \caption{Size of the code base by layer (physical lines).}
 \label{tab:loc}
 \footnotesize
-\begin{tabular}{@{}l r r@{}}
+\begin{tabular}{@{}p{5.6cm} r r@{}}
 \toprule
 Layer & Files & Lines \\
 \midrule
@@ -226,14 +226,166 @@ Markdown/\LaTeX{} editor, Pandoc export & yes & --- & GUI and Pandoc not exercis
 \section{Experimental Evaluation}
 \label{sec:eval}
 
-%%EVAL%%
+All measurements below were produced by \code{experiments/run\_all.sh} (raw JSON in \code{results/}). Upstream services are emulated (\cref{sec:method}); ``injected'' latencies are parameters. Medians are over $n\ge5$ repetitions after discarding warm-up unless stated.
+
+\subsection{RQ1: search latency, throttles and failure containment}
+\textbf{Latency structure.} We issued a six-provider search ($k{=}10$, each run after $\ge$3.3\,s of idleness so that the arXiv throttle is not engaged) with the same injected latency $L$ for every upstream request. \cref{fig:latency} shows that the observed median equals the parallel model of \cref{eq:tsearch,eq:adapters} to within 4--11\,ms at every $L$ (e.g., 2\,011\,ms observed vs.\ 2\,000\,ms predicted at $L{=}1$\,s), and is far below the sum-of-adapters and fully serial alternatives (8\,000 and 17\,000\,ms at $L{=}1$\,s). At $L{=}0$ the search still takes $\approx$358\,ms: the 350\,ms spacing between PubMed's two requests is a floor that no upstream speed can remove. Interquartile ranges were about 1\,ms or less, so the emulator-driven runs are deterministic to that precision; this says nothing about real network jitter.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig_latency.pdf}
+\caption{Search wall-clock vs.\ injected per-request latency (six providers, $k{=}10$, cold start). Observed medians (IQR bars; invisible at this scale) coincide with the parallel model; serial alternatives are shown for contrast.}
+\label{fig:latency}
+\end{figure}
+
+\textbf{Back-to-back searches.} The arXiv adapter's 3\,s spacing is module-global state. With $L{=}100$\,ms, a second search started immediately after the first returned took 2\,652\,ms (range 2\,642--2\,656) instead of 455\,ms; after idle gaps of 1\,s and 2\,s it took 1\,650 and 647\,ms; after 3.5\,s it took 454\,ms, in line with $w_{\text{ax}}=\max(0,3-\Delta)$. A user who refines a query within about three seconds therefore waits for the throttle whenever arXiv is selected, because the wait is applied inside the adapter.
+
+\textbf{Request amplification.} \cref{tab:amp} lists upstream requests per search: $N_{\text{req}}=7+k$, because Europe~PMC issues one Crossref look-up for every returned hit, all concurrently and without a bound. At $k{=}50$ a single search emits 57 HTTP requests, 50 of them to a host that is also a selected provider.
+
+\begin{table}[t]
+\centering
+\caption{Upstream HTTP requests per six-provider search.}
+\label{tab:amp}
+\footnotesize
+\begin{tabular}{@{}r r r r r@{}}
+\toprule
+Limit $k$ & 5 & 10 & 20 & 50 \\
+\midrule
+Total requests & 12 & 17 & 27 & 57 \\
+of which Crossref look-ups for Europe PMC & 5 & 10 & 20 & 50 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Faults.} We injected faults into one provider at a time (\cref{tab:faults}). For five providers an HTTP~500 or network error is reported correctly (\code{status: failed}, listed in \code{providerFailures}) and the other providers' results are returned unchanged within the normal time. The arXiv adapter, however, catches every error and returns \code{[]}, so the orchestrator records \code{status: success, raw: 0} and nothing is listed as failed; the user cannot distinguish an outage from a query with no hits. The same masking appears in the repository's own \code{test-paper-service.js} log in the sandbox (``\code{[source=arxiv] failed: fetch failed}'' followed by a successful, empty summary). A hung provider stalls the entire result set until its adapter timeout (15.0, 25.0 and 30.0\,s for OpenAlex, PubMed and arXiv; $n{=}3$ each, spread below 3\,ms), since the orchestrator has no overall deadline; this matches the worst-case bound of \cref{sec:method}.
+
+\begin{table}[t]
+\centering
+\caption{Fault injection into one provider (other five healthy). ``Reported'' is the status in \code{providerStats}; ``Listed'' = appears in \code{providerFailures}. The 429 case includes one 2\,s retry.}
+\label{tab:faults}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}p{1.45cm} p{2.15cm} p{1.4cm} c r@{}}
+\toprule
+Fault & Provider & Reported & Listed & Time \\
+\midrule
+HTTP 500 / net.\ error & OpenAlex, S2, Crossref, EPMC, PubMed & failed & yes & 0.11--0.41\,s \\
+HTTP 500 / net.\ error & arXiv & success (0 items) & \textbf{no} & 0.41\,s \\
+HTTP 429 & Semantic Scholar & failed & yes & 2.11\,s \\
+Hang & OpenAlex & failed & yes & 15.02\,s \\
+Hang & PubMed & failed & yes & 25.03\,s \\
+Hang & arXiv & success (0 items) & \textbf{no} & 30.03\,s \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{RQ2: deduplication}
+\textbf{Single-factor disagreement.} For 500 works we built two records of the same work, one from an OpenAlex-style rendering (with DOI) and one from a record that lacks a DOI (arXiv-style, via the real arXiv normalizer), differing in one metadata factor at a time; \cref{fig:dedup} reports the fraction merged. When both records carry the same DOI, every variant merges all pairs for every perturbation (recall 1.00; not plotted). Without a shared DOI the repository's \code{deduplicate()} merges only metadata-identical records and records differing in letter case: a one-year difference in year, any change of first-author format (``A.\ Surname'', ``Surname A''), a trailing period, a changed subtitle separator, a dropped subtitle, diacritic folding of the first author, and reversed author order each give recall 0.00. The \textsc{uf-repo} variant behaves identically on these pairs, as expected, since it uses the same keys. The relaxed-key prototype restores recall 1.00 for all but two probes, reversed authors (the first-author key changes) and a dropped subtitle (the title key changes), which require different evidence.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig_dedup.pdf}
+\caption{Pairwise merge recall for a same-work pair where one record lacks a DOI, by metadata perturbation ($n{=}$161--500 works each; synthetic corpus). Case-only changes are handled by the repository's lower-casing.}
+\label{fig:dedup}
+\end{figure}
+
+\textbf{Order dependence.} \cref{tab:order} shows the three-record scenario of Property~1 for 1\,000 works (a DOI-less record, a DOI record with identical strings, a DOI record with different strings) under all six input orders. \code{deduplicate()} outputs 1\,000 records for two orders and 2\,000 for four, i.e., half of the works stay duplicated depending on which provider is listed first; both union-find variants output the 1\,000 correct records for every order. Whether a real search lands in a favourable or unfavourable order depends on provider selection and per-provider ranking, not on anything the user controls directly.
+
+\begin{table}[t]
+\centering
+\caption{Output records for 1\,000 works $\times$ 3 records under each input order (truth: 1\,000). A: no DOI; B: DOI, strings identical to A; C: DOI, different strings.}
+\label{tab:order}
+\footnotesize
+\begin{tabular}{@{}l r r r r r r@{}}
+\toprule
+Input order & ABC & ACB & BAC & BCA & CAB & CBA \\
+\midrule
+\code{deduplicate()} & 2000 & 2000 & 1000 & 1000 & 2000 & 2000 \\
+\textsc{uf-repo} & 1000 & 1000 & 1000 & 1000 & 1000 & 1000 \\
+\textsc{uf-relaxed} & 1000 & 1000 & 1000 & 1000 & 1000 & 1000 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{False-merge probes.} (i)~500 pairs of distinct works with different DOIs but identical title, first author and year were all merged by all variants (Property~2). (ii)~100 records with empty title and no authors but distinct DOIs and a common year collapsed to a single record in every variant. (iii)~500 pairs with the same title and surname and the same first initial but different given names (``Wei'' vs.\ ``Wen'' Zhang) were never merged by the repository (0/500) but always merged by the relaxed prototype (500/500). The last result is the cost of the relaxation, and is why the prototype is not offered as a drop-in fix.
+
+\textbf{End-to-end mixed scenario.} We ran the real adapters and normalizers through the emulator for 20 queries per setting, over 400 works with provider membership probability 0.5, abbreviated Europe~PMC author strings, and a 40\,\% preprint-year skew for arXiv-bearing works (\cref{tab:e2d}). Because the orchestrator's own pre-deduplication list is not exposed, the harness replicates its steps~1--3 with the same modules; the replicated pipeline and the real orchestrator produced identical output sizes (58 and 133 records for the checked queries). \code{deduplicate()} left 0.8\,\% (9 of 1\,121 works) and 2.6\,\% (66 of 2\,522 works) of the works duplicated at $k{=}10$ and $k{=}25$, all involving an arXiv record (arXiv with OpenAlex, Europe~PMC, Crossref, PubMed or Semantic Scholar); union-find over the same keys removed none of the 9 at $k{=}10$ and only 4 of the 66 at $k{=}25$; the relaxed prototype removed all residual duplicates with no work lost. These rates are driven by the assumed skew and author format and are illustrative only; what the experiment shows is that the mechanism operates through the full pipeline.
+
+\begin{table}[t]
+\centering
+\caption{Mixed end-to-end scenario (20 queries, emulated providers, synthetic corpus). Residual = output records minus distinct works.}
+\label{tab:e2d}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}l r r r r r@{}}
+\toprule
+ & \multicolumn{2}{c}{$k{=}10$} & & \multicolumn{2}{c}{$k{=}25$} \\
+\cmidrule(lr){2-3}\cmidrule(lr){5-6}
+Variant & Output & Residual & & Output & Residual \\
+\midrule
+Raw candidates / distinct works & 1\,200 & 1\,121 & & 3\,000 & 2\,522 \\
+\code{deduplicate()} & 1\,130 & 9 & & 2\,588 & 66 \\
+\textsc{uf-repo} & 1\,130 & 9 & & 2\,584 & 62 \\
+\textsc{uf-relaxed} & 1\,121 & 0 & & 2\,522 & 0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{RQ3: local cost and scaling}
+\textbf{Normalization and parsing.} Normalizers cost 3.4--6.6\,\textmu s per record (OpenAlex 6.6 and PubMed 6.5\,\textmu s are the highest, from abstract reconstruction and XML traversal; Semantic Scholar 3.4\,\textmu s the lowest). Parsing an arXiv Atom response of 100 entries (79\,kB) takes 2.4\,ms and a PubMed EFetch response of 100 entries (122\,kB) 5.7\,ms. Orchestration of four JSON providers (fetch emulation, parse, normalize, rank, deduplicate, UUIDs) took 5\,ms at $k{=}10$, 19\,ms at $k{=}100$ and 43\,ms at $k{=}200$ (medians, $n{=}15$), growing about linearly with the 40--800 candidates. Local compute is thus negligible next to the adapter timeouts of 15--30\,s and to any injected latency we used.
+
+\textbf{Persistence.} On a local PostgreSQL~16 instance (\cref{tab:db}), \code{searchAndStore} adds about 0.5--0.7\,ms per returned paper for the sequential \code{INSERT} plus \code{SELECT} (two round trips per record), i.e., 28\,ms for 40 papers and 188\,ms for 355. Repeating the identical search (all rows conflict) costs roughly half, returns identical identifiers (checked for all four limits), and leaves the row count unchanged, confirming that the \code{ON CONFLICT DO NOTHING}\,+\,re-select design provides stable identifiers. Over a network the two round trips per record would dominate; we did not measure this.
+
+\begin{table}[t]
+\centering
+\caption{\code{searchAndStore} cost split (four JSON providers, local PostgreSQL; medians, $n{=}6$).}
+\label{tab:db}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}r r r r r r@{}}
+\toprule
+$k$ & Papers & Orchestrator & Total (cold) & Repeat & DB ms/paper \\
+\midrule
+10 & 40 & 5.1 & 33.4 & 17.7 & 0.71 \\
+25 & 97 & 7.5 & 67.5 & 31.9 & 0.62 \\
+50 & 191 & 10.6 & 118.3 & 60.3 & 0.56 \\
+100 & 355 & 19.6 & 207.2 & 109.9 & 0.53 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Persisted duplicates.} Over a session of eight overlapping six-provider queries ($k{=}20$, 300-work corpus), the table held 310 rows for 271 distinct works: 39 rows (12.6\,\%) were persisted duplicates. The unique DOI index collapses duplicates that share a DOI; the residual ones must involve the 45 rows without a DOI, which are arXiv records (47 arXiv rows, two of which had acquired a DOI through the in-memory merge). In this setting the deduplicator's DOI-less weakness (RQ2) therefore carries into the permanent library, where nothing later reconciles it.
+
+\textbf{Dedup scaling and library scan.} \cref{fig:scaling}(a) shows that \code{deduplicate()} scales roughly linearly: 2.3\,ms for 1\,000 records, 28\,ms for 10\,000 and 626\,ms for 100\,000 (including shallow copies); the union-find variants have the same order of cost, so order independence costs essentially nothing. \cref{fig:scaling}(b) shows that \code{getLibraryPapers()} loads the full table on every call and, for each PDF without a UUID or path match, scans all rows with a substring test: with unmatched files its time grows with the product of rows and files (about 47--52\,ns per row-file pair), from 4\,ms (1\,000 rows, no files) to 51\,ms (1\,000 rows, 1\,000 files) and 1.10\,s (20\,000 rows, 1\,000 files); even with no files, loading 20\,000 rows takes 48\,ms.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{fig_scaling.pdf}
+\caption{Scaling of local components. (a)~\code{deduplicate()} and two union-find variants versus input size (log--log; medians). (b)~\code{getLibraryPapers()} for unmatched PDF files, for three database sizes $P$ (medians, $n{=}5$).}
+\label{fig:scaling}
+\end{figure*}
+
+\subsection{RQ4: AI-analysis client}
+\textbf{Scheduling.} With the shipped 2\,s interval, six papers took 10.2, 11.0, 12.0 and 18.0\,s for injected model latencies of 0.2, 1, 2 and 3\,s; the model $5\max(L,\tau)+L$ predicts 10.2, 11.0, 12.0 and 18.0\,s (\cref{fig:ai}a), and start-to-start gaps had a median of 2\,002, 2\,001, 2\,003 and 3\,004\,ms. The loop is strictly serial, so throughput is bounded by $\max(L,\tau)$ per paper regardless of what the provider would allow.
+
+\textbf{Retry behaviour.} Success after one, two or three consecutive 429 responses took 2.2--2.3, 6.2--6.7 and 14.4--14.8\,s respectively ($n{=}3$ each), matching $\sum(2^a+0.25)$\,s; with four consecutive 429s the client issued four requests in 14.7--14.9\,s and then threw (\cref{fig:ai}b). HTTP 400, 401, 500 and 503 responses were \emph{not} retried (one request each), so transient server errors fail a paper immediately; \code{Retry-After} is ignored. Inside \code{processPapers}, an injected failure at the third of five papers was isolated (4 succeeded, 1 failed, the failure recorded with its title).
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{fig_ai.pdf}
+\caption{AI client scheduling against an emulated endpoint. (a)~Total time for six papers vs.\ model latency; the first request is not delayed. (b)~Elapsed time for $k$ consecutive HTTP 429 responses followed by success; at $k{=}4$ the retry budget is exhausted and the error is thrown.}
+\label{fig:ai}
+\end{figure*}
+
+\textbf{Prompt construction.} The user message is \code{Paper Title: \${title}\textbackslash nAbstract: \${abstract}\textbackslash n\textbackslash nTask: \${prompt}} with no null handling. For a paper whose abstract is \code{null} (the normalizers' value for a missing abstract; arXiv, PubMed and Crossref records can lack one) the model receives the literal text ``\code{Abstract: null}'', for an absent field ``\code{Abstract: undefined}'', and a 20\,000-word abstract is sent whole (100\,060 characters) with no truncation. Responses are requested with \code{temperature} 0.3 and \code{max\_tokens} 1024 for model \code{openai/gpt-oss-120b}. Whether a model given ``\code{Abstract: null}'' fabricates content is not measured here; the prompt gives it no instruction to refuse.
+
 
 \section{Discussion}
 \label{sec:disc}
 
 \textbf{Answers to the research questions.} \emph{RQ1:} search latency is the maximum, not the sum, of adapter latencies, but the maximum includes adapter-internal serialization (PubMed spacing, Europe~PMC enrichment, arXiv throttle) and has no deadline, so one hung provider holds back all results until its timeout (\cref{sec:eval}); failure containment is good for five providers and misreported for arXiv. \emph{RQ2:} the deduplicator reliably merges records that share a DOI and nothing else; for DOI-less records it merges only metadata-identical strings, and the outcome depends on input order. \emph{RQ3:} local compute is negligible next to network time, but the library view re-reads and scans the whole table and scales with rows~$\times$ files in its fallback path. \emph{RQ4:} the AI client enforces a $\tau$-spaced serial schedule and bounded back-off for 429 only; it sends the literal string \code{null} for a missing abstract.
 
-\textbf{Engineering recommendations tied to evidence.} (1)~Make adapter failure handling uniform: the arXiv adapter should reject on HTTP errors and timeouts like the other five. (2)~Add a global deadline with progressive delivery, since a single hung provider costs 15--33\,s versus sub-second typical settle times; hedged requests~\cite{dean2013tail} are inappropriate for rate-limited free APIs, so a deadline plus partial results is the proportionate response. (3)~Replace first-match deduplication by transitive closure over registered keys of \emph{all} records, which makes the output order independent, costs the same $O(n)$ (\cref{fig:scaling}), and lets a DOI veto and empty-field guards be added. (4)~Any relaxation of the fallback key (diacritic folding, punctuation-insensitive titles, surname/initial authors, $\pm1$ year) recovers the DOI-less cases but admits same-initial/same-title false merges, so it should be adopted only with a labelled evaluation on real provider data and extra evidence such as author-list overlap. (5)~Bound or defer the Europe~PMC enrichment fan-out ($k$ extra Crossref requests per search). (6)~Guard null abstracts and over-long inputs in the prompt, honour \code{Retry-After}, and retry transient 5xx responses. (7)~Batch database inserts and index the library scan if libraries grow beyond a few thousand records. These are suggestions derived from measured behaviour; we did not implement them in the application.
+\textbf{Engineering recommendations tied to evidence.} (1)~Make adapter failure handling uniform: the arXiv adapter should reject on HTTP errors and timeouts like the other five. (2)~Add a global deadline with progressive delivery, since a single hung provider costs 15--33\,s, whereas healthy emulated providers settle in well under a second (real settle times were not measured); hedged requests~\cite{dean2013tail} are inappropriate for rate-limited free APIs, so a deadline plus partial results is the proportionate response. (3)~Replace first-match deduplication by transitive closure over registered keys of \emph{all} records, which makes the output order independent, costs the same $O(n)$ (\cref{fig:scaling}), and lets a DOI veto and empty-field guards be added. (4)~Any relaxation of the fallback key (diacritic folding, punctuation-insensitive titles, surname/initial authors, $\pm1$ year) recovers the DOI-less cases but admits same-initial/same-title false merges, so it should be adopted only with a labelled evaluation on real provider data and extra evidence such as author-list overlap. (5)~Bound or defer the Europe~PMC enrichment fan-out ($k$ extra Crossref requests per search). (6)~Guard null abstracts and over-long inputs in the prompt, honour \code{Retry-After}, and retry transient 5xx responses. (7)~Batch database inserts and index the library scan if libraries grow beyond a few thousand records. These are suggestions derived from measured behaviour; we did not implement them in the application.
 
 \textbf{Engineering contribution vs.\ scientific novelty.} The system itself is an integration of existing services and techniques; its value is practical. The scientific content of this paper is limited to (i)~an explicit, tested latency model of a federated fan-out with adapter-internal throttling, (ii)~a demonstration that a common ``first match wins'' key-based deduplicator is non-confluent and a quantification of which metadata disagreements defeat equality keys, and (iii)~a reusable fault-injection harness. None of these is a new algorithm, and none establishes retrieval or summarization quality.
 

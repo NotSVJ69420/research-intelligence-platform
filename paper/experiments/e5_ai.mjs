@@ -30,8 +30,8 @@ if (mode === 'spacing') {
     const starts = emu.log.map(e => e.t);                 // request arrival times at the emulator
     const gaps = starts.slice(1).map((s, i) => s - starts[i]);
     emu.uninstall();
-    rows.push({ L, N, succeeded: r.succeeded.length, total_ms: Math.round(total), startGaps_ms: summarize(gaps), model_total_ms: Math.round(N * Math.max(L, ai.minRequestInterval)), perPaper_ms: total / N });
-    console.log('L', L, 'total', Math.round(total), 'gaps median', summarize(gaps).median.toFixed(0), 'model', Math.max(L, ai.minRequestInterval) * N);
+    rows.push({ L, N, succeeded: r.succeeded.length, total_ms: Math.round(total), startGaps_ms: summarize(gaps), model_total_ms: Math.round((N - 1) * Math.max(L, ai.minRequestInterval) + L), perPaper_ms: total / N });
+    console.log('L', L, 'total', Math.round(total), 'gaps median', summarize(gaps).median.toFixed(0), 'model', (N - 1) * Math.max(L, ai.minRequestInterval) + L);
   }
   save('e5_spacing', { meta, rows });
 }

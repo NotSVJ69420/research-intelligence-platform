@@ -1,0 +1,97 @@
+{
+ "commit": "bf2d3a3",
+ "byLayer": {
+  "HTML views": {
+   "files": 2,
+   "lines": 1057
+  },
+  "Electron main process / IPC / preload": {
+   "files": 3,
+   "lines": 431
+  },
+  "ingestion: orchestration (orchestrator, dedupe, ranking, ai-pipeline)": {
+   "files": 4,
+   "lines": 271
+  },
+  "ingestion: normalizers": {
+   "files": 6,
+   "lines": 720
+  },
+  "ingestion: source adapters": {
+   "files": 6,
+   "lines": 454
+  },
+  "renderer: editor modules": {
+   "files": 3,
+   "lines": 477
+  },
+  "services (db, schema, paper, ai, document)": {
+   "files": 5,
+   "lines": 746
+  },
+  "renderer: main window modules": {
+   "files": 5,
+   "lines": 1559
+  },
+  "tests": {
+   "files": 4,
+   "lines": 772
+  }
+ },
+ "totalLines": 6487,
+ "tests": {
+  "test/test-all-providers.js": {
+   "lines": 287,
+   "assertions": 46,
+   "needsNetwork": true,
+   "needsPostgres": false
+  },
+  "test/test-ingestion.js": {
+   "lines": 181,
+   "assertions": 8,
+   "needsNetwork": true,
+   "needsPostgres": false
+  },
+  "test/test-paper-service.js": {
+   "lines": 133,
+   "assertions": 16,
+   "needsNetwork": true,
+   "needsPostgres": true
+  },
+  "test/test-workspace-library.js": {
+   "lines": 171,
+   "assertions": 22,
+   "needsNetwork": false,
+   "needsPostgres": true
+  }
+ },
+ "drift": {
+  "readmeSourcesClaimed": [
+   "arxiv",
+   "openalex"
+  ],
+  "registeredSources": [
+   "openalex",
+   "arxiv",
+   "semantic_scholar",
+   "crossref",
+   "europe_pmc",
+   "pubmed"
+  ],
+  "readmeModel": "llama-3.3-70b-versatile",
+  "codeDefaultModel": "openai/gpt-oss-120b",
+  "analysisJsHeaderMentions": "Gemini",
+  "readmeMentionsOrchestratorJs": true,
+  "readmeTablesClaimed": [
+   "papers",
+   "analyses",
+   "collections"
+  ],
+  "schemaTablesCreated": [
+   "papers"
+  ],
+  "readmeClaimsFullTextIndexes": true,
+  "schemaHasFullTextIndex": false,
+  "readmeSyncScroll": true
+ }
+}

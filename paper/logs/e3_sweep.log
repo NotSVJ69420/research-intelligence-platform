@@ -1,0 +1,5 @@
+0 obs median 357.9 par 350 srcseq 350 seq 0 req 17
+100 obs median 454.2 par 450 srcseq 1050 seq 1700 req 17
+250 obs median 603.8 par 600 srcseq 2100 seq 4250 req 17
+500 obs median 1010.9 par 1000 srcseq 4000 seq 8500 req 17
+1000 obs median 2011.0 par 2000 srcseq 8000 seq 17000 req 17

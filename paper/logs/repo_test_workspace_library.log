@@ -1,0 +1,39 @@
+
+=== TEST SUITE: WORKSPACE & LIBRARY INDEXING ===
+[schema] Database initialized
+  ✓ Database initialized with local_pdf_path column
+
+--- Test A: Workspace Config & raw_papers/ Creation ---
+  ✓ Workspace config returns workspaceRoot
+  ✓ Workspace config returns rawPapersDir ending in raw_papers
+  ✓ raw_papers/ exists and is a directory
+
+--- Test B: PDF Acquisition and File ↔ Paper Association ---
+  ✓ Target PDF placed in raw_papers/ without temp leftovers
+
+--- Test C: Duplicate Handling ---
+  ✓ downloadPaperPdf identifies existing PDF and returns alreadyExists = true
+  ✓ downloadPaperPdf returns localPath matching target file
+
+--- Test D: Custom Directory Destination ---
+  ✓ Custom directory destination preserves chosen directory path
+
+--- Test E: Library Auto-Discovery from raw_papers/ ---
+  ✓ getLibraryPapers returns array
+  ✓ Library discovers paper in raw_papers/
+  ✓ Library mapped canonical title
+  ✓ Library mapped canonical authors
+  ✓ Library mapped publication year
+  ✓ Library mapped source provider
+  ✓ Library flag isExternal is false
+  ✓ Library has local PDF path
+
+--- Test F: External PDF Discovery ---
+  ✓ Library auto-discovers external PDF in raw_papers/
+  ✓ External paper has isExternal = true
+  ✓ External paper has transparent fallback author
+  ✓ External paper title derived from filename
+
+=== RESULTS: 20 passed, 0 failed ===
+
+exit=0

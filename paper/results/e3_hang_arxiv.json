@@ -1,0 +1,28 @@
+{
+  "source": "arxiv",
+  "reps": 3,
+  "elapsed_ms": {
+    "n": 3,
+    "mean": 30030.322819666664,
+    "sd": 1.2237864858617389,
+    "median": 30030.742500000008,
+    "min": 30028.944409999996,
+    "max": 30031.281549,
+    "p25": 30029.843455000002,
+    "p75": 30031.012024500003
+  },
+  "resultsReturned": 50,
+  "statusReported": {
+    "status": "success",
+    "raw": 0,
+    "count": 0
+  },
+  "otherStatuses": {
+    "openalex": "success/10",
+    "arxiv": "success/0",
+    "semantic_scholar": "success/10",
+    "crossref": "success/10",
+    "europe_pmc": "success/10",
+    "pubmed": "success/10"
+  }
+}

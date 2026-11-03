@@ -1,0 +1,12 @@
+openalex           6.57 us/record (median)  sd 1.59
+semantic_scholar   3.38 us/record (median)  sd 0.24
+crossref           4.56 us/record (median)  sd 0.58
+europe_pmc         3.88 us/record (median)  sd 0.27
+arxiv              3.80 us/record (median)  sd 0.19
+pubmed             6.51 us/record (median)  sd 0.41
+arxiv 10 entries 7759 B 0.43 ms (median)
+pubmed 10 entries 12054 B 0.57 ms (median)
+arxiv 30 entries 23606 B 0.65 ms (median)
+pubmed 30 entries 36512 B 1.73 ms (median)
+arxiv 100 entries 78783 B 2.37 ms (median)
+pubmed 100 entries 122073 B 5.72 ms (median)

@@ -1,0 +1,4 @@
+100 {"repo":"0.22ms/70","uf_repo_keys":"0.26ms/70","uf_relaxed":"0.36ms/70"}
+1000 {"repo":"2.32ms/700","uf_repo_keys":"1.53ms/700","uf_relaxed":"2.45ms/700"}
+10000 {"repo":"27.95ms/7000","uf_repo_keys":"19.39ms/7000","uf_relaxed":"36.25ms/7000"}
+100000 {"repo":"626.36ms/70000","uf_repo_keys":"573.14ms/70000","uf_relaxed":"570.66ms/70000"}

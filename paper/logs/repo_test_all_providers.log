@@ -1,0 +1,128 @@
+🚀 Running Multi-Provider Test Suite...
+
+
+═════ SECTION 1: Normalizer Unit Tests (6 Providers) ═════
+  ✓ Semantic Scholar normalizer produces valid schema
+  ✓ Semantic Scholar DOI normalized without prefix
+  ✓ Semantic Scholar citationCount preserved
+  ✓ Semantic Scholar PDF URL extracted
+  ✓ Crossref normalizer produces valid schema
+  ✓ Crossref JATS tags stripped from abstract
+  ✓ Crossref year extracted correctly
+  ✓ Crossref authors combined given and family
+  ✓ Crossref PDF extracted from link array
+  ✓ Europe PMC normalizer produces valid schema
+  ✓ Europe PMC authors parsed correctly from authorString
+  ✓ Europe PMC year parsed as integer
+  ✓ Europe PMC PDF extracted from fullTextUrlList
+  ✓ PubMed normalizer produces valid schema
+  ✓ PubMed PMID used as source_id
+  ✓ PubMed authors formatted properly
+  ✓ PubMed direct PMC PDF URL is null to avoid PoW bot-block error
+  ✓ PubMed DOI extracted from ArticleIdList
+  ✓ Normalizers tolerate empty objects without throwing
+
+═════ SECTION 2: Real API Smoke Tests (Individual Providers) ═════
+
+--- Test 2.1: arXiv Single Provider (N=2) ---
+[source=arxiv] failed: fetch failed
+[orchestrator] Search summary: {
+  query: 'quantum computing',
+  validSources: [ 'arxiv' ],
+  rawTotal: 0,
+  stats: { arxiv: { status: 'success', raw: 0, count: 0 } }
+}
+  ✗ FAIL: arXiv returned results
+
+--- Test 2.2: Crossref Single Provider (N=2) ---
+[source=crossref] failed: fetch failed
+[source=crossref] failed: fetch failed
+[orchestrator] Search summary: {
+  query: 'machine learning',
+  validSources: [ 'crossref' ],
+  rawTotal: 0,
+  stats: {
+    crossref: { status: 'failed', raw: 0, count: 0, error: 'fetch failed' }
+  }
+}
+  ✗ FAIL: Crossref returned results
+
+--- Test 2.3: Europe PMC Single Provider (N=2) ---
+[source=europe_pmc] failed: fetch failed
+[source=europe_pmc] failed: fetch failed
+[orchestrator] Search summary: {
+  query: 'crispr cas9',
+  validSources: [ 'europe_pmc' ],
+  rawTotal: 0,
+  stats: {
+    europe_pmc: { status: 'failed', raw: 0, count: 0, error: 'fetch failed' }
+  }
+}
+  ✗ FAIL: Europe PMC returned results
+
+--- Test 2.4: PubMed Single Provider (N=2) ---
+[source=pubmed] failed: fetch failed
+[source=pubmed] failed: fetch failed
+[orchestrator] Search summary: {
+  query: 'immunotherapy cancer',
+  validSources: [ 'pubmed' ],
+  rawTotal: 0,
+  stats: {
+    pubmed: { status: 'failed', raw: 0, count: 0, error: 'fetch failed' }
+  }
+}
+  ✗ FAIL: PubMed returned results
+
+--- Test 2.5: Semantic Scholar Single Provider (N=2) ---
+[source=semantic_scholar] failed: fetch failed
+[source=semantic_scholar] failed: fetch failed
+[orchestrator] Search summary: {
+  query: 'neural networks',
+  validSources: [ 'semantic_scholar' ],
+  rawTotal: 0,
+  stats: {
+    semantic_scholar: { status: 'failed', raw: 0, count: 0, error: 'fetch failed' }
+  }
+}
+  ✓ Semantic Scholar unauthenticated pool handled gracefully without throwing
+  ℹ Note: Semantic Scholar public pool status: fetch failed
+
+═════ SECTION 3: Multi-Provider Search & Deduplication ═════
+
+--- Test 3.1: Biomedical overlap (Europe PMC + PubMed, N=3 each) ---
+[source=europe_pmc] failed: fetch failed
+[source=pubmed] failed: fetch failed
+[source=europe_pmc] failed: fetch failed
+[source=pubmed] failed: fetch failed
+[orchestrator] Search summary: {
+  query: 'mrna vaccine covid',
+  validSources: [ 'europe_pmc', 'pubmed' ],
+  rawTotal: 0,
+  stats: {
+    europe_pmc: { status: 'failed', raw: 0, count: 0, error: 'fetch failed' },
+    pubmed: { status: 'failed', raw: 0, count: 0, error: 'fetch failed' }
+  }
+}
+  ✗ FAIL: Multi-provider search returned results
+  Sources present in results:  (total: 0)
+  ✓ No duplicate DOIs in combined results
+
+--- Test 3.2: Partial outage resilience (arxiv + invalid_provider) ---
+[orchestrator] unknown source: "invalid_provider" — skipping
+[source=arxiv] failed: fetch failed
+[orchestrator] Search summary: {
+  query: 'compiler optimization',
+  validSources: [ 'arxiv' ],
+  rawTotal: 0,
+  stats: { arxiv: { status: 'success', raw: 0, count: 0 } }
+}
+  ✗ FAIL: Valid source succeeds despite invalid source
+
+--- Test 3.3: Registered source list contains all 6 sources ---
+  ✓ All 6 providers registered
+
+══════════════════════════════════════════
+🏁 Test Results: 22 passed, 6 failed
+══════════════════════════════════════════
+
+exit=1

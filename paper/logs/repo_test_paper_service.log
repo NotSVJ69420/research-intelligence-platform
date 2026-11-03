@@ -1,0 +1,40 @@
+
+═══ Setup: Initialize Database ═══
+[schema] Database initialized
+  ✓ Database initialized
+
+═══ Test 1: searchAndStore("compiler design", ["arxiv"], 5) ═══
+[source=arxiv] failed: fetch failed
+[orchestrator] Search summary: {
+  query: 'compiler design',
+  validSources: [ 'arxiv' ],
+  rawTotal: 0,
+  stats: { arxiv: { status: 'success', raw: 0, count: 0 } }
+}
+  ✓ Returns array
+  ✗ FAIL: Returns ≤ 5 papers (got 0)
+  ✓ All papers have valid UUID IDs
+
+═══ Test 2: ID consistency (same search again) ═══
+[source=arxiv] failed: fetch failed
+[orchestrator] Search summary: {
+  query: 'compiler design',
+  validSources: [ 'arxiv' ],
+  rawTotal: 0,
+  stats: { arxiv: { status: 'success', raw: 0, count: 0 } }
+}
+  ✗ FAIL: Papers returned for comparison
+
+═══ Test 3: getAllPapers() ═══
+  ✓ Returns array
+  ✓ Returns ≤ 50 papers (got 0)
+  ✓ Papers have created_at field
+
+═══ Test 4: getPaperById ═══
+  ✓ Returns null for non-existent ID
+
+═══ Test 5: deletePaper ═══
+
+═══ Results: 7 passed, 2 failed ═══
+
+exit=1

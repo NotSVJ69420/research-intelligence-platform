@@ -1,0 +1,12 @@
+{"consecutive429":1,"rep":0,"requestsIssued":2,"outcome":"ok","total_ms":2287,"waitsBetweenAttempts_ms":[2285]}
+{"consecutive429":1,"rep":1,"requestsIssued":2,"outcome":"ok","total_ms":2241,"waitsBetweenAttempts_ms":[2238]}
+{"consecutive429":1,"rep":2,"requestsIssued":2,"outcome":"ok","total_ms":2316,"waitsBetweenAttempts_ms":[2314]}
+{"consecutive429":2,"rep":0,"requestsIssued":3,"outcome":"ok","total_ms":6186,"waitsBetweenAttempts_ms":[2028,4156]}
+{"consecutive429":2,"rep":1,"requestsIssued":3,"outcome":"ok","total_ms":6519,"waitsBetweenAttempts_ms":[2275,4242]}
+{"consecutive429":2,"rep":2,"requestsIssued":3,"outcome":"ok","total_ms":6660,"waitsBetweenAttempts_ms":[2180,4478]}
+{"consecutive429":3,"rep":0,"requestsIssued":4,"outcome":"ok","total_ms":14369,"waitsBetweenAttempts_ms":[2153,4028,8186]}
+{"consecutive429":3,"rep":1,"requestsIssued":4,"outcome":"ok","total_ms":14523,"waitsBetweenAttempts_ms":[2196,4007,8319]}
+{"consecutive429":3,"rep":2,"requestsIssued":4,"outcome":"ok","total_ms":14796,"waitsBetweenAttempts_ms":[2464,4056,8275]}
+{"consecutive429":4,"rep":0,"requestsIssued":4,"outcome":"threw: Groq API error 429: emulated 429","total_ms":14878,"waitsBetweenAttempts_ms":[2210,4205,8461]}
+{"consecutive429":4,"rep":1,"requestsIssued":4,"outcome":"threw: Groq API error 429: emulated 429","total_ms":14702,"waitsBetweenAttempts_ms":[2005,4424,8272]}
+{"consecutive429":4,"rep":2,"requestsIssued":4,"outcome":"threw: Groq API error 429: emulated 429","total_ms":14755,"waitsBetweenAttempts_ms":[2427,4197,8129]}
