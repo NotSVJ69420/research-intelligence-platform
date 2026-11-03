@@ -1,0 +1,151 @@
+{
+  "meta": {
+    "L": 50,
+    "note": "fault applied to every request to the named host; status as reported by orchestrator providerStats"
+  },
+  "rows": [
+    {
+      "faultySource": "openalex",
+      "fault": "http500",
+      "elapsed_ms": 410,
+      "statusReported": "failed",
+      "countReported": 0,
+      "listedInProviderFailures": true,
+      "otherSourcesIntact": true,
+      "resultsReturned": 49,
+      "requestsToFaultySource": 1
+    },
+    {
+      "faultySource": "openalex",
+      "fault": "neterror",
+      "elapsed_ms": 404,
+      "statusReported": "failed",
+      "countReported": 0,
+      "listedInProviderFailures": true,
+      "otherSourcesIntact": true,
+      "resultsReturned": 49,
+      "requestsToFaultySource": 1
+    },
+    {
+      "faultySource": "arxiv",
+      "fault": "http500",
+      "elapsed_ms": 408,
+      "statusReported": "success",
+      "countReported": 0,
+      "listedInProviderFailures": false,
+      "otherSourcesIntact": true,
+      "resultsReturned": 50,
+      "requestsToFaultySource": 1
+    },
+    {
+      "faultySource": "arxiv",
+      "fault": "neterror",
+      "elapsed_ms": 407,
+      "statusReported": "success",
+      "countReported": 0,
+      "listedInProviderFailures": false,
+      "otherSourcesIntact": true,
+      "resultsReturned": 50,
+      "requestsToFaultySource": 1
+    },
+    {
+      "faultySource": "semantic_scholar",
+      "fault": "http500",
+      "elapsed_ms": 405,
+      "statusReported": "failed",
+      "countReported": 0,
+      "listedInProviderFailures": true,
+      "otherSourcesIntact": true,
+      "resultsReturned": 49,
+      "requestsToFaultySource": 1
+    },
+    {
+      "faultySource": "semantic_scholar",
+      "fault": "neterror",
+      "elapsed_ms": 405,
+      "statusReported": "failed",
+      "countReported": 0,
+      "listedInProviderFailures": true,
+      "otherSourcesIntact": true,
+      "resultsReturned": 49,
+      "requestsToFaultySource": 1
+    },
+    {
+      "faultySource": "semantic_scholar",
+      "fault": "http429",
+      "elapsed_ms": 2109,
+      "statusReported": "failed",
+      "countReported": 0,
+      "listedInProviderFailures": true,
+      "otherSourcesIntact": true,
+      "resultsReturned": 49,
+      "requestsToFaultySource": 2
+    },
+    {
+      "faultySource": "crossref",
+      "fault": "http500",
+      "elapsed_ms": 405,
+      "statusReported": "failed",
+      "countReported": 0,
+      "listedInProviderFailures": true,
+      "otherSourcesIntact": true,
+      "resultsReturned": 50,
+      "requestsToFaultySource": 1
+    },
+    {
+      "faultySource": "crossref",
+      "fault": "neterror",
+      "elapsed_ms": 406,
+      "statusReported": "failed",
+      "countReported": 0,
+      "listedInProviderFailures": true,
+      "otherSourcesIntact": true,
+      "resultsReturned": 50,
+      "requestsToFaultySource": 1
+    },
+    {
+      "faultySource": "europe_pmc",
+      "fault": "http500",
+      "elapsed_ms": 405,
+      "statusReported": "failed",
+      "countReported": 0,
+      "listedInProviderFailures": true,
+      "otherSourcesIntact": true,
+      "resultsReturned": 49,
+      "requestsToFaultySource": 1
+    },
+    {
+      "faultySource": "europe_pmc",
+      "fault": "neterror",
+      "elapsed_ms": 406,
+      "statusReported": "failed",
+      "countReported": 0,
+      "listedInProviderFailures": true,
+      "otherSourcesIntact": true,
+      "resultsReturned": 49,
+      "requestsToFaultySource": 1
+    },
+    {
+      "faultySource": "pubmed",
+      "fault": "http500",
+      "elapsed_ms": 107,
+      "statusReported": "failed",
+      "countReported": 0,
+      "listedInProviderFailures": true,
+      "otherSourcesIntact": true,
+      "resultsReturned": 49,
+      "requestsToFaultySource": 1
+    },
+    {
+      "faultySource": "pubmed",
+      "fault": "neterror",
+      "elapsed_ms": 106,
+      "statusReported": "failed",
+      "countReported": 0,
+      "listedInProviderFailures": true,
+      "otherSourcesIntact": true,
+      "resultsReturned": 49,
+      "requestsToFaultySource": 1
+    }
+  ]
+}

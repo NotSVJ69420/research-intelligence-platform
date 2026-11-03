@@ -1,0 +1,100 @@
+{
+  "meta": {
+    "limit": 10,
+    "reps": 5,
+    "node": "v22.23.4",
+    "note": "latency L injected identically for every emulated upstream request; cold = >3.2 s idle before each run so the arXiv adapter throttle does not engage"
+  },
+  "rows": [
+    {
+      "L": 0,
+      "observed": {
+        "n": 5,
+        "mean": 357.54984579999984,
+        "sd": 0.8089573391652621,
+        "median": 357.855227,
+        "min": 356.69321599999967,
+        "max": 358.5441720000017,
+        "p25": 356.7351240000007,
+        "p75": 357.921489999997
+      },
+      "model_parallel_ms": 350,
+      "model_source_sequential_ms": 350,
+      "model_fully_sequential_ms": 0,
+      "upstreamRequests": 17,
+      "resultsReturned": 58
+    },
+    {
+      "L": 100,
+      "observed": {
+        "n": 5,
+        "mean": 454.12373380000207,
+        "sd": 0.7755200045683082,
+        "median": 454.2007400000002,
+        "min": 453.30867600000056,
+        "max": 455.2988059999989,
+        "p25": 453.54523200000403,
+        "p75": 454.2652150000067
+      },
+      "model_parallel_ms": 450,
+      "model_source_sequential_ms": 1050,
+      "model_fully_sequential_ms": 1700,
+      "upstreamRequests": 17,
+      "resultsReturned": 58
+    },
+    {
+      "L": 250,
+      "observed": {
+        "n": 5,
+        "mean": 603.559932400001,
+        "sd": 0.7634324607692469,
+        "median": 603.8412270000044,
+        "min": 602.2337939999998,
+        "max": 604.1242700000003,
+        "p25": 603.6275199999945,
+        "p75": 603.9728510000059
+      },
+      "model_parallel_ms": 600,
+      "model_source_sequential_ms": 2100,
+      "model_fully_sequential_ms": 4250,
+      "upstreamRequests": 17,
+      "resultsReturned": 59
+    },
+    {
+      "L": 500,
+      "observed": {
+        "n": 5,
+        "mean": 1011.3177356,
+        "sd": 1.1131576731189963,
+        "median": 1010.8892420000047,
+        "min": 1010.5295760000008,
+        "max": 1013.2390719999967,
+        "p25": 1010.6399289999972,
+        "p75": 1011.2908590000006
+      },
+      "model_parallel_ms": 1000,
+      "model_source_sequential_ms": 4000,
+      "model_fully_sequential_ms": 8500,
+      "upstreamRequests": 17,
+      "resultsReturned": 57
+    },
+    {
+      "L": 1000,
+      "observed": {
+        "n": 5,
+        "mean": 2010.7643314000015,
+        "sd": 0.5693871324648551,
+        "median": 2011.0296369999996,
+        "min": 2009.8860350000032,
+        "max": 2011.2346700000053,
+        "p25": 2010.5012759999954,
+        "p75": 2011.1700390000042
+      },
+      "model_parallel_ms": 2000,
+      "model_source_sequential_ms": 8000,
+      "model_fully_sequential_ms": 17000,
+      "upstreamRequests": 17,
+      "resultsReturned": 59
+    }
+  ]
+}

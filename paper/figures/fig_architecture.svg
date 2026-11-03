@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="740" height="418" viewBox="0 0 740 418">
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1a1a1a"/></marker><marker id="arrg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#555555"/></marker></defs>
+<rect width="740" height="418" fill="white"/>
+<rect x="4" y="2" width="732" height="62" rx="4" fill="#fafafa" stroke="#d9d9d9" stroke-width="1"/>
+<text x="10" y="13" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="8.5" text-anchor="start" font-weight="bold" font-style="normal" fill="#555555">Renderer processes (contextIsolation = true, nodeIntegration = false)</text>
+<rect x="10" y="19" width="400" height="40" rx="3" fill="#dcebf5" stroke="#1a1a1a" stroke-width="1"/>
+<text x="210.0" y="37.71" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="10.5" text-anchor="middle" font-weight="bold" font-style="normal" fill="#1a1a1a">Main window  (index.html, Vite, Tailwind)</text>
+<text x="210.0" y="50.790000000000006" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="9" text-anchor="middle" font-weight="normal" font-style="normal" fill="#555555">src/main.js · fetcher.js · library.js · analysis.js</text>
+<rect x="420" y="19" width="310" height="40" rx="3" fill="#dcebf5" stroke="#1a1a1a" stroke-width="1"/>
+<text x="575.0" y="37.71" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="10.5" text-anchor="middle" font-weight="bold" font-style="normal" fill="#1a1a1a">Editor window  (editor.html)</text>
+<text x="575.0" y="50.790000000000006" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="9" text-anchor="middle" font-weight="normal" font-style="normal" fill="#555555">renderer/editor/*: CodeMirror 6, markdown-it + KaTeX</text>
+<rect x="10" y="74" width="720" height="26" rx="3" fill="#ececec" stroke="#1a1a1a" stroke-width="1"/>
+<text x="18" y="91" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="10" text-anchor="start" font-weight="bold" font-style="normal" fill="#1a1a1a">preload.js — contextBridge → window.electronAPI</text>
+<text x="722" y="91" font-family="Liberation Mono, Courier New, monospace" font-size="8.5" text-anchor="end" font-weight="normal" font-style="normal" fill="#555555">{library, papers, ai, document, window, settings}</text>
+<rect x="4" y="108" width="732" height="40" rx="4" fill="#fafafa" stroke="#d9d9d9" stroke-width="1"/>
+<text x="10" y="119" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="8.5" text-anchor="start" font-weight="bold" font-style="normal" fill="#555555">Electron main process</text>
+<rect x="10" y="123" width="720" height="21" rx="3" fill="#fbeccb" stroke="#1a1a1a" stroke-width="1"/>
+<text x="370.0" y="137.1" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="9" text-anchor="middle" font-weight="bold" font-style="normal" fill="#1a1a1a">electron-main.js · ipcMain.handle()  library:* · papers:* · ai:* · settings:* · window:*   +   main/ipc/document-ipc.js  document:*</text>
+<line x1="210" y1="59" x2="210" y2="74" stroke="#1a1a1a" stroke-width="1" marker-end="url(#arr)"/>
+<line x1="575" y1="59" x2="575" y2="74" stroke="#1a1a1a" stroke-width="1" marker-end="url(#arr)"/>
+<line x1="370" y1="100" x2="370" y2="123" stroke="#1a1a1a" stroke-width="1" marker-end="url(#arr)"/>
+<text x="10" y="160" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="8.5" text-anchor="start" font-weight="bold" font-style="normal" fill="#555555">Services and ingestion layer</text>
+<line x1="100" y1="144" x2="100" y2="164" stroke="#1a1a1a" stroke-width="1" marker-end="url(#arr)"/>
+<rect x="10" y="164" width="180" height="48" rx="3" fill="#d4efe6" stroke="#1a1a1a" stroke-width="1"/>
+<text x="100.0" y="181.22" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="10.5" text-anchor="middle" font-weight="bold" font-style="normal" fill="#1a1a1a">services/paper-service.js</text>
+<text x="100.0" y="194.29999999999998" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="9" text-anchor="middle" font-weight="normal" font-style="normal" fill="#555555">searchAndStore · downloadPaperPdf</text>
+<text x="100.0" y="205.28" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="9" text-anchor="middle" font-weight="normal" font-style="normal" fill="#555555">getLibraryPapers · addManualPaper</text>
+<rect x="258" y="164" width="222" height="48" rx="3" fill="#d4efe6" stroke="#1a1a1a" stroke-width="1"/>
+<text x="369.0" y="186.71" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="10.5" text-anchor="middle" font-weight="bold" font-style="normal" fill="#1a1a1a">ingestion/  search-orchestrator.js</text>
+<text x="369.0" y="199.79" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="9" text-anchor="middle" font-weight="normal" font-style="normal" fill="#555555">6 adapters → 6 normalizers → dedupe → rank</text>
+<rect x="540" y="164" width="190" height="48" rx="3" fill="white" stroke="#1a1a1a" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="635.0" y="181.22" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="10.5" text-anchor="middle" font-weight="bold" font-style="normal" fill="#1a1a1a">Scholarly APIs (HTTPS)</text>
+<text x="635.0" y="194.29999999999998" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="9" text-anchor="middle" font-weight="normal" font-style="normal" fill="#555555">arXiv · OpenAlex · Semantic Scholar</text>
+<text x="635.0" y="205.28" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="9" text-anchor="middle" font-weight="normal" font-style="normal" fill="#555555">Crossref · Europe PMC · PubMed</text>
+<line x1="190" y1="188" x2="258" y2="188" stroke="#1a1a1a" stroke-width="1" marker-end="url(#arr)"/>
+<line x1="480" y1="188" x2="540" y2="188" stroke="#1a1a1a" stroke-width="1" marker-end="url(#arr)"/>
+<text x="510.0" y="183" font-family="Liberation Mono, Courier New, monospace" font-size="8" text-anchor="middle" font-weight="normal" font-style="normal" fill="#555555">fetch()</text>
+<rect x="10" y="222" width="180" height="48" rx="3" fill="#d4efe6" stroke="#1a1a1a" stroke-width="1"/>
+<text x="100.0" y="244.71" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="10.5" text-anchor="middle" font-weight="bold" font-style="normal" fill="#1a1a1a">services/db.js · schema.js</text>
+<text x="100.0" y="257.79" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="9" text-anchor="middle" font-weight="normal" font-style="normal" fill="#555555">pg.Pool · idempotent DDL at start-up</text>
+<rect x="258" y="222" width="222" height="48" rx="3" fill="white" stroke="#1a1a1a" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="369.0" y="239.22" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="10.5" text-anchor="middle" font-weight="bold" font-style="normal" fill="#1a1a1a">PostgreSQL 14+</text>
+<text x="369.0" y="252.29999999999998" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="9" text-anchor="middle" font-weight="normal" font-style="normal" fill="#555555">table papers (JSONB authors,</text>
+<text x="369.0" y="263.28" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="9" text-anchor="middle" font-weight="normal" font-style="normal" fill="#555555">UNIQUE(source, source_id), DOI index)</text>
+<rect x="540" y="222" width="190" height="48" rx="3" fill="white" stroke="#1a1a1a" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="635.0" y="239.22" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="10.5" text-anchor="middle" font-weight="bold" font-style="normal" fill="#1a1a1a">Local filesystem</text>
+<text x="635.0" y="252.29999999999998" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="9" text-anchor="middle" font-weight="normal" font-style="normal" fill="#555555">raw_papers/*.pdf · analysis/*.md</text>
+<text x="635.0" y="263.28" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="9" text-anchor="middle" font-weight="normal" font-style="normal" fill="#555555">userData: settings.json, draft.md</text>
+<line x1="100" y1="212" x2="100" y2="222" stroke="#1a1a1a" stroke-width="1" marker-end="url(#arr)"/>
+<line x1="190" y1="246" x2="258" y2="246" stroke="#1a1a1a" stroke-width="1" marker-end="url(#arr)"/>
+<text x="224.0" y="241" font-family="Liberation Mono, Courier New, monospace" font-size="8" text-anchor="middle" font-weight="normal" font-style="normal" fill="#555555">SQL</text>
+<path d="M160,212 L160,217 L635,217 L635,222" stroke="#1a1a1a" stroke-width="1" fill="none" stroke-dasharray="3 2" marker-end="url(#arrg)"/>
+<rect x="10" y="280" width="180" height="48" rx="3" fill="#d4efe6" stroke="#1a1a1a" stroke-width="1"/>
+<text x="100.0" y="297.22" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="10.5" text-anchor="middle" font-weight="bold" font-style="normal" fill="#1a1a1a">ingestion/ai-pipeline.js</text>
+<text x="100.0" y="310.30000000000007" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="9" text-anchor="middle" font-weight="normal" font-style="normal" fill="#555555">processPapers(): serial loop,</text>
+<text x="100.0" y="321.28000000000003" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="9" text-anchor="middle" font-weight="normal" font-style="normal" fill="#555555">per-paper failure isolation</text>
+<rect x="258" y="280" width="222" height="48" rx="3" fill="#d4efe6" stroke="#1a1a1a" stroke-width="1"/>
+<text x="369.0" y="297.22" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="10.5" text-anchor="middle" font-weight="bold" font-style="normal" fill="#1a1a1a">services/ai-service.js</text>
+<text x="369.0" y="310.30000000000007" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="9" text-anchor="middle" font-weight="normal" font-style="normal" fill="#555555">2 s minimum request interval</text>
+<text x="369.0" y="321.28000000000003" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="9" text-anchor="middle" font-weight="normal" font-style="normal" fill="#555555">429 → exponential back-off (≤ 3 retries)</text>
+<rect x="540" y="280" width="190" height="48" rx="3" fill="white" stroke="#1a1a1a" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="635.0" y="297.22" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="10.5" text-anchor="middle" font-weight="bold" font-style="normal" fill="#1a1a1a">Groq chat-completions API</text>
+<text x="635.0" y="310.30000000000007" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="9" text-anchor="middle" font-weight="normal" font-style="normal" fill="#555555">model: openai/gpt-oss-120b</text>
+<text x="635.0" y="321.28000000000003" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="9" text-anchor="middle" font-weight="normal" font-style="normal" fill="#555555">T = 0.3, max_tokens = 1024</text>
+<line x1="190" y1="304" x2="258" y2="304" stroke="#1a1a1a" stroke-width="1" marker-end="url(#arr)"/>
+<line x1="480" y1="304" x2="540" y2="304" stroke="#1a1a1a" stroke-width="1" marker-end="url(#arr)"/>
+<text x="510.0" y="299" font-family="Liberation Mono, Courier New, monospace" font-size="8" text-anchor="middle" font-weight="normal" font-style="normal" fill="#555555">POST</text>
+<rect x="10" y="338" width="180" height="48" rx="3" fill="#d4efe6" stroke="#1a1a1a" stroke-width="1"/>
+<text x="100.0" y="360.71" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="10.5" text-anchor="middle" font-weight="bold" font-style="normal" fill="#1a1a1a">services/document-service.js</text>
+<text x="100.0" y="373.79" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="9" text-anchor="middle" font-weight="normal" font-style="normal" fill="#555555">spawn('pandoc') — md → tex / pdf</text>
+<rect x="540" y="338" width="190" height="48" rx="3" fill="white" stroke="#1a1a1a" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="635.0" y="360.71" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="10.5" text-anchor="middle" font-weight="bold" font-style="normal" fill="#1a1a1a">Pandoc + pdflatex (optional)</text>
+<text x="635.0" y="373.79" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="9" text-anchor="middle" font-weight="normal" font-style="normal" fill="#555555">external binaries on PATH</text>
+<line x1="190" y1="362" x2="540" y2="362" stroke="#1a1a1a" stroke-width="1" marker-end="url(#arr)"/>
+<text x="380" y="357" font-family="Liberation Mono, Courier New, monospace" font-size="8" text-anchor="middle" font-weight="normal" font-style="normal" fill="#555555">child process</text>
+<text x="10" y="404" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="8" text-anchor="start" font-weight="normal" font-style="normal" fill="#555555">Solid arrows: calls implemented in the repository.  Dashed boxes: external systems.  Green: modules evaluated in this paper.</text>
+</svg>

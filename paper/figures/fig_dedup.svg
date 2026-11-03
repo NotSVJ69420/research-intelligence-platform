@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="272" viewBox="0 0 360 272">
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1a1a1a"/></marker><marker id="arrg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#555555"/></marker></defs>
+<rect width="360" height="272" fill="white"/>
+<text x="148" y="10" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="8.8" text-anchor="start" font-weight="bold" font-style="normal" fill="#1a1a1a">Pairwise merge recall (record lacks a DOI)</text>
+<line x1="148" y1="16" x2="148" y2="236" stroke="#d9d9d9" stroke-width="0.6"/>
+<text x="148" y="247" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="8.5" text-anchor="middle" font-weight="normal" font-style="normal" fill="#555555">0</text>
+<line x1="233.0" y1="16" x2="233.0" y2="236" stroke="#d9d9d9" stroke-width="0.6"/>
+<text x="233.0" y="247" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="8.5" text-anchor="middle" font-weight="normal" font-style="normal" fill="#555555">0.5</text>
+<line x1="318" y1="16" x2="318" y2="236" stroke="#d9d9d9" stroke-width="0.6"/>
+<text x="318" y="247" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="8.5" text-anchor="middle" font-weight="normal" font-style="normal" fill="#555555">1</text>
+<text x="143" y="27.5" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="8.3" text-anchor="end" font-weight="normal" font-style="normal" fill="#1a1a1a">year -1 (preprint earlier)</text>
+<rect x="148" y="18" width="0.0" height="7" fill="#D55E00"/>
+<rect x="148" y="26" width="170.0" height="7" fill="#0072B2"/>
+<text x="151" y="24.6" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="7.4" text-anchor="start" font-weight="normal" font-style="normal" fill="#D55E00">0.00</text>
+<text x="321" y="32.6" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="7.4" text-anchor="start" font-weight="normal" font-style="normal" fill="#0072B2">1.00</text>
+<text x="143" y="47.5" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="8.3" text-anchor="end" font-weight="normal" font-style="normal" fill="#1a1a1a">year +1</text>
+<rect x="148" y="38" width="0.0" height="7" fill="#D55E00"/>
+<rect x="148" y="46" width="170.0" height="7" fill="#0072B2"/>
+<text x="151" y="44.6" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="7.4" text-anchor="start" font-weight="normal" font-style="normal" fill="#D55E00">0.00</text>
+<text x="321" y="52.6" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="7.4" text-anchor="start" font-weight="normal" font-style="normal" fill="#0072B2">1.00</text>
+<text x="143" y="67.5" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="8.3" text-anchor="end" font-weight="normal" font-style="normal" fill="#1a1a1a">author "A. Surname"</text>
+<rect x="148" y="58" width="0.0" height="7" fill="#D55E00"/>
+<rect x="148" y="66" width="170.0" height="7" fill="#0072B2"/>
+<text x="151" y="64.6" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="7.4" text-anchor="start" font-weight="normal" font-style="normal" fill="#D55E00">0.00</text>
+<text x="321" y="72.6" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="7.4" text-anchor="start" font-weight="normal" font-style="normal" fill="#0072B2">1.00</text>
+<text x="143" y="87.5" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="8.3" text-anchor="end" font-weight="normal" font-style="normal" fill="#1a1a1a">author "Surname A"</text>
+<rect x="148" y="78" width="0.0" height="7" fill="#D55E00"/>
+<rect x="148" y="86" width="170.0" height="7" fill="#0072B2"/>
+<text x="151" y="84.6" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="7.4" text-anchor="start" font-weight="normal" font-style="normal" fill="#D55E00">0.00</text>
+<text x="321" y="92.6" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="7.4" text-anchor="start" font-weight="normal" font-style="normal" fill="#0072B2">1.00</text>
+<text x="143" y="107.5" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="8.3" text-anchor="end" font-weight="normal" font-style="normal" fill="#1a1a1a">author order reversed</text>
+<rect x="148" y="98" width="0.0" height="7" fill="#D55E00"/>
+<rect x="148" y="106" width="0.0" height="7" fill="#0072B2"/>
+<text x="151" y="104.6" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="7.4" text-anchor="start" font-weight="normal" font-style="normal" fill="#D55E00">0.00</text>
+<text x="151" y="112.6" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="7.4" text-anchor="start" font-weight="normal" font-style="normal" fill="#0072B2">0.00</text>
+<text x="143" y="127.5" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="8.3" text-anchor="end" font-weight="normal" font-style="normal" fill="#1a1a1a">title trailing period</text>
+<rect x="148" y="118" width="0.0" height="7" fill="#D55E00"/>
+<rect x="148" y="126" width="170.0" height="7" fill="#0072B2"/>
+<text x="151" y="124.6" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="7.4" text-anchor="start" font-weight="normal" font-style="normal" fill="#D55E00">0.00</text>
+<text x="321" y="132.6" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="7.4" text-anchor="start" font-weight="normal" font-style="normal" fill="#0072B2">1.00</text>
+<text x="143" y="147.5" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="8.3" text-anchor="end" font-weight="normal" font-style="normal" fill="#1a1a1a">title upper-cased</text>
+<rect x="148" y="138" width="170.0" height="7" fill="#D55E00"/>
+<rect x="148" y="146" width="170.0" height="7" fill="#0072B2"/>
+<text x="321" y="144.6" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="7.4" text-anchor="start" font-weight="normal" font-style="normal" fill="#D55E00">1.00</text>
+<text x="321" y="152.6" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="7.4" text-anchor="start" font-weight="normal" font-style="normal" fill="#0072B2">1.00</text>
+<text x="143" y="167.5" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="8.3" text-anchor="end" font-weight="normal" font-style="normal" fill="#1a1a1a">title ": " -&gt; " - "</text>
+<rect x="148" y="158" width="0.0" height="7" fill="#D55E00"/>
+<rect x="148" y="166" width="170.0" height="7" fill="#0072B2"/>
+<text x="151" y="164.6" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="7.4" text-anchor="start" font-weight="normal" font-style="normal" fill="#D55E00">0.00</text>
+<text x="321" y="172.6" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="7.4" text-anchor="start" font-weight="normal" font-style="normal" fill="#0072B2">1.00</text>
+<text x="143" y="187.5" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="8.3" text-anchor="end" font-weight="normal" font-style="normal" fill="#1a1a1a">title subtitle dropped</text>
+<rect x="148" y="178" width="0.0" height="7" fill="#D55E00"/>
+<rect x="148" y="186" width="0.0" height="7" fill="#0072B2"/>
+<text x="151" y="184.6" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="7.4" text-anchor="start" font-weight="normal" font-style="normal" fill="#D55E00">0.00</text>
+<text x="151" y="192.6" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="7.4" text-anchor="start" font-weight="normal" font-style="normal" fill="#0072B2">0.00</text>
+<text x="143" y="207.5" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="8.3" text-anchor="end" font-weight="normal" font-style="normal" fill="#1a1a1a">author diacritics folded</text>
+<rect x="148" y="198" width="97.2" height="7" fill="#D55E00"/>
+<rect x="148" y="206" width="170.0" height="7" fill="#0072B2"/>
+<text x="248.20744680851064" y="204.6" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="7.4" text-anchor="start" font-weight="normal" font-style="normal" fill="#D55E00">0.57</text>
+<text x="321" y="212.6" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="7.4" text-anchor="start" font-weight="normal" font-style="normal" fill="#0072B2">1.00</text>
+<text x="143" y="227.5" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="8.3" text-anchor="end" font-weight="normal" font-style="normal" fill="#1a1a1a">combined (Europe PMC-like)</text>
+<rect x="148" y="218" width="0.0" height="7" fill="#D55E00"/>
+<rect x="148" y="226" width="170.0" height="7" fill="#0072B2"/>
+<text x="151" y="224.6" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="7.4" text-anchor="start" font-weight="normal" font-style="normal" fill="#D55E00">0.00</text>
+<text x="321" y="232.6" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="7.4" text-anchor="start" font-weight="normal" font-style="normal" fill="#0072B2">1.00</text>
+<rect x="48" y="256" width="9" height="8" fill="#D55E00"/>
+<text x="61" y="263" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="8.4" text-anchor="start" font-weight="normal" font-style="normal" fill="#1a1a1a">repository deduplicate()</text>
+<rect x="203" y="256" width="9" height="8" fill="#0072B2"/>
+<text x="216" y="263" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="8.4" text-anchor="start" font-weight="normal" font-style="normal" fill="#1a1a1a">relaxed-key prototype</text>
+</svg>

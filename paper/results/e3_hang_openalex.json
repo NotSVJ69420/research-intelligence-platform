@@ -1,0 +1,29 @@
+{
+  "source": "openalex",
+  "reps": 3,
+  "elapsed_ms": {
+    "n": 3,
+    "mean": 15014.896798333335,
+    "sd": 0.8566141373118142,
+    "median": 15014.573635000004,
+    "min": 15014.248774,
+    "max": 15015.867986,
+    "p25": 15014.411204500002,
+    "p75": 15015.220810500003
+  },
+  "resultsReturned": 50,
+  "statusReported": {
+    "status": "failed",
+    "raw": 0,
+    "count": 0,
+    "error": "This operation was aborted"
+  },
+  "otherStatuses": {
+    "openalex": "failed/0",
+    "arxiv": "success/10",
+    "semantic_scholar": "success/10",
+    "crossref": "success/10",
+    "europe_pmc": "success/10",
+    "pubmed": "success/10"
+  }
+}
