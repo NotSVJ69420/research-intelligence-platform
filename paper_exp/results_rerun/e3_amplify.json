@@ -1,0 +1,64 @@
+{
+  "rows": [
+    {
+      "limit": 5,
+      "totalUpstreamRequests": 12,
+      "perEndpoint": {
+        "openalex": 1,
+        "arxiv": 1,
+        "semantic_scholar": 1,
+        "crossref": 1,
+        "europe_pmc": 1,
+        "pubmed (esearch)": 1,
+        "europe_pmc→crossref enrichment": 5,
+        "pubmed (efetch)": 1
+      },
+      "resultsReturned": 30
+    },
+    {
+      "limit": 10,
+      "totalUpstreamRequests": 17,
+      "perEndpoint": {
+        "openalex": 1,
+        "arxiv": 1,
+        "semantic_scholar": 1,
+        "crossref": 1,
+        "europe_pmc": 1,
+        "pubmed (esearch)": 1,
+        "europe_pmc→crossref enrichment": 10,
+        "pubmed (efetch)": 1
+      },
+      "resultsReturned": 60
+    },
+    {
+      "limit": 20,
+      "totalUpstreamRequests": 27,
+      "perEndpoint": {
+        "openalex": 1,
+        "arxiv": 1,
+        "semantic_scholar": 1,
+        "crossref": 1,
+        "europe_pmc": 1,
+        "pubmed (esearch)": 1,
+        "europe_pmc→crossref enrichment": 20,
+        "pubmed (efetch)": 1
+      },
+      "resultsReturned": 112
+    },
+    {
+      "limit": 50,
+      "totalUpstreamRequests": 57,
+      "perEndpoint": {
+        "openalex": 1,
+        "arxiv": 1,
+        "semantic_scholar": 1,
+        "crossref": 1,
+        "europe_pmc": 1,
+        "pubmed (esearch)": 1,
+        "europe_pmc→crossref enrichment": 50,
+        "pubmed (efetch)": 1
+      },
+      "resultsReturned": 258
+    }
+  ]
+}

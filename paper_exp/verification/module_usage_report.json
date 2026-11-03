@@ -1,0 +1,165 @@
+{
+  "generatedAt": "2026-11-03T17:10:21.335Z",
+  "imports": {
+    "e0_repo_stats.mjs": [],
+    "e1_normalizers.mjs": [],
+    "e2_dedup.mjs": [
+      "ingestion/dedupe.js",
+      "ingestion/search-orchestrator.js"
+    ],
+    "e2b_dedup_scaling.mjs": [
+      "ingestion/dedupe.js"
+    ],
+    "e3_orchestrator.mjs": [
+      "ingestion/search-orchestrator.js"
+    ],
+    "e4_db.mjs": [
+      "ingestion/search-orchestrator.js",
+      "services/db.js",
+      "services/paper-service.js",
+      "services/schema.js"
+    ],
+    "e5_ai.mjs": [
+      "ingestion/ai-pipeline.js",
+      "services/ai-service.js"
+    ],
+    "env_info.mjs": [],
+    "lib/corpus.mjs": [],
+    "lib/dedupe_variants.mjs": [],
+    "lib/emulator.mjs": [],
+    "lib/pipeline.mjs": [
+      "ingestion/normalizers/arxiv.js",
+      "ingestion/normalizers/crossref.js",
+      "ingestion/normalizers/europepmc.js",
+      "ingestion/normalizers/openalex.js",
+      "ingestion/normalizers/pubmed.js",
+      "ingestion/normalizers/semanticscholar.js",
+      "ingestion/ranking.js",
+      "ingestion/sources/arxiv.js",
+      "ingestion/sources/crossref.js",
+      "ingestion/sources/europepmc.js",
+      "ingestion/sources/openalex.js",
+      "ingestion/sources/pubmed.js",
+      "ingestion/sources/semanticscholar.js"
+    ],
+    "lib/render.mjs": [],
+    "lib/rng.mjs": []
+  },
+  "harnessOnlyFunctions": {
+    "lib/dedupe_variants.mjs": "strictHash/relaxedKey/clusterUF/variants.* — explicitly identified experimental variants (uf_repo_keys, uf_relaxed); strictHash re-states the repo key and is used only for the applicability test and as a UF key",
+    "lib/emulator.mjs": "globalThis.fetch replacement (upstream emulation, latency, fault injection)",
+    "lib/render.mjs": "synthetic provider payload renderers (input data, not application logic)",
+    "lib/pipeline.mjs": "collectPreDedup(): replicates orchestrator steps 1-3 by calling the repository source adapters, normalizers and rankPapers; checked against the real orchestrator in section 3"
+  },
+  "git": {
+    "baseline": "bf2d3a3",
+    "changedApplicationFiles": [],
+    "diffStat": "(no differences)"
+  },
+  "orchestratorEquivalence": [
+    {
+      "query": "query-0",
+      "limit": 10,
+      "realOutput": 58,
+      "replicatedOutput": 58,
+      "sameRecordSet": true,
+      "sameRankedOrder": true
+    },
+    {
+      "query": "query-1",
+      "limit": 10,
+      "realOutput": 55,
+      "replicatedOutput": 55,
+      "sameRecordSet": true,
+      "sameRankedOrder": true
+    },
+    {
+      "query": "query-2",
+      "limit": 25,
+      "realOutput": 123,
+      "replicatedOutput": 123,
+      "sameRecordSet": true,
+      "sameRankedOrder": true
+    }
+  ],
+  "roundTrip": {
+    "openalex": {
+      "records": 200,
+      "fieldAgreement": {
+        "title": "200/200",
+        "doi": "200/200",
+        "year": "200/200",
+        "venue": "200/200",
+        "citation_count": "200/200",
+        "abstract": "200/200",
+        "firstAuthor": "200/200",
+        "nAuthors": "200/200"
+      }
+    },
+    "arxiv": {
+      "records": 200,
+      "fieldAgreement": {
+        "title": "200/200",
+        "doi": "200/200",
+        "year": "200/200",
+        "venue": "200/200",
+        "citation_count": "200/200",
+        "abstract": "200/200",
+        "firstAuthor": "200/200",
+        "nAuthors": "200/200"
+      }
+    },
+    "semantic_scholar": {
+      "records": 200,
+      "fieldAgreement": {
+        "title": "200/200",
+        "doi": "200/200",
+        "year": "200/200",
+        "venue": "200/200",
+        "citation_count": "200/200",
+        "abstract": "200/200",
+        "firstAuthor": "200/200",
+        "nAuthors": "200/200"
+      }
+    },
+    "crossref": {
+      "records": 200,
+      "fieldAgreement": {
+        "title": "200/200",
+        "doi": "200/200",
+        "year": "200/200",
+        "venue": "200/200",
+        "citation_count": "200/200",
+        "abstract": "200/200",
+        "firstAuthor": "200/200",
+        "nAuthors": "200/200"
+      }
+    },
+    "europe_pmc": {
+      "records": 200,
+      "fieldAgreement": {
+        "title": "200/200",
+        "doi": "200/200",
+        "year": "200/200",
+        "venue": "200/200",
+        "citation_count": "200/200",
+        "abstract": "200/200",
+        "firstAuthor": "0/200",
+        "nAuthors": "200/200"
+      }
+    },
+    "pubmed": {
+      "records": 200,
+      "fieldAgreement": {
+        "title": "200/200",
+        "doi": "200/200",
+        "year": "200/200",
+        "venue": "200/200",
+        "citation_count": "200/200",
+        "abstract": "200/200",
+        "firstAuthor": "200/200",
+        "nAuthors": "200/200"
+      }
+    }
+  }
+}

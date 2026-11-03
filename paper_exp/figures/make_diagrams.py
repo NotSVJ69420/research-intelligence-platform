@@ -33,7 +33,7 @@ def architecture():
     s.text(10, 160, "Services and ingestion layer", size=8.5, fill=MUTED, weight="bold")
     for y in lanes:
         s.line(100, 144 if y == lanes[0] else y - 10, 100, y, arrow=True, grey=True) if False else None
-    s.line(100, 144, 100, 164, arrow=True)
+    s.line(165, 144, 165, 164, arrow=True)
     # lane 1: paper-service -> ingestion -> scholarly APIs
     s.box(col1[0], lanes[0], col1[1], 48, "services/paper-service.js", ["searchAndStore · downloadPaperPdf", "getLibraryPapers · addManualPaper"], fill=FILL["green"])
     s.box(col2[0], lanes[0], col2[1], 48, "ingestion/  search-orchestrator.js", ["6 adapters → 6 normalizers → dedupe → rank"], fill=FILL["green"])

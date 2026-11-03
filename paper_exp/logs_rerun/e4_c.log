@@ -1,0 +1,14 @@
+[schema] Database initialized
+[schema] Database initialized
+P 1000 F 0 4.3 ms
+P 1000 F 100 10.0 ms
+P 1000 F 500 29.0 ms
+P 1000 F 1000 51.6 ms
+P 5000 F 0 12.4 ms
+P 5000 F 100 38.0 ms
+P 5000 F 500 125.1 ms
+P 5000 F 1000 256.7 ms
+P 20000 F 0 54.5 ms
+P 20000 F 100 157.8 ms
+P 20000 F 500 626.1 ms
+P 20000 F 1000 1021.0 ms

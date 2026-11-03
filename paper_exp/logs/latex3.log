@@ -111,15 +111,16 @@ Underfull \hbox (badness 10000) in paragraph at lines 79--80
 
 pdfTeX warning: pdflatex (file ./figures/fig_architecture.pdf): PDF inclusion: 
 found PDF version <1.7>, but at most version <1.5> allowed
-
+[2]
 Underfull \hbox (badness 10000) in paragraph at lines 112--113
 []\T1/ptm/m/n/10 (+20) A call \T1/pcr/m/n/9 searchAndStore(q, sources, k, sortB
 y)
-[2]
+
+Underfull \vbox (badness 10000) has occurred while \output is active
 
 pdfTeX warning: pdflatex (file ./figures/fig_dataflow.pdf): PDF inclusion: foun
 d PDF version <1.7>, but at most version <1.5> allowed
-
+[3 <./figures/fig_architecture.pdf>]
 Underfull \hbox (badness 2150) in paragraph at lines 125--126
 \T1/ptm/m/n/10 (+20) re-sponses and bod-ies lack-ing the \T1/pcr/m/n/9 %PDF- \T
 1/ptm/m/n/10 (+20) magic bytes,
@@ -131,7 +132,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 125--126
 Underfull \hbox (badness 10000) in paragraph at lines 125--126
 \T1/ptm/m/n/10 (+20) a workspace-relative path. \T1/pcr/m/n/9 getLibraryPapers 
 \T1/ptm/m/n/10 (+20) lists
-[3 <./figures/fig_architecture.pdf>]
+
 Underfull \hbox (badness 3557) in paragraph at lines 146--147
 []\OT1/cmr/m/n/10 ([]([]) \OMS/cmsy/m/n/10 j []\OT1/cmr/m/n/10 ([]) \OMS/cmsy/m
 /n/10 j []\OT1/cmr/m/n/10 )$\T1/ptm/m/n/10 (+20) . Records are pro-
@@ -143,64 +144,82 @@ os-i-tory mod-ules
 Underfull \hbox (badness 10000) in paragraph at lines 161--162
 \T1/ptm/m/n/10 (+20) un-mod-i-fied un-der Node.js; the only sub-sti-tu-tion is
 
-Underfull \hbox (badness 1852) in paragraph at lines 199--200
+Underfull \hbox (badness 1546) in paragraph at lines 161--162
+\T1/ptm/m/n/10 (+20) Ev-ery ran-dom choice is seeded. Two ex-per-i-ments call
+
+Underfull \hbox (badness 10000) in paragraph at lines 161--162
+\T1/ptm/m/n/10 (+20) (\T1/pcr/m/n/9 verification/verify_module_usage.mjs\T1/ptm
+/m/n/10 (+20) ) con-firms
+
+Underfull \hbox (badness 10000) in paragraph at lines 167--168
+[]\T1/ptm/b/n/10 (+20) Platform [S]. \T1/ptm/m/n/10 (+20) 4 vCPU In-tel Xeon 2.
+3GHz,
+
+Underfull \hbox (badness 10000) in paragraph at lines 167--168
+\T1/ptm/m/n/10 (+20) 16GB RAM, Ubuntu 24.04.5, Node.js v22.23.4,
+
+Underfull \hbox (badness 2119) in paragraph at lines 167--168
+\T1/ptm/m/n/10 (+20) Post-greSQL 16.15, \T1/pcr/m/n/9 pg \T1/ptm/m/n/10 (+20) 8
+.20.0, \T1/pcr/m/n/9 xml2js \T1/ptm/m/n/10 (+20) 0.6.2 (recorded
+
+Overfull \hbox (0.62907pt too wide) in paragraph at lines 182--183
+\T1/ptm/m/n/8 (-20) (\T1/pcr/m/n/9 run_all.sh\T1/ptm/m/n/8 (-20) )|  
+[5]
+Underfull \hbox (badness 1852) in paragraph at lines 220--221
 \T1/ptm/m/n/10 (+20) 2 in \T1/pcr/m/n/9 test-paper-service.js\T1/ptm/m/n/10 (+2
 0) ). The 20 as-ser-tions of
-[5]
-Underfull \hbox (badness 10000) in paragraph at lines 229--230
-[]\T1/ptm/m/n/10 (+20) All mea-sure-ments be-low were pro-duced by
 
-Underfull \hbox (badness 4266) in paragraph at lines 229--230
+Underfull \hbox (badness 10000) in paragraph at lines 251--252
+[]\T1/ptm/m/n/10 (+20) All [S] mea-sure-ments be-low were pro-duced by
+
+Underfull \hbox (badness 5741) in paragraph at lines 251--252
 \T1/pcr/m/n/9 experiments/run_all.sh \T1/ptm/m/n/10 (+20) (raw JSON in \T1/pcr/
-m/n/9 results/\T1/ptm/m/n/10 (+20) ).
+m/n/9 results/\T1/ptm/m/n/10 (+20) ;
 
 
 pdfTeX warning: pdflatex (file ./figures/fig_latency.pdf): PDF inclusion: found
  PDF version <1.7>, but at most version <1.5> allowed
-
-Underfull \hbox (badness 1571) in paragraph at lines 260--261
+[6]
+Underfull \hbox (badness 1571) in paragraph at lines 304--305
 \T1/ptm/m/n/10 (+20) er-ror is re-ported cor-rectly (\T1/pcr/m/n/9 status: fail
 ed\T1/ptm/m/n/10 (+20) , listed in
-[6 <./figures/fig_latency.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 272--272
-[]|\T1/ptm/m/n/8 (+20) OpenAlex, S2,
-
-Underfull \hbox (badness 10000) in paragraph at lines 272--272
-\T1/ptm/m/n/8 (+20) Cross-ref, EPMC,
-
-Underfull \hbox (badness 10000) in paragraph at lines 273--273
-[]|\T1/ptm/m/n/8 (+20) success (0
-
-Underfull \hbox (badness 10000) in paragraph at lines 277--277
-[]|\T1/ptm/m/n/8 (+20) success (0
-
+[7 <./figures/fig_latency.pdf>]
 
 pdfTeX warning: pdflatex (file ./figures/fig_dedup.pdf): PDF inclusion: found P
 DF version <1.7>, but at most version <1.5> allowed
-[7 <./figures/fig_dedup.pdf>]
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd) [8 <./figures/fig_de
+dup.pdf>]
 
 pdfTeX warning: pdflatex (file ./figures/fig_scaling.pdf): PDF inclusion: found
  PDF version <1.7>, but at most version <1.5> allowed
+
+Underfull \hbox (badness 4084) in paragraph at lines 408--408
+\T1/ptm/m/n/8 (+20) Fig. 5.  []\T1/ptm/b/n/8 (+20) [S] \T1/ptm/m/n/8 (+20) Scal
+-ing of lo-cal com-po-nents. (a) \T1/pcr/m/n/9 deduplicate() \T1/ptm/m/n/8 (+20
+) and two union-find vari-ants ver-sus in-put size (log--log; me-di-ans).
 
 
 pdfTeX warning: pdflatex (file ./figures/fig_ai.pdf): PDF inclusion: found PDF 
 version <1.7>, but at most version <1.5> allowed
 
-Underfull \hbox (badness 10000) in paragraph at lines 380--381
+Underfull \hbox (badness 10000) in paragraph at lines 424--425
 \T1/pcr/m/n/9 $title\nAbstract: $abstract\n\nTask: $prompt
-[8]
-Underfull \vbox (badness 10000) has occurred while \output is active
-Underfull \vbox (badness 10000) has occurred while \output is active [9 <./figu
-res/fig_scaling.pdf> <./figures/fig_ai.pdf
+[9]
+Underfull \vbox (badness 1009) has occurred while \output is active
+Underfull \vbox (badness 10000) has occurred while \output is active [10 <./fig
+ures/fig_scaling.pdf> <./figures/fig_ai.pdf
 
 pdfTeX warning: pdflatex (file ./figures/fig_ai.pdf): PDF inclusion: multiple p
 dfs with page group included in a single page
 >]
-Underfull \hbox (badness 10000) in paragraph at lines 411--412
-[]\T1/ptm/m/n/10 (+20) The com-plete project is in \T1/pcr/m/n/9 paper/\T1/ptm/
-m/n/10 (+20) : \T1/pcr/m/n/9 main.tex\T1/ptm/m/n/10 (+20) ,
-(./main.bbl [10])
+Underfull \vbox (badness 4001) has occurred while \output is active [11]
+Underfull \hbox (badness 3343) in paragraph at lines 509--510
+\T1/ptm/m/n/10 (+20) gen-er-a-tors, PDF con-ver-sions), \T1/pcr/m/n/9 experimen
+ts/ \T1/ptm/m/n/10 (+20) (har-ness;
+(./main.bbl [12]
+Underfull \hbox (badness 10000) in paragraph at lines 176--177
+[]\T1/ptm/m/n/8 (+20) OpenAI, ``gpt-oss-120b & gpt-oss-20b model card,'' 2025,
+)
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -212,22 +231,23 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[11] (./main.aux) )
+[13] (./main.aux) )
 (see the transcript file for additional information)</usr/share/texlive/texmf-d
 ist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fo
 nts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/ty
 pe1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
 lic/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
 fonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf
--dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/
-utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (11 pages, 421312 bytes).
+m/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.p
+fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw
+/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on main.pdf (13 pages, 450660 bytes).
 Transcript written on main.log.

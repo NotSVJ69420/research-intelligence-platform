@@ -1,0 +1,87 @@
+{
+  "meta": {
+    "note": "L=0; includes JSON parse, normalization, dedup, ranking, UUID assignment and emulator overhead; arXiv and PubMed excluded because their adapters impose wall-clock throttles (3 s; 2x350 ms between back-to-back searches) that would mask CPU cost"
+  },
+  "rows": [
+    {
+      "limit": 10,
+      "sources": 4,
+      "rawAfterTrim": 40,
+      "deduplicated": 40,
+      "wall_ms": {
+        "n": 15,
+        "mean": 5.464273933333335,
+        "sd": 1.020180804274733,
+        "median": 5.133747,
+        "min": 3.678696000000002,
+        "max": 7.3689930000000174,
+        "p25": 4.827614000000011,
+        "p75": 5.922732999999994
+      }
+    },
+    {
+      "limit": 20,
+      "sources": 4,
+      "rawAfterTrim": 80,
+      "deduplicated": 79,
+      "wall_ms": {
+        "n": 15,
+        "mean": 6.867510133333326,
+        "sd": 0.5761550541019888,
+        "median": 6.671714999999949,
+        "min": 6.221499999999992,
+        "max": 7.814369999999997,
+        "p25": 6.302499000000012,
+        "p75": 7.296625999999975
+      }
+    },
+    {
+      "limit": 50,
+      "sources": 4,
+      "rawAfterTrim": 200,
+      "deduplicated": 190,
+      "wall_ms": {
+        "n": 15,
+        "mean": 14.274804733333346,
+        "sd": 2.050931773604075,
+        "median": 14.663967000000014,
+        "min": 10.700827000000004,
+        "max": 17.35776999999996,
+        "p25": 13.475292500000023,
+        "p75": 15.554906500000016
+      }
+    },
+    {
+      "limit": 100,
+      "sources": 4,
+      "rawAfterTrim": 400,
+      "deduplicated": 366,
+      "wall_ms": {
+        "n": 15,
+        "mean": 18.79058679999999,
+        "sd": 1.624670579011508,
+        "median": 18.519698999999946,
+        "min": 16.53581399999996,
+        "max": 23.539688999999953,
+        "p25": 18.090922000000035,
+        "p75": 19.097113500000034
+      }
+    },
+    {
+      "limit": 200,
+      "sources": 4,
+      "rawAfterTrim": 800,
+      "deduplicated": 675,
+      "wall_ms": {
+        "n": 15,
+        "mean": 34.126198600000045,
+        "sd": 5.12314192937401,
+        "median": 32.03257400000007,
+        "min": 28.864577000000054,
+        "max": 46.82376700000009,
+        "p25": 30.698447999999985,
+        "p75": 35.15385050000009
+      }
+    }
+  ]
+}

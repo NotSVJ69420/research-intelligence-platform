@@ -102,7 +102,7 @@ class Axes:
     """Cartesian axes drawn into an SVG. xscale/yscale: 'lin' or 'log'."""
 
     def __init__(self, svg, x, y, w, h, xlim, ylim, xscale="lin", yscale="lin", xlabel="", ylabel="", xticks=None, yticks=None,
-                 xfmt=lambda v: f"{v:g}", yfmt=lambda v: f"{v:g}", size=9):
+                 xfmt=lambda v: f"{v:g}", yfmt=lambda v: f"{v:g}", size=9.6):
         self.s, self.x, self.y, self.w, self.h = svg, x, y, w, h
         self.xlim, self.ylim, self.xs, self.ys = xlim, ylim, xscale, yscale
         self.size = size

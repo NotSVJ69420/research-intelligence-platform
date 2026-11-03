@@ -1,0 +1,35 @@
+{
+ "nullAbstract": {
+  "userMessageFirst120": "Paper Title: Has no abstract\nAbstract: null\n\nTask: Extract the methodology.",
+  "userMessageChars": 75,
+  "model": "openai/gpt-oss-120b",
+  "temperature": 0.3,
+  "max_tokens": 1024,
+  "roles": [
+   "system",
+   "user"
+  ]
+ },
+ "undefinedAbstract": {
+  "userMessageFirst120": "Paper Title: Undefined abstract\nAbstract: undefined\n\nTask: Extract the methodology.",
+  "userMessageChars": 83,
+  "model": "openai/gpt-oss-120b",
+  "temperature": 0.3,
+  "max_tokens": 1024,
+  "roles": [
+   "system",
+   "user"
+  ]
+ },
+ "longAbstract": {
+  "userMessageFirst120": "Paper Title: Long\nAbstract: word word word word word word word word word word word word word word word word word word wo",
+  "userMessageChars": 100060,
+  "model": "openai/gpt-oss-120b",
+  "temperature": 0.3,
+  "max_tokens": 1024,
+  "roles": [
+   "system",
+   "user"
+  ]
+ }
+}

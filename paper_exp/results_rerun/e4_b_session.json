@@ -1,0 +1,112 @@
+{
+  "meta": {
+    "sources": [
+      "openalex",
+      "arxiv",
+      "semantic_scholar",
+      "crossref",
+      "europe_pmc",
+      "pubmed"
+    ],
+    "limit": 20,
+    "corpusWorks": 300
+  },
+  "steps": [
+    {
+      "queries": 1,
+      "returnedCumulative": 106,
+      "rowsInTable": 106,
+      "distinctWorks": 102,
+      "persistedDuplicateRows": 4,
+      "rowsWithoutDoi": 17
+    },
+    {
+      "queries": 2,
+      "returnedCumulative": 217,
+      "rowsInTable": 179,
+      "distinctWorks": 166,
+      "persistedDuplicateRows": 13,
+      "rowsWithoutDoi": 26
+    },
+    {
+      "queries": 3,
+      "returnedCumulative": 317,
+      "rowsInTable": 218,
+      "distinctWorks": 197,
+      "persistedDuplicateRows": 21,
+      "rowsWithoutDoi": 33
+    },
+    {
+      "queries": 4,
+      "returnedCumulative": 422,
+      "rowsInTable": 256,
+      "distinctWorks": 227,
+      "persistedDuplicateRows": 29,
+      "rowsWithoutDoi": 37
+    },
+    {
+      "queries": 5,
+      "returnedCumulative": 527,
+      "rowsInTable": 274,
+      "distinctWorks": 242,
+      "persistedDuplicateRows": 32,
+      "rowsWithoutDoi": 39
+    },
+    {
+      "queries": 6,
+      "returnedCumulative": 635,
+      "rowsInTable": 293,
+      "distinctWorks": 255,
+      "persistedDuplicateRows": 38,
+      "rowsWithoutDoi": 44
+    },
+    {
+      "queries": 7,
+      "returnedCumulative": 737,
+      "rowsInTable": 305,
+      "distinctWorks": 266,
+      "persistedDuplicateRows": 39,
+      "rowsWithoutDoi": 45
+    },
+    {
+      "queries": 8,
+      "returnedCumulative": 845,
+      "rowsInTable": 310,
+      "distinctWorks": 271,
+      "persistedDuplicateRows": 39,
+      "rowsWithoutDoi": 45
+    }
+  ],
+  "bySource": [
+    {
+      "source": "arxiv",
+      "n": 47,
+      "with_doi": 2
+    },
+    {
+      "source": "crossref",
+      "n": 51,
+      "with_doi": 51
+    },
+    {
+      "source": "europe_pmc",
+      "n": 57,
+      "with_doi": 57
+    },
+    {
+      "source": "openalex",
+      "n": 47,
+      "with_doi": 47
+    },
+    {
+      "source": "pubmed",
+      "n": 45,
+      "with_doi": 45
+    },
+    {
+      "source": "semantic_scholar",
+      "n": 63,
+      "with_doi": 63
+    }
+  ]
+}

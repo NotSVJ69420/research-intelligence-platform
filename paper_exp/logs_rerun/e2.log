@@ -1,0 +1,340 @@
+{
+ "meta": {
+  "node": "v22.23.4",
+  "date": "2026-11-03T16:53:53.435Z",
+  "seed": 1
+ },
+ "A": {
+  "both_doi": [
+   {
+    "perturbation": "none",
+    "applicable": 500,
+    "recall": {
+     "repo": 1,
+     "uf_repo_keys": 1,
+     "uf_relaxed": 1
+    },
+    "merged": {
+     "repo": 500,
+     "uf_repo_keys": 500,
+     "uf_relaxed": 500
+    }
+   },
+   {
+    "perturbation": "year -1 (preprint earlier)",
+    "applicable": 500,
+    "recall": {
+     "repo": 1,
+     "uf_repo_keys": 1,
+     "uf_relaxed": 1
+    },
+    "merged": {
+     "repo": 500,
+     "uf_repo_keys": 500,
+     "uf_relaxed": 500
+    }
+   },
+   {
+    "perturbation": "year +1",
+    "applicable": 500,
+    "recall": {
+     "repo": 1,
+     "uf_repo_keys": 1,
+     "uf_relaxed": 1
+    },
+    "merged": {
+     "repo": 500,
+     "uf_repo_keys": 500,
+     "uf_relaxed": 500
+    }
+   },
+   {
+    "perturbation": "author \"A. Surname\"",
+    "applicable": 500,
+    "recall": {
+     "repo": 1,
+     "uf_repo_keys": 1,
+     "uf_relaxed": 1
+    },
+    "merged": {
+     "repo": 500,
+     "uf_repo_keys": 500,
+     "uf_relaxed": 500
+    }
+   },
+   {
+    "perturbation": "author \"Surname A\"",
+    "applicable": 500,
+    "recall": {
+     "repo": 1,
+     "uf_repo_keys": 1,
+     "uf_relaxed": 1
+    },
+    "merged": {
+     "repo": 500,
+     "uf_repo_keys": 500,
+     "uf_relaxed": 500
+    }
+   },
+   {
+    "perturbation": "author order reversed",
+    "applicable": 500,
+    "recall": {
+     "repo": 1,
+     "uf_repo_keys": 1,
+     "uf_relaxed": 1
+    },
+    "merged": {
+     "repo": 500,
+     "uf_repo_keys": 500,
+     "uf_relaxed": 500
+    }
+   },
+   {
+    "perturbation": "title trailing period",
+    "applicable": 500,
+    "recall": {
+     "repo": 1,
+     "uf_repo_keys": 1,
+     "uf_relaxed": 1
+    },
+    "merged": {
+     "repo": 500,
+     "uf_repo_keys": 500,
+     "uf_relaxed": 500
+    }
+   },
+   {
+    "perturbation": "title upper-cased",
+    "applicable": 500,
+    "recall": {
+     "repo": 1,
+     "uf_repo_keys": 1,
+     "uf_relaxed": 1
+    },
+    "merged": {
+     "repo": 500,
+     "uf_repo_keys": 500,
+     "uf_relaxed": 500
+    }
+   },
+   {
+    "perturbation": "title \": \" -> \" - \"",
+    "applicable": 250,
+    "recall": {
+     "repo": 1,
+     "uf_repo_keys": 1,
+     "uf_relaxed": 1
+    },
+    "merged": {
+     "repo": 250,
+     "uf_repo_keys": 250,
+     "uf_relaxed": 250
+    }
+   },
+   {
+    "perturbation": "title subtitle dropped",
+    "applicable": 250,
+    "recall": {
+     "repo": 1,
+     "uf_repo_keys": 1,
+     "uf_relaxed": 1
+    },
+    "merged": {
+     "repo": 250,
+     "uf_repo_keys": 250,
+     "uf_relaxed": 250
+    }
+   },
+   {
+    "perturbation": "author diacritics folded",
+    "applicable": 161,
+    "recall": {
+     "repo": 1,
+     "uf_repo_keys": 1,
+     "uf_relaxed": 1
+    },
+    "merged": {
+     "repo": 161,
+     "uf_repo_keys": 161,
+     "uf_relaxed": 161
+    }
+   },
+   {
+    "perturbation": "combined (Europe PMC-like)",
+    "applicable": 500,
+    "recall": {
+     "repo": 1,
+     "uf_repo_keys": 1,
+     "uf_relaxed": 1
+    },
+    "merged": {
+     "repo": 500,
+     "uf_repo_keys": 500,
+     "uf_relaxed": 500
+    }
+   }
+  ],
+  "s_no_doi": [
+   {
+    "perturbation": "none",
+    "applicable": 500,
+    "recall": {
+     "repo": 1,
+     "uf_repo_keys": 1,
+     "uf_relaxed": 1
+    },
+    "merged": {
+     "repo": 500,
+     "uf_repo_keys": 500,
+     "uf_relaxed": 500
+    }
+   },
+   {
+    "perturbation": "year -1 (preprint earlier)",
+    "applicable": 500,
+    "recall": {
+     "repo": 0,
+     "uf_repo_keys": 0,
+     "uf_relaxed": 1
+    },
+    "merged": {
+     "repo": 0,
+     "uf_repo_keys": 0,
+     "uf_relaxed": 500
+    }
+   },
+   {
+    "perturbation": "year +1",
+    "applicable": 500,
+    "recall": {
+     "repo": 0,
+     "uf_repo_keys": 0,
+     "uf_relaxed": 1
+    },
+    "merged": {
+     "repo": 0,
+     "uf_repo_keys": 0,
+     "uf_relaxed": 500
+    }
+   },
+   {
+    "perturbation": "author \"A. Surname\"",
+    "applicable": 500,
+    "recall": {
+     "repo": 0,
+     "uf_repo_keys": 0,
+     "uf_relaxed": 1
+    },
+    "merged": {
+     "repo": 0,
+     "uf_repo_keys": 0,
+     "uf_relaxed": 500
+    }
+   },
+   {
+    "perturbation": "author \"Surname A\"",
+    "applicable": 500,
+    "recall": {
+     "repo": 0,
+     "uf_repo_keys": 0,
+     "uf_relaxed": 1
+    },
+    "merged": {
+     "repo": 0,
+     "uf_repo_keys": 0,
+     "uf_relaxed": 500
+    }
+   },
+   {
+    "perturbation": "author order reversed",
+    "applicable": 500,
+    "recall": {
+     "repo": 0,
+     "uf_repo_keys": 0,
+     "uf_relaxed": 0
+    },
+    "merged": {
+     "repo": 0,
+     "uf_repo_keys": 0,
+     "uf_relaxed": 0
+    }
+   },
+   {
+    "perturbation": "title trailing period",
+    "applicable": 500,
+    "recall": {
+     "repo": 0,
+     "uf_repo_keys": 0,
+     "uf_relaxed": 1
+    },
+    "merged": {
+     "repo": 0,
+     "uf_repo_keys": 0,
+     "uf_relaxed": 500
+    }
+   },
+   {
+    "perturbation": "title upper-cased",
+    "applicable": 500,
+    "recall": {
+     "repo": 1,
+     "uf_repo_keys": 1,
+     "uf_relaxed": 1
+    },
+    "merged": {
+     "repo": 500,
+     "uf_repo_keys": 500,
+     "uf_relaxed": 500
+    }
+   },
+   {
+    "perturbation": "title \": \" -> \" - \"",
+    "applicable": 250,
+    "recall": {
+     "repo": 0,
+     "uf_repo_keys": 0,
+     "uf_relaxed": 1
+    },
+    "merged": {
+     "repo": 0,
+     "uf_repo_keys": 0,
+     "uf_relaxed": 250
+    }
+   },
+   {
+    "perturbation": "title subtitle dropped",
+    "applicable": 250,
+    "recall": {
+     "repo": 0,
+     "uf_repo_keys": 0,
+     "uf_relaxed": 0
+    },
+    "merged": {
+     "repo": 0,
+     "uf_repo_keys": 0,
+     "uf_relaxed": 0
+    }
+   },
+   {
+    "perturbation": "author diacritics folded",
+    "applicable": 161,
+    "recall": {
+     "repo": 0,
+     "uf_repo_keys": 0,
+     "uf_relaxed": 1
+    },
+    "merged": {
+     "repo": 0,
+     "uf_repo_keys": 0,
+     "uf_relaxed": 161
+    }
+   },
+   {
+    "perturbation": "combined (Europe PMC-like)",
+    "applicable": 500,
+    "recall": {
+     "repo": 0,
+     "uf_repo_keys": 0,
+     "uf_relaxed": 1
+ 

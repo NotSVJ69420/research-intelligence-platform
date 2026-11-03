@@ -1,0 +1,812 @@
+{
+  "generatedAt": "2026-11-03T17:12:54.273Z",
+  "summary": {
+    "claims": 39,
+    "passed": 39,
+    "failed": 0,
+    "rerunComparisons": 75,
+    "rerunMatches": 73
+  },
+  "claims": [
+    {
+      "id": "E3.1",
+      "section": "VI-B",
+      "statement": "Observed median within 4--11 ms of the parallel model at every L",
+      "actual": "7.9, 4.2, 3.8, 10.9, 11.0",
+      "pass": true
+    },
+    {
+      "id": "E3.2",
+      "section": "VI-B",
+      "statement": "2 011 ms observed vs 2 000 ms predicted at L=1 s",
+      "actual": "2011 vs 2000",
+      "pass": true
+    },
+    {
+      "id": "E3.3",
+      "section": "VI-B",
+      "statement": "Source-sequential and fully serial alternatives are 8 000 and 17 000 ms at L=1 s",
+      "actual": "8000, 17000",
+      "pass": true
+    },
+    {
+      "id": "E3.4",
+      "section": "VI-B",
+      "statement": "At L=0 the search takes ~358 ms (PubMed 350 ms spacing floor)",
+      "actual": "357.9",
+      "pass": true
+    },
+    {
+      "id": "E3.5",
+      "section": "VI-B",
+      "statement": "IQR about 1 ms or less",
+      "actual": "1.19, 0.72, 0.35, 0.65, 0.67",
+      "pass": true
+    },
+    {
+      "id": "E3.6",
+      "section": "VI-B",
+      "statement": "n = 5 repetitions per latency",
+      "actual": "5,5,5,5,5",
+      "pass": true
+    },
+    {
+      "id": "E3.7",
+      "section": "VI-B",
+      "statement": "Immediate second search 2 652 ms (range 2 642--2 656), first 455 ms",
+      "actual": "2652 [2642, 2656], first 455",
+      "pass": true
+    },
+    {
+      "id": "E3.8",
+      "section": "VI-B",
+      "statement": "After idle gaps of 1 s, 2 s, 3.5 s: 1 650, 647, 454 ms",
+      "actual": "1650, 647, 454",
+      "pass": true
+    },
+    {
+      "id": "E3.9",
+      "section": "VI-B / Tab. VI",
+      "statement": "Requests per search 12/17/27/57 for k=5/10/20/50 (= 7 + k); enrichment = k",
+      "actual": "5:12/5 10:17/10 20:27/20 50:57/50",
+      "pass": true
+    },
+    {
+      "id": "E3.10",
+      "section": "VI-B / Tab. VII",
+      "statement": "HTTP 500 / network error: five providers reported failed and listed; arXiv reported success with 0 items and NOT listed",
+      "actual": "openalex:failed/true openalex:failed/true arxiv:success/false arxiv:success/false semantic_scholar:failed/true semantic_scholar:failed/true crossref:failed/true crossref:failed/true europe_pmc:failed/true europe_pmc:failed/true pubmed:failed/true pubmed:failed/true",
+      "pass": true
+    },
+    {
+      "id": "E3.11",
+      "section": "VI-B / Tab. VII",
+      "statement": "Wall-clock 0.11--0.41 s for HTTP 500 / network error",
+      "actual": "106..410 ms",
+      "pass": true
+    },
+    {
+      "id": "E3.12",
+      "section": "VI-B / Tab. VII",
+      "statement": "S2 HTTP 429: failed after one retry, 2.11 s",
+      "actual": "[[\"failed\",2109,2]]",
+      "pass": true
+    },
+    {
+      "id": "E3.13",
+      "section": "VI-B",
+      "statement": "Other providers intact in every fault case",
+      "actual": "true,true,true,true,true,true,true,true,true,true,true,true,true",
+      "pass": true
+    },
+    {
+      "id": "E3.14",
+      "section": "VI-B / Tab. VII",
+      "statement": "Hang: OpenAlex 15.02 s, PubMed 25.03 s, arXiv 30.03 s (n = 3, spread < 3 ms); arXiv reported success, others failed",
+      "actual": "openalex:15.01s n=3 spread=1.6ms failed | pubmed:25.02s n=3 spread=1.6ms failed | arxiv:30.03s n=3 spread=2.3ms success",
+      "pass": true
+    },
+    {
+      "id": "E2.1",
+      "section": "VI-C / Fig. 4",
+      "statement": "Repository recall = 0.00 for every perturbation without a DOI, except identical metadata and letter case (=1.00)",
+      "actual": "year -1 (preprint earlier):0; year +1:0; author \"A. Surname\":0; author \"Surname A\":0; author order reversed:0; title trailing period:0; title \": \" -> \" - \":0; title subtitle dropped:0; author diacritics folded:0; combined (Europe PMC-like):0",
+      "pass": true
+    },
+    {
+      "id": "E2.2",
+      "section": "VI-C",
+      "statement": "uf-repo identical to repository on pairs",
+      "actual": "true",
+      "pass": true
+    },
+    {
+      "id": "E2.3",
+      "section": "VI-C",
+      "statement": "Relaxed prototype recall 1.00 except reversed authors and dropped subtitle",
+      "actual": "author order reversed, title subtitle dropped",
+      "pass": true
+    },
+    {
+      "id": "E2.4",
+      "section": "VI-C / Fig. 4 caption",
+      "statement": "n = 161--500 works per perturbation",
+      "actual": "161--500",
+      "pass": true
+    },
+    {
+      "id": "E2.5",
+      "section": "VI-C",
+      "statement": "With a shared DOI every variant merges all pairs for every perturbation",
+      "actual": "1/1 1/1 1/1 1/1 1/1 1/1 1/1 1/1 1/1 1/1 1/1 1/1",
+      "pass": true
+    },
+    {
+      "id": "E2.6",
+      "section": "VI-C / Tab. VIII",
+      "statement": "Order dependence: repository 2000 for ABC/ACB/CAB/CBA, 1000 for BAC/BCA; union-find 1000 for all",
+      "actual": "{\"ABC\":{\"repo\":2000,\"uf_repo_keys\":1000,\"uf_relaxed\":1000},\"ACB\":{\"repo\":2000,\"uf_repo_keys\":1000,\"uf_relaxed\":1000},\"BAC\":{\"repo\":1000,\"uf_repo_keys\":1000,\"uf_relaxed\":1000},\"BCA\":{\"repo\":1000,\"uf_repo_keys\":1000,\"uf_relaxed\":1000},\"CAB\":{\"repo\":2000,\"uf_repo_keys\":1000,\"uf_relaxed\":1000},\"CBA\":{\"repo\":2000,\"uf_repo_keys\":1000,\"uf_relaxed\":1000}}",
+      "pass": true
+    },
+    {
+      "id": "E2.7",
+      "section": "VI-C",
+      "statement": "Probes: 500/500 merged (distinct DOI), 100 empty-title records -> 1, 0/500 vs 500/500 (Wei/Wen)",
+      "actual": "[{\"repo\":500,\"uf_repo_keys\":500,\"uf_relaxed\":500},{\"repo\":1,\"uf_repo_keys\":1,\"uf_relaxed\":1},{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":500}]",
+      "pass": true
+    },
+    {
+      "id": "E2.8",
+      "section": "VI-C / Tab. IX",
+      "statement": "k=10: raw 1200, distinct 1121, outputs 1130/1130/1121, residual 9/9/0",
+      "actual": "1200, 1121, 1130/9 1130/9 1121/0",
+      "pass": true
+    },
+    {
+      "id": "E2.9",
+      "section": "VI-C / Tab. IX",
+      "statement": "k=25: raw 3000, distinct 2522, outputs 2588/2584/2522, residual 66/62/0",
+      "actual": "3000, 2522, 2588/66 2584/62 2522/0",
+      "pass": true
+    },
+    {
+      "id": "E2.10",
+      "section": "VI-C",
+      "statement": "Residual duplicates 0.8% and 2.6% of works; all pairs involve arXiv; no work lost",
+      "actual": "0.80%, 2.62%; {\"arxiv + openalex\":24,\"arxiv + europe_pmc\":22,\"arxiv + pubmed\":6,\"arxiv + crossref\":9,\"arxiv + semantic_scholar\":5}",
+      "pass": true
+    },
+    {
+      "id": "E2.11",
+      "section": "VI-C",
+      "statement": "Replicated pipeline and real orchestrator give identical output sizes (58, 133)",
+      "actual": "[{\"orchestratorOutput\":58,\"replicatedPipelineOutput\":58},{\"orchestratorOutput\":133,\"replicatedPipelineOutput\":133}]",
+      "pass": true
+    },
+    {
+      "id": "E1.1",
+      "section": "VI-D",
+      "statement": "Normalizers cost 3.1--6.6 us per record across two independent executions (single-run values vary up to ~45%, e.g. OpenAlex 6.6 vs 3.6); no provider ranking is claimed",
+      "actual": "openalex:6.57 semantic_scholar:3.38 crossref:4.56 europe_pmc:3.88 arxiv:3.80 pubmed:6.51 || openalex:3.60 semantic_scholar:3.07 crossref:4.45 europe_pmc:3.74 arxiv:3.30 pubmed:4.75",
+      "pass": true
+    },
+    {
+      "id": "E1.2",
+      "section": "VI-D",
+      "statement": "XML parse, 100 entries: arXiv 2.4--3.8 ms (79 kB), PubMed 5.7--7.4 ms (122 kB) across two executions",
+      "actual": "arXiv 2.37/3.80, PubMed 5.72/7.43; 78783 B, 122073 B",
+      "pass": true
+    },
+    {
+      "id": "E3.15",
+      "section": "VI-D",
+      "statement": "Orchestration CPU (4 JSON providers): ~5 ms @k=10, ~19 ms @k=100, 32--43 ms @k=200 across two executions; 40--800 candidates; n=15 per setting",
+      "actual": "k10 5.0/5.1; k100 19.2/18.5; k200 43.2/32.0; raw 40-800; n=15",
+      "pass": true
+    },
+    {
+      "id": "E4.1",
+      "section": "VI-D / Tab. X",
+      "statement": "DB table: papers 40/97/191/355; orchestrator 5.1/7.5/10.6/19.6; total 33.4/67.5/118.3/207.2; repeat 17.7/31.9/60.3/109.9 (ms)",
+      "actual": "10:40,5.1,33.4,17.7 | 25:97,7.5,67.5,31.9 | 50:191,10.6,118.3,60.3 | 100:355,19.6,207.2,109.9",
+      "pass": true
+    },
+    {
+      "id": "E4.2",
+      "section": "VI-D",
+      "statement": "DB cost 0.5--0.7 ms per paper; IDs stable; no extra rows on repeat; no failed inserts",
+      "actual": "0.71/true/40==40/0 0.62/true/97==97/0 0.56/true/191==191/0 0.53/true/355==355/0",
+      "pass": true
+    },
+    {
+      "id": "E4.3",
+      "section": "VI-D",
+      "statement": "8-query session: 310 rows, 271 distinct works, 39 duplicate rows (12.6%), 45 DOI-less, 47 arXiv rows (2 with DOI)",
+      "actual": "310, 271, 39 (12.6%), 45, 47(2)",
+      "pass": true
+    },
+    {
+      "id": "E4.4",
+      "section": "VI-D",
+      "statement": "Library scan: 4 ms (1k rows,0 files), 51 ms (1k,1k), 1.10 s (20k,1k), 48 ms (20k,0); ~47--52 ns per row-file pair",
+      "actual": "4.1, 51.5, 1098, 48.1; ns/pair 47/48/52",
+      "pass": true
+    },
+    {
+      "id": "E2b.1",
+      "section": "VI-D",
+      "statement": "deduplicate(): 2.3 ms @1 000, 28 ms @10 000, 626 ms @100 000",
+      "actual": "2.32, 28.0, 626",
+      "pass": true
+    },
+    {
+      "id": "E5.1",
+      "section": "VI-E",
+      "statement": "Six papers: 10.2/11.0/12.0/18.0 s for L = 0.2/1/2/3 s; model (N-1)max(L,tau)+L; start gaps 2002/2001/2003/3004 ms",
+      "actual": "10.21s(model 10.20) gap 2002 | 11.01s(model 11.00) gap 2001 | 12.02s(model 12.00) gap 2003 | 18.02s(model 18.00) gap 3004",
+      "pass": true
+    },
+    {
+      "id": "E5.2",
+      "section": "VI-E",
+      "statement": "k=1: 2.2-2.3 s; k=2: 6.2-6.7 s; k=3: 14.4-14.8 s; k=4: 4 requests, 14.7-14.9 s, thrown (n=3 each)",
+      "actual": "1: 2.24-2.32 n=3 | 2: 6.19-6.66 n=3 | 3: 14.37-14.80 n=3 | 4: 14.70-14.88 n=3",
+      "pass": true
+    },
+    {
+      "id": "E5.3",
+      "section": "VI-E",
+      "statement": "HTTP 400/401/500/503 not retried (1 request each); failure isolation 4 succeeded / 1 failed",
+      "actual": "[[400,1],[401,1],[500,1],[503,1]] {\"papers\":5,\"injectedFailureAtIndex\":3,\"succeeded\":4,\"failed\":1,\"failedTitles\":[\"Paper 2\"]}",
+      "pass": true
+    },
+    {
+      "id": "E5.4",
+      "section": "VI-E",
+      "statement": "Null abstract -> literal \"Abstract: null\"; undefined -> \"Abstract: undefined\"; 20 000-word abstract sent untruncated (100 060 chars); T=0.3, max_tokens 1024, openai/gpt-oss-120b",
+      "actual": "\"Paper Title: Has no abstract\\nAbstract: n\", 100060, openai/gpt-oss-120b",
+      "pass": true
+    },
+    {
+      "id": "E0.1",
+      "section": "V / Tab. III",
+      "statement": "Code base 6 487 lines in 38 files; layer sizes as tabulated",
+      "actual": "6487, 38 files",
+      "pass": true
+    },
+    {
+      "id": "R.1",
+      "section": "V",
+      "statement": "Repository tests run in sandbox: 57 of 65 assertions pass; 8 failures are all live-network assertions",
+      "actual": "all_providers:22/6 ingestion:8/0 paper_service:7/2 workspace_library:20/0",
+      "pass": true
+    }
+  ],
+  "rerun": [
+    {
+      "metric": "E2 pairwise recall matrix (A)",
+      "original": "{\"both_doi\":[{\"perturbation\":\"none\",\"applicable\":500,\"recall\":{\"repo\":1,\"uf_repo_keys\":1,\"uf_relaxed\":1},\"merged\":{\"repo\":500,\"uf_repo_keys\":500,\"uf_relaxed\":500}},{\"perturbation\":\"year -1 (preprint earlier)\",\"applicable\":500,\"recall\":{\"repo\":1,\"uf_repo_keys\":1,\"uf_relaxed\":1},\"merged\":{\"repo\":500,\"uf_repo_keys\":500,\"uf_relaxed\":500}},{\"perturbation\":\"year +1\",\"applicable\":500,\"recall\":{\"repo\":1,\"uf_repo_keys\":1,\"uf_relaxed\":1},\"merged\":{\"repo\":500,\"uf_repo_keys\":500,\"uf_relaxed\":500}},{\"perturbation\":\"author \\\"A. Surname\\\"\",\"applicable\":500,\"recall\":{\"repo\":1,\"uf_repo_keys\":1,\"uf_relaxed\":1},\"merged\":{\"repo\":500,\"uf_repo_keys\":500,\"uf_relaxed\":500}},{\"perturbation\":\"author \\\"Surname A\\\"\",\"applicable\":500,\"recall\":{\"repo\":1,\"uf_repo_keys\":1,\"uf_relaxed\":1},\"merged\":{\"repo\":500,\"uf_repo_keys\":500,\"uf_relaxed\":500}},{\"perturbation\":\"author order reversed\",\"applicable\":500,\"recall\":{\"repo\":1,\"uf_repo_keys\":1,\"uf_relaxed\":1},\"merged\":{\"repo\":500,\"uf_repo_keys\":500,\"uf_relaxed\":500}},{\"perturbation\":\"title trailing period\",\"applicable\":500,\"recall\":{\"repo\":1,\"uf_repo_keys\":1,\"uf_relaxed\":1},\"merged\":{\"repo\":500,\"uf_repo_keys\":500,\"uf_relaxed\":500}},{\"perturbation\":\"title upper-cased\",\"applicable\":500,\"recall\":{\"repo\":1,\"uf_repo_keys\":1,\"uf_relaxed\":1},\"merged\":{\"repo\":500,\"uf_repo_keys\":500,\"uf_relaxed\":500}},{\"perturbation\":\"title \\\": \\\" -> \\\" - \\\"\",\"applicable\":250,\"recall\":{\"repo\":1,\"uf_repo_keys\":1,\"uf_relaxed\":1},\"merged\":{\"repo\":250,\"uf_repo_keys\":250,\"uf_relaxed\":250}},{\"perturbation\":\"title subtitle dropped\",\"applicable\":250,\"recall\":{\"repo\":1,\"uf_repo_keys\":1,\"uf_relaxed\":1},\"merged\":{\"repo\":250,\"uf_repo_keys\":250,\"uf_relaxed\":250}},{\"perturbation\":\"author diacritics folded\",\"applicable\":161,\"recall\":{\"repo\":1,\"uf_repo_keys\":1,\"uf_relaxed\":1},\"merged\":{\"repo\":161,\"uf_repo_keys\":161,\"uf_relaxed\":161}},{\"perturbation\":\"combined (Europe PMC-like)\",\"applicable\":500,\"recall\":{\"repo\":1,\"uf_repo_keys\":1,\"uf_relaxed\":1},\"merged\":{\"repo\":500,\"uf_repo_keys\":500,\"uf_relaxed\":500}}],\"s_no_doi\":[{\"perturbation\":\"none\",\"applicable\":500,\"recall\":{\"repo\":1,\"uf_repo_keys\":1,\"uf_relaxed\":1},\"merged\":{\"repo\":500,\"uf_repo_keys\":500,\"uf_relaxed\":500}},{\"perturbation\":\"year -1 (preprint earlier)\",\"applicable\":500,\"recall\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":1},\"merged\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":500}},{\"perturbation\":\"year +1\",\"applicable\":500,\"recall\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":1},\"merged\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":500}},{\"perturbation\":\"author \\\"A. Surname\\\"\",\"applicable\":500,\"recall\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":1},\"merged\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":500}},{\"perturbation\":\"author \\\"Surname A\\\"\",\"applicable\":500,\"recall\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":1},\"merged\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":500}},{\"perturbation\":\"author order reversed\",\"applicable\":500,\"recall\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":0},\"merged\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":0}},{\"perturbation\":\"title trailing period\",\"applicable\":500,\"recall\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":1},\"merged\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":500}},{\"perturbation\":\"title upper-cased\",\"applicable\":500,\"recall\":{\"repo\":1,\"uf_repo_keys\":1,\"uf_relaxed\":1},\"merged\":{\"repo\":500,\"uf_repo_keys\":500,\"uf_relaxed\":500}},{\"perturbation\":\"title \\\": \\\" -> \\\" - \\\"\",\"applicable\":250,\"recall\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":1},\"merged\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":250}},{\"perturbation\":\"title subtitle dropped\",\"applicable\":250,\"recall\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":0},\"merged\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":0}},{\"perturbation\":\"author diacritics folded\",\"applicable\":161,\"recall\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":1},\"merged\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":161}},{\"perturbation\":\"combined (Europe PMC-like)\",\"applicable\":500,\"recall\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":1},\"merged\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":500}}]}",
+      "rerun": "{\"both_doi\":[{\"perturbation\":\"none\",\"applicable\":500,\"recall\":{\"repo\":1,\"uf_repo_keys\":1,\"uf_relaxed\":1},\"merged\":{\"repo\":500,\"uf_repo_keys\":500,\"uf_relaxed\":500}},{\"perturbation\":\"year -1 (preprint earlier)\",\"applicable\":500,\"recall\":{\"repo\":1,\"uf_repo_keys\":1,\"uf_relaxed\":1},\"merged\":{\"repo\":500,\"uf_repo_keys\":500,\"uf_relaxed\":500}},{\"perturbation\":\"year +1\",\"applicable\":500,\"recall\":{\"repo\":1,\"uf_repo_keys\":1,\"uf_relaxed\":1},\"merged\":{\"repo\":500,\"uf_repo_keys\":500,\"uf_relaxed\":500}},{\"perturbation\":\"author \\\"A. Surname\\\"\",\"applicable\":500,\"recall\":{\"repo\":1,\"uf_repo_keys\":1,\"uf_relaxed\":1},\"merged\":{\"repo\":500,\"uf_repo_keys\":500,\"uf_relaxed\":500}},{\"perturbation\":\"author \\\"Surname A\\\"\",\"applicable\":500,\"recall\":{\"repo\":1,\"uf_repo_keys\":1,\"uf_relaxed\":1},\"merged\":{\"repo\":500,\"uf_repo_keys\":500,\"uf_relaxed\":500}},{\"perturbation\":\"author order reversed\",\"applicable\":500,\"recall\":{\"repo\":1,\"uf_repo_keys\":1,\"uf_relaxed\":1},\"merged\":{\"repo\":500,\"uf_repo_keys\":500,\"uf_relaxed\":500}},{\"perturbation\":\"title trailing period\",\"applicable\":500,\"recall\":{\"repo\":1,\"uf_repo_keys\":1,\"uf_relaxed\":1},\"merged\":{\"repo\":500,\"uf_repo_keys\":500,\"uf_relaxed\":500}},{\"perturbation\":\"title upper-cased\",\"applicable\":500,\"recall\":{\"repo\":1,\"uf_repo_keys\":1,\"uf_relaxed\":1},\"merged\":{\"repo\":500,\"uf_repo_keys\":500,\"uf_relaxed\":500}},{\"perturbation\":\"title \\\": \\\" -> \\\" - \\\"\",\"applicable\":250,\"recall\":{\"repo\":1,\"uf_repo_keys\":1,\"uf_relaxed\":1},\"merged\":{\"repo\":250,\"uf_repo_keys\":250,\"uf_relaxed\":250}},{\"perturbation\":\"title subtitle dropped\",\"applicable\":250,\"recall\":{\"repo\":1,\"uf_repo_keys\":1,\"uf_relaxed\":1},\"merged\":{\"repo\":250,\"uf_repo_keys\":250,\"uf_relaxed\":250}},{\"perturbation\":\"author diacritics folded\",\"applicable\":161,\"recall\":{\"repo\":1,\"uf_repo_keys\":1,\"uf_relaxed\":1},\"merged\":{\"repo\":161,\"uf_repo_keys\":161,\"uf_relaxed\":161}},{\"perturbation\":\"combined (Europe PMC-like)\",\"applicable\":500,\"recall\":{\"repo\":1,\"uf_repo_keys\":1,\"uf_relaxed\":1},\"merged\":{\"repo\":500,\"uf_repo_keys\":500,\"uf_relaxed\":500}}],\"s_no_doi\":[{\"perturbation\":\"none\",\"applicable\":500,\"recall\":{\"repo\":1,\"uf_repo_keys\":1,\"uf_relaxed\":1},\"merged\":{\"repo\":500,\"uf_repo_keys\":500,\"uf_relaxed\":500}},{\"perturbation\":\"year -1 (preprint earlier)\",\"applicable\":500,\"recall\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":1},\"merged\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":500}},{\"perturbation\":\"year +1\",\"applicable\":500,\"recall\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":1},\"merged\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":500}},{\"perturbation\":\"author \\\"A. Surname\\\"\",\"applicable\":500,\"recall\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":1},\"merged\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":500}},{\"perturbation\":\"author \\\"Surname A\\\"\",\"applicable\":500,\"recall\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":1},\"merged\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":500}},{\"perturbation\":\"author order reversed\",\"applicable\":500,\"recall\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":0},\"merged\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":0}},{\"perturbation\":\"title trailing period\",\"applicable\":500,\"recall\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":1},\"merged\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":500}},{\"perturbation\":\"title upper-cased\",\"applicable\":500,\"recall\":{\"repo\":1,\"uf_repo_keys\":1,\"uf_relaxed\":1},\"merged\":{\"repo\":500,\"uf_repo_keys\":500,\"uf_relaxed\":500}},{\"perturbation\":\"title \\\": \\\" -> \\\" - \\\"\",\"applicable\":250,\"recall\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":1},\"merged\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":250}},{\"perturbation\":\"title subtitle dropped\",\"applicable\":250,\"recall\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":0},\"merged\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":0}},{\"perturbation\":\"author diacritics folded\",\"applicable\":161,\"recall\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":1},\"merged\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":161}},{\"perturbation\":\"combined (Europe PMC-like)\",\"applicable\":500,\"recall\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":1},\"merged\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":500}}]}",
+      "rule": "exact",
+      "match": true
+    },
+    {
+      "metric": "E2 false-merge probes (B)",
+      "original": "{\"distinct_doi_same_title_author_year\":{\"n\":500,\"falseMerged\":{\"repo\":500,\"uf_repo_keys\":500,\"uf_relaxed\":500}},\"empty_title_records\":{\"n\":100,\"outputRecords\":{\"repo\":1,\"uf_repo_keys\":1,\"uf_relaxed\":1}},\"same_initial_different_person\":{\"n\":500,\"falseMerged\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":500}}}",
+      "rerun": "{\"distinct_doi_same_title_author_year\":{\"n\":500,\"falseMerged\":{\"repo\":500,\"uf_repo_keys\":500,\"uf_relaxed\":500}},\"empty_title_records\":{\"n\":100,\"outputRecords\":{\"repo\":1,\"uf_repo_keys\":1,\"uf_relaxed\":1}},\"same_initial_different_person\":{\"n\":500,\"falseMerged\":{\"repo\":0,\"uf_repo_keys\":0,\"uf_relaxed\":500}}}",
+      "rule": "exact",
+      "match": true
+    },
+    {
+      "metric": "E2 order dependence (C)",
+      "original": "[{\"order\":\"ABC\",\"records\":{\"repo\":2000,\"uf_repo_keys\":1000,\"uf_relaxed\":1000}},{\"order\":\"ACB\",\"records\":{\"repo\":2000,\"uf_repo_keys\":1000,\"uf_relaxed\":1000}},{\"order\":\"BAC\",\"records\":{\"repo\":1000,\"uf_repo_keys\":1000,\"uf_relaxed\":1000}},{\"order\":\"BCA\",\"records\":{\"repo\":1000,\"uf_repo_keys\":1000,\"uf_relaxed\":1000}},{\"order\":\"CAB\",\"records\":{\"repo\":2000,\"uf_repo_keys\":1000,\"uf_relaxed\":1000}},{\"order\":\"CBA\",\"records\":{\"repo\":2000,\"uf_repo_keys\":1000,\"uf_relaxed\":1000}}]",
+      "rerun": "[{\"order\":\"ABC\",\"records\":{\"repo\":2000,\"uf_repo_keys\":1000,\"uf_relaxed\":1000}},{\"order\":\"ACB\",\"records\":{\"repo\":2000,\"uf_repo_keys\":1000,\"uf_relaxed\":1000}},{\"order\":\"BAC\",\"records\":{\"repo\":1000,\"uf_repo_keys\":1000,\"uf_relaxed\":1000}},{\"order\":\"BCA\",\"records\":{\"repo\":1000,\"uf_repo_keys\":1000,\"uf_relaxed\":1000}},{\"order\":\"CAB\",\"records\":{\"repo\":2000,\"uf_repo_keys\":1000,\"uf_relaxed\":1000}},{\"order\":\"CBA\",\"records\":{\"repo\":2000,\"uf_repo_keys\":1000,\"uf_relaxed\":1000}}]",
+      "rule": "exact",
+      "match": true
+    },
+    {
+      "metric": "E2 mixed scenario (D)",
+      "original": "[[1200,1121,{\"repo\":{\"outputRecords\":1130,\"residualDuplicates\":9,\"lostWorks\":0},\"uf_repo_keys\":{\"outputRecords\":1130,\"residualDuplicates\":9,\"lostWorks\":0},\"uf_relaxed\":{\"outputRecords\":1121,\"residualDuplicates\":0,\"lostWorks\":0}},{\"arxiv + openalex\":3,\"arxiv + crossref\":2,\"arxiv + europe_pmc\":4}],[3000,2522,{\"repo\":{\"outputRecords\":2588,\"residualDuplicates\":66,\"lostWorks\":0},\"uf_repo_keys\":{\"outputRecords\":2584,\"residualDuplicates\":62,\"lostWorks\":0},\"uf_relaxed\":{\"outputRecords\":2522,\"residualDuplicates\":0,\"lostWorks\":0}},{\"arxiv + openalex\":24,\"arxiv + europe_pmc\":22,\"arxiv + pubmed\":6,\"arxiv + crossref\":9,\"arxiv + semantic_scholar\":5}]]",
+      "rerun": "[[1200,1121,{\"repo\":{\"outputRecords\":1130,\"residualDuplicates\":9,\"lostWorks\":0},\"uf_repo_keys\":{\"outputRecords\":1130,\"residualDuplicates\":9,\"lostWorks\":0},\"uf_relaxed\":{\"outputRecords\":1121,\"residualDuplicates\":0,\"lostWorks\":0}},{\"arxiv + openalex\":3,\"arxiv + crossref\":2,\"arxiv + europe_pmc\":4}],[3000,2522,{\"repo\":{\"outputRecords\":2588,\"residualDuplicates\":66,\"lostWorks\":0},\"uf_repo_keys\":{\"outputRecords\":2584,\"residualDuplicates\":62,\"lostWorks\":0},\"uf_relaxed\":{\"outputRecords\":2522,\"residualDuplicates\":0,\"lostWorks\":0}},{\"arxiv + openalex\":24,\"arxiv + europe_pmc\":22,\"arxiv + pubmed\":6,\"arxiv + crossref\":9,\"arxiv + semantic_scholar\":5}]]",
+      "rule": "exact",
+      "match": true
+    },
+    {
+      "metric": "E3 amplification",
+      "original": "[[5,12,{\"openalex\":1,\"arxiv\":1,\"semantic_scholar\":1,\"crossref\":1,\"europe_pmc\":1,\"pubmed (esearch)\":1,\"europe_pmc→crossref enrichment\":5,\"pubmed (efetch)\":1}],[10,17,{\"openalex\":1,\"arxiv\":1,\"semantic_scholar\":1,\"crossref\":1,\"europe_pmc\":1,\"pubmed (esearch)\":1,\"europe_pmc→crossref enrichment\":10,\"pubmed (efetch)\":1}],[20,27,{\"openalex\":1,\"arxiv\":1,\"semantic_scholar\":1,\"crossref\":1,\"europe_pmc\":1,\"pubmed (esearch)\":1,\"europe_pmc→crossref enrichment\":20,\"pubmed (efetch)\":1}],[50,57,{\"openalex\":1,\"arxiv\":1,\"semantic_scholar\":1,\"crossref\":1,\"europe_pmc\":1,\"pubmed (esearch)\":1,\"europe_pmc→crossref enrichment\":50,\"pubmed (efetch)\":1}]]",
+      "rerun": "[[5,12,{\"openalex\":1,\"arxiv\":1,\"semantic_scholar\":1,\"crossref\":1,\"europe_pmc\":1,\"pubmed (esearch)\":1,\"europe_pmc→crossref enrichment\":5,\"pubmed (efetch)\":1}],[10,17,{\"openalex\":1,\"arxiv\":1,\"semantic_scholar\":1,\"crossref\":1,\"europe_pmc\":1,\"pubmed (esearch)\":1,\"europe_pmc→crossref enrichment\":10,\"pubmed (efetch)\":1}],[20,27,{\"openalex\":1,\"arxiv\":1,\"semantic_scholar\":1,\"crossref\":1,\"europe_pmc\":1,\"pubmed (esearch)\":1,\"europe_pmc→crossref enrichment\":20,\"pubmed (efetch)\":1}],[50,57,{\"openalex\":1,\"arxiv\":1,\"semantic_scholar\":1,\"crossref\":1,\"europe_pmc\":1,\"pubmed (esearch)\":1,\"europe_pmc→crossref enrichment\":50,\"pubmed (efetch)\":1}]]",
+      "rule": "exact",
+      "match": true
+    },
+    {
+      "metric": "E3 fault statuses",
+      "original": "[[\"openalex\",\"http500\",\"failed\",0,true,true],[\"openalex\",\"neterror\",\"failed\",0,true,true],[\"arxiv\",\"http500\",\"success\",0,false,true],[\"arxiv\",\"neterror\",\"success\",0,false,true],[\"semantic_scholar\",\"http500\",\"failed\",0,true,true],[\"semantic_scholar\",\"neterror\",\"failed\",0,true,true],[\"semantic_scholar\",\"http429\",\"failed\",0,true,true],[\"crossref\",\"http500\",\"failed\",0,true,true],[\"crossref\",\"neterror\",\"failed\",0,true,true],[\"europe_pmc\",\"http500\",\"failed\",0,true,true],[\"europe_pmc\",\"neterror\",\"failed\",0,true,true],[\"pubmed\",\"http500\",\"failed\",0,true,true],[\"pubmed\",\"neterror\",\"failed\",0,true,true]]",
+      "rerun": "[[\"openalex\",\"http500\",\"failed\",0,true,true],[\"openalex\",\"neterror\",\"failed\",0,true,true],[\"arxiv\",\"http500\",\"success\",0,false,true],[\"arxiv\",\"neterror\",\"success\",0,false,true],[\"semantic_scholar\",\"http500\",\"failed\",0,true,true],[\"semantic_scholar\",\"neterror\",\"failed\",0,true,true],[\"semantic_scholar\",\"http429\",\"failed\",0,true,true],[\"crossref\",\"http500\",\"failed\",0,true,true],[\"crossref\",\"neterror\",\"failed\",0,true,true],[\"europe_pmc\",\"http500\",\"failed\",0,true,true],[\"europe_pmc\",\"neterror\",\"failed\",0,true,true],[\"pubmed\",\"http500\",\"failed\",0,true,true],[\"pubmed\",\"neterror\",\"failed\",0,true,true]]",
+      "rule": "exact",
+      "match": true
+    },
+    {
+      "metric": "E3 sweep median @L=0 ms",
+      "original": 357.86,
+      "rerun": 357.87,
+      "rule": "|diff| <= 15",
+      "match": true
+    },
+    {
+      "metric": "E3 sweep median @L=100 ms",
+      "original": 454.2,
+      "rerun": 454.28,
+      "rule": "|diff| <= 15",
+      "match": true
+    },
+    {
+      "metric": "E3 sweep median @L=250 ms",
+      "original": 603.84,
+      "rerun": 603.9,
+      "rule": "|diff| <= 15",
+      "match": true
+    },
+    {
+      "metric": "E3 sweep median @L=500 ms",
+      "original": 1010.89,
+      "rerun": 1010.08,
+      "rule": "|diff| <= 15",
+      "match": true
+    },
+    {
+      "metric": "E3 sweep median @L=1000 ms",
+      "original": 2011.03,
+      "rerun": 2010.83,
+      "rule": "|diff| <= 15",
+      "match": true
+    },
+    {
+      "metric": "E3 warm second-search median, idle gap 0 ms",
+      "original": 2652.23,
+      "rerun": 2648.92,
+      "rule": "|diff| <= 25",
+      "match": true
+    },
+    {
+      "metric": "E3 warm second-search median, idle gap 1000 ms",
+      "original": 1649.93,
+      "rerun": 1649.5,
+      "rule": "|diff| <= 25",
+      "match": true
+    },
+    {
+      "metric": "E3 warm second-search median, idle gap 2000 ms",
+      "original": 647.31,
+      "rerun": 647.79,
+      "rule": "|diff| <= 25",
+      "match": true
+    },
+    {
+      "metric": "E3 warm second-search median, idle gap 3500 ms",
+      "original": 454,
+      "rerun": 454.99,
+      "rule": "|diff| <= 25",
+      "match": true
+    },
+    {
+      "metric": "E3 hang openalex median (ms)",
+      "original": 15014.57,
+      "rerun": 15014.66,
+      "rule": "|diff| <= 25",
+      "match": true
+    },
+    {
+      "metric": "E3 hang pubmed median (ms)",
+      "original": 25024.79,
+      "rerun": 25024.76,
+      "rule": "|diff| <= 25",
+      "match": true
+    },
+    {
+      "metric": "E3 hang arxiv median (ms)",
+      "original": 30030.74,
+      "rerun": 30030.47,
+      "rule": "|diff| <= 25",
+      "match": true
+    },
+    {
+      "metric": "E4a papers returned k=10",
+      "original": 40,
+      "rerun": 40,
+      "rule": "exact",
+      "match": true
+    },
+    {
+      "metric": "E4a total ms k=10",
+      "original": 33.41,
+      "rerun": 30.45,
+      "rule": "|diff| <= 8",
+      "match": true
+    },
+    {
+      "metric": "E4a papers returned k=25",
+      "original": 97,
+      "rerun": 97,
+      "rule": "exact",
+      "match": true
+    },
+    {
+      "metric": "E4a total ms k=25",
+      "original": 67.47,
+      "rerun": 69.21,
+      "rule": "|diff| <= 10.120922174999986",
+      "match": true
+    },
+    {
+      "metric": "E4a papers returned k=50",
+      "original": 191,
+      "rerun": 191,
+      "rule": "exact",
+      "match": true
+    },
+    {
+      "metric": "E4a total ms k=50",
+      "original": 118.34,
+      "rerun": 127.89,
+      "rule": "|diff| <= 17.750910375",
+      "match": true
+    },
+    {
+      "metric": "E4a papers returned k=100",
+      "original": 355,
+      "rerun": 355,
+      "rule": "exact",
+      "match": true
+    },
+    {
+      "metric": "E4a total ms k=100",
+      "original": 207.19,
+      "rerun": 220.49,
+      "rule": "|diff| <= 31.078337250000093",
+      "match": true
+    },
+    {
+      "metric": "E4b session counts",
+      "original": "[{\"queries\":1,\"returnedCumulative\":106,\"rowsInTable\":106,\"distinctWorks\":102,\"persistedDuplicateRows\":4,\"rowsWithoutDoi\":17},{\"queries\":2,\"returnedCumulative\":217,\"rowsInTable\":179,\"distinctWorks\":166,\"persistedDuplicateRows\":13,\"rowsWithoutDoi\":26},{\"queries\":3,\"returnedCumulative\":317,\"rowsInTable\":218,\"distinctWorks\":197,\"persistedDuplicateRows\":21,\"rowsWithoutDoi\":33},{\"queries\":4,\"returnedCumulative\":422,\"rowsInTable\":256,\"distinctWorks\":227,\"persistedDuplicateRows\":29,\"rowsWithoutDoi\":37},{\"queries\":5,\"returnedCumulative\":527,\"rowsInTable\":274,\"distinctWorks\":242,\"persistedDuplicateRows\":32,\"rowsWithoutDoi\":39},{\"queries\":6,\"returnedCumulative\":635,\"rowsInTable\":293,\"distinctWorks\":255,\"persistedDuplicateRows\":38,\"rowsWithoutDoi\":44},{\"queries\":7,\"returnedCumulative\":737,\"rowsInTable\":305,\"distinctWorks\":266,\"persistedDuplicateRows\":39,\"rowsWithoutDoi\":45},{\"queries\":8,\"returnedCumulative\":845,\"rowsInTable\":310,\"distinctWorks\":271,\"persistedDuplicateRows\":39,\"rowsWithoutDoi\":45}]",
+      "rerun": "[{\"queries\":1,\"returnedCumulative\":106,\"rowsInTable\":106,\"distinctWorks\":102,\"persistedDuplicateRows\":4,\"rowsWithoutDoi\":17},{\"queries\":2,\"returnedCumulative\":217,\"rowsInTable\":179,\"distinctWorks\":166,\"persistedDuplicateRows\":13,\"rowsWithoutDoi\":26},{\"queries\":3,\"returnedCumulative\":317,\"rowsInTable\":218,\"distinctWorks\":197,\"persistedDuplicateRows\":21,\"rowsWithoutDoi\":33},{\"queries\":4,\"returnedCumulative\":422,\"rowsInTable\":256,\"distinctWorks\":227,\"persistedDuplicateRows\":29,\"rowsWithoutDoi\":37},{\"queries\":5,\"returnedCumulative\":527,\"rowsInTable\":274,\"distinctWorks\":242,\"persistedDuplicateRows\":32,\"rowsWithoutDoi\":39},{\"queries\":6,\"returnedCumulative\":635,\"rowsInTable\":293,\"distinctWorks\":255,\"persistedDuplicateRows\":38,\"rowsWithoutDoi\":44},{\"queries\":7,\"returnedCumulative\":737,\"rowsInTable\":305,\"distinctWorks\":266,\"persistedDuplicateRows\":39,\"rowsWithoutDoi\":45},{\"queries\":8,\"returnedCumulative\":845,\"rowsInTable\":310,\"distinctWorks\":271,\"persistedDuplicateRows\":39,\"rowsWithoutDoi\":45}]",
+      "rule": "exact",
+      "match": true
+    },
+    {
+      "metric": "E4c library scan P=1000 F=0 (ms)",
+      "original": 4.06,
+      "rerun": 4.33,
+      "rule": "|diff| <= 6",
+      "match": true
+    },
+    {
+      "metric": "E4c library scan P=1000 F=100 (ms)",
+      "original": 9.15,
+      "rerun": 9.99,
+      "rule": "|diff| <= 6",
+      "match": true
+    },
+    {
+      "metric": "E4c library scan P=1000 F=500 (ms)",
+      "original": 29.74,
+      "rerun": 29.03,
+      "rule": "|diff| <= 6",
+      "match": true
+    },
+    {
+      "metric": "E4c library scan P=1000 F=1000 (ms)",
+      "original": 51.5,
+      "rerun": 51.64,
+      "rule": "|diff| <= 7.725630149999994",
+      "match": true
+    },
+    {
+      "metric": "E4c library scan P=5000 F=0 (ms)",
+      "original": 11.79,
+      "rerun": 12.41,
+      "rule": "|diff| <= 6",
+      "match": true
+    },
+    {
+      "metric": "E4c library scan P=5000 F=100 (ms)",
+      "original": 37.14,
+      "rerun": 38.02,
+      "rule": "|diff| <= 6",
+      "match": true
+    },
+    {
+      "metric": "E4c library scan P=5000 F=500 (ms)",
+      "original": 125.57,
+      "rerun": 125.14,
+      "rule": "|diff| <= 18.83501369999999",
+      "match": true
+    },
+    {
+      "metric": "E4c library scan P=5000 F=1000 (ms)",
+      "original": 251.91,
+      "rerun": 256.72,
+      "rule": "|diff| <= 37.78652610000001",
+      "match": true
+    },
+    {
+      "metric": "E4c library scan P=20000 F=0 (ms)",
+      "original": 48.06,
+      "rerun": 54.48,
+      "rule": "|diff| <= 7.209320099999967",
+      "match": true
+    },
+    {
+      "metric": "E4c library scan P=20000 F=100 (ms)",
+      "original": 174.36,
+      "rerun": 157.84,
+      "rule": "|diff| <= 26.154587849999917",
+      "match": true
+    },
+    {
+      "metric": "E4c library scan P=20000 F=500 (ms)",
+      "original": 546.39,
+      "rerun": 626.08,
+      "rule": "|diff| <= 81.95864100000003",
+      "match": true
+    },
+    {
+      "metric": "E4c library scan P=20000 F=1000 (ms)",
+      "original": 1097.94,
+      "rerun": 1020.99,
+      "rule": "|diff| <= 164.69104874999994",
+      "match": true
+    },
+    {
+      "metric": "E3 cpu k=10 (ms)",
+      "original": 4.98,
+      "rerun": 5.13,
+      "rule": "|diff| <= 2.5",
+      "match": true
+    },
+    {
+      "metric": "E3 cpu k=20 (ms)",
+      "original": 9.49,
+      "rerun": 6.67,
+      "rule": "|diff| <= 2.848089599999997",
+      "match": true
+    },
+    {
+      "metric": "E3 cpu k=50 (ms)",
+      "original": 11.13,
+      "rerun": 14.66,
+      "rule": "|diff| <= 3.338707500000021",
+      "match": false
+    },
+    {
+      "metric": "E3 cpu k=100 (ms)",
+      "original": 19.23,
+      "rerun": 18.52,
+      "rule": "|diff| <= 5.768718300000001",
+      "match": true
+    },
+    {
+      "metric": "E3 cpu k=200 (ms)",
+      "original": 43.22,
+      "rerun": 32.03,
+      "rule": "|diff| <= 12.965215499999976",
+      "match": true
+    },
+    {
+      "metric": "E5 spacing total L=200 (ms)",
+      "original": 10211,
+      "rerun": 10213,
+      "rule": "|diff| <= 40",
+      "match": true
+    },
+    {
+      "metric": "E5 spacing total L=1000 (ms)",
+      "original": 11008,
+      "rerun": 11007,
+      "rule": "|diff| <= 40",
+      "match": true
+    },
+    {
+      "metric": "E5 spacing total L=2000 (ms)",
+      "original": 12015,
+      "rerun": 12017,
+      "rule": "|diff| <= 40",
+      "match": true
+    },
+    {
+      "metric": "E5 spacing total L=3000 (ms)",
+      "original": 18019,
+      "rerun": 18021,
+      "rule": "|diff| <= 40",
+      "match": true
+    },
+    {
+      "metric": "E5 backoff k=1 rep 0 (ms)",
+      "original": 2287,
+      "rerun": 2284,
+      "rule": "|diff| <= 900",
+      "match": true
+    },
+    {
+      "metric": "E5 backoff k=1 rep 1 (ms)",
+      "original": 2241,
+      "rerun": 2288,
+      "rule": "|diff| <= 900",
+      "match": true
+    },
+    {
+      "metric": "E5 backoff k=1 rep 2 (ms)",
+      "original": 2316,
+      "rerun": 2223,
+      "rule": "|diff| <= 900",
+      "match": true
+    },
+    {
+      "metric": "E5 backoff k=2 rep 0 (ms)",
+      "original": 6186,
+      "rerun": 6551,
+      "rule": "|diff| <= 900",
+      "match": true
+    },
+    {
+      "metric": "E5 backoff k=2 rep 1 (ms)",
+      "original": 6519,
+      "rerun": 6522,
+      "rule": "|diff| <= 900",
+      "match": true
+    },
+    {
+      "metric": "E5 backoff k=2 rep 2 (ms)",
+      "original": 6660,
+      "rerun": 6539,
+      "rule": "|diff| <= 900",
+      "match": true
+    },
+    {
+      "metric": "E5 backoff k=3 rep 0 (ms)",
+      "original": 14369,
+      "rerun": 15101,
+      "rule": "|diff| <= 900",
+      "match": true
+    },
+    {
+      "metric": "E5 backoff k=3 rep 1 (ms)",
+      "original": 14523,
+      "rerun": 14232,
+      "rule": "|diff| <= 900",
+      "match": true
+    },
+    {
+      "metric": "E5 backoff k=3 rep 2 (ms)",
+      "original": 14796,
+      "rerun": 14777,
+      "rule": "|diff| <= 900",
+      "match": true
+    },
+    {
+      "metric": "E5 backoff k=4 rep 0 (ms)",
+      "original": 14878,
+      "rerun": 14432,
+      "rule": "|diff| <= 900",
+      "match": true
+    },
+    {
+      "metric": "E5 backoff k=4 rep 1 (ms)",
+      "original": 14702,
+      "rerun": 14482,
+      "rule": "|diff| <= 900",
+      "match": true
+    },
+    {
+      "metric": "E5 backoff k=4 rep 2 (ms)",
+      "original": 14755,
+      "rerun": 14551,
+      "rule": "|diff| <= 900",
+      "match": true
+    },
+    {
+      "metric": "E5 errors (request counts, outcomes, isolation; total_ms excluded)",
+      "original": "{\"meta\":{\"minRequestInterval_ms\":2000,\"maxRetries\":3,\"model\":\"openai/gpt-oss-120b (default in ai-service.js)\"},\"perStatus\":[{\"status\":400,\"requestsIssued\":1,\"retried\":false,\"outcome\":\"Groq API error 400: emulated 400\"},{\"status\":401,\"requestsIssued\":1,\"retried\":false,\"outcome\":\"Groq API error 401: emulated 401\"},{\"status\":500,\"requestsIssued\":1,\"retried\":false,\"outcome\":\"Groq API error 500: emulated 500\"},{\"status\":503,\"requestsIssued\":1,\"retried\":false,\"outcome\":\"Groq API error 503: emulated 503\"}],\"isolation\":{\"papers\":5,\"injectedFailureAtIndex\":3,\"succeeded\":4,\"failed\":1,\"failedTitles\":[\"Paper 2\"]}}",
+      "rerun": "{\"meta\":{\"minRequestInterval_ms\":2000,\"maxRetries\":3,\"model\":\"openai/gpt-oss-120b (default in ai-service.js)\"},\"perStatus\":[{\"status\":400,\"requestsIssued\":1,\"retried\":false,\"outcome\":\"Groq API error 400: emulated 400\"},{\"status\":401,\"requestsIssued\":1,\"retried\":false,\"outcome\":\"Groq API error 401: emulated 401\"},{\"status\":500,\"requestsIssued\":1,\"retried\":false,\"outcome\":\"Groq API error 500: emulated 500\"},{\"status\":503,\"requestsIssued\":1,\"retried\":false,\"outcome\":\"Groq API error 503: emulated 503\"}],\"isolation\":{\"papers\":5,\"injectedFailureAtIndex\":3,\"succeeded\":4,\"failed\":1,\"failedTitles\":[\"Paper 2\"]}}",
+      "rule": "exact",
+      "match": true
+    },
+    {
+      "metric": "E1 normalize openalex (us/record)",
+      "original": 6.57,
+      "rerun": 3.6,
+      "rule": "|diff| <= 1.97152875000001",
+      "match": false
+    },
+    {
+      "metric": "E1 normalize semantic_scholar (us/record)",
+      "original": 3.38,
+      "rerun": 3.07,
+      "rule": "|diff| <= 1.0152046499999925",
+      "match": true
+    },
+    {
+      "metric": "E1 normalize crossref (us/record)",
+      "original": 4.56,
+      "rerun": 4.45,
+      "rule": "|diff| <= 1.369325249999997",
+      "match": true
+    },
+    {
+      "metric": "E1 normalize europe_pmc (us/record)",
+      "original": 3.88,
+      "rerun": 3.74,
+      "rule": "|diff| <= 1.165294649999987",
+      "match": true
+    },
+    {
+      "metric": "E1 normalize arxiv (us/record)",
+      "original": 3.8,
+      "rerun": 3.3,
+      "rule": "|diff| <= 1.1407569000000024",
+      "match": true
+    },
+    {
+      "metric": "E1 normalize pubmed (us/record)",
+      "original": 6.51,
+      "rerun": 4.75,
+      "rule": "|diff| <= 1.9529600999999956",
+      "match": true
+    },
+    {
+      "metric": "E2b output records n=100",
+      "original": 70,
+      "rerun": 70,
+      "rule": "exact",
+      "match": true
+    },
+    {
+      "metric": "E2b deduplicate ms n=100",
+      "original": 0.22,
+      "rerun": 0.23,
+      "rule": "|diff| <= 1",
+      "match": true
+    },
+    {
+      "metric": "E2b output records n=1000",
+      "original": 700,
+      "rerun": 700,
+      "rule": "exact",
+      "match": true
+    },
+    {
+      "metric": "E2b deduplicate ms n=1000",
+      "original": 2.32,
+      "rerun": 2.37,
+      "rule": "|diff| <= 1",
+      "match": true
+    },
+    {
+      "metric": "E2b output records n=10000",
+      "original": 7000,
+      "rerun": 7000,
+      "rule": "exact",
+      "match": true
+    },
+    {
+      "metric": "E2b deduplicate ms n=10000",
+      "original": 27.95,
+      "rerun": 36.63,
+      "rule": "|diff| <= 11.181103200000008",
+      "match": true
+    },
+    {
+      "metric": "E2b output records n=100000",
+      "original": 70000,
+      "rerun": 70000,
+      "rule": "exact",
+      "match": true
+    },
+    {
+      "metric": "E2b deduplicate ms n=100000",
+      "original": 626.36,
+      "rerun": 550.81,
+      "rule": "|diff| <= 250.54564040000005",
+      "match": true
+    }
+  ]
+}

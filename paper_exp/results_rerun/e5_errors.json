@@ -1,0 +1,46 @@
+{
+  "meta": {
+    "minRequestInterval_ms": 2000,
+    "maxRetries": 3,
+    "model": "openai/gpt-oss-120b (default in ai-service.js)"
+  },
+  "perStatus": [
+    {
+      "status": 400,
+      "requestsIssued": 1,
+      "retried": false,
+      "total_ms": 27,
+      "outcome": "Groq API error 400: emulated 400"
+    },
+    {
+      "status": 401,
+      "requestsIssued": 1,
+      "retried": false,
+      "total_ms": 1,
+      "outcome": "Groq API error 401: emulated 401"
+    },
+    {
+      "status": 500,
+      "requestsIssued": 1,
+      "retried": false,
+      "total_ms": 2,
+      "outcome": "Groq API error 500: emulated 500"
+    },
+    {
+      "status": 503,
+      "requestsIssued": 1,
+      "retried": false,
+      "total_ms": 1,
+      "outcome": "Groq API error 503: emulated 503"
+    }
+  ],
+  "isolation": {
+    "papers": 5,
+    "injectedFailureAtIndex": 3,
+    "succeeded": 4,
+    "failed": 1,
+    "failedTitles": [
+      "Paper 2"
+    ]
+  }
+}
