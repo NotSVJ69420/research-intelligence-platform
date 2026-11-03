@@ -2,7 +2,7 @@
 import fs from 'fs';
 import { execSync } from 'child_process';
 const root = new URL('../../', import.meta.url).pathname;
-const files = execSync('git ls-files', { cwd: root }).toString().trim().split('\n').filter(f => !f.startsWith('paper/'));
+const files = execSync('git ls-files', { cwd: root }).toString().trim().split('\n').filter(f => !f.startsWith('paper_exp/'));
 const loc = (f) => fs.readFileSync(root + f, 'utf8').split('\n').length - (fs.readFileSync(root + f, 'utf8').endsWith('\n') ? 1 : 0);
 const layer = (f) => {
   if (f.startsWith('ingestion/sources/')) return 'ingestion: source adapters';
