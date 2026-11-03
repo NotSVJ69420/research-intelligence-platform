@@ -1,0 +1,125 @@
+(node:669) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+🚀 Running Multi-Provider Test Suite...
+
+
+═════ SECTION 1: Normalizer Unit Tests (6 Providers) ═════
+  ✓ Semantic Scholar normalizer produces valid schema
+  ✓ Semantic Scholar DOI normalized without prefix
+  ✓ Semantic Scholar citationCount preserved
+  ✓ Semantic Scholar PDF URL extracted
+  ✓ Crossref normalizer produces valid schema
+  ✓ Crossref JATS tags stripped from abstract
+  ✓ Crossref year extracted correctly
+  ✓ Crossref authors combined given and family
+  ✓ Crossref PDF extracted from link array
+  ✓ Europe PMC normalizer produces valid schema
+  ✓ Europe PMC authors parsed correctly from authorString
+  ✓ Europe PMC year parsed as integer
+  ✓ Europe PMC PDF extracted from fullTextUrlList
+  ✓ PubMed normalizer produces valid schema
+  ✓ PubMed PMID used as source_id
+  ✓ PubMed authors formatted properly
+  ✓ PubMed direct PMC PDF URL is null to avoid PoW bot-block error
+  ✓ PubMed DOI extracted from ArticleIdList
+  ✓ Normalizers tolerate empty objects without throwing
+
+═════ SECTION 2: Real API Smoke Tests (Individual Providers) ═════
+
+--- Test 2.1: arXiv Single Provider (N=2) ---
+[orchestrator] Search summary: {
+  query: 'quantum computing',
+  validSources: [ 'arxiv' ],
+  rawTotal: 2,
+  stats: { arxiv: { status: 'success', raw: 6, count: 2 } }
+}
+  ✓ arXiv returned results
+  ✓ arXiv paper has valid schema
+  ✓ arXiv source is "arxiv"
+
+--- Test 2.2: Crossref Single Provider (N=2) ---
+[orchestrator] Search summary: {
+  query: 'machine learning',
+  validSources: [ 'crossref' ],
+  rawTotal: 2,
+  stats: { crossref: { status: 'success', raw: 2, count: 2 } }
+}
+  ✓ Crossref returned results
+  ✓ Crossref paper has valid schema
+  ✓ Crossref source is "crossref"
+
+--- Test 2.3: Europe PMC Single Provider (N=2) ---
+[orchestrator] Search summary: {
+  query: 'crispr cas9',
+  validSources: [ 'europe_pmc' ],
+  rawTotal: 2,
+  stats: { europe_pmc: { status: 'success', raw: 2, count: 2 } }
+}
+  ✓ Europe PMC returned results
+  ✓ Europe PMC paper has valid schema
+  ✓ Europe PMC source is "europe_pmc"
+
+--- Test 2.4: PubMed Single Provider (N=2) ---
+[orchestrator] Search summary: {
+  query: 'immunotherapy cancer',
+  validSources: [ 'pubmed' ],
+  rawTotal: 2,
+  stats: { pubmed: { status: 'success', raw: 2, count: 2 } }
+}
+  ✓ PubMed returned results
+  ✓ PubMed paper has valid schema
+  ✓ PubMed source is "pubmed"
+
+--- Test 2.5: Semantic Scholar Single Provider (N=2) ---
+[source=semantic_scholar] failed: Semantic Scholar rate limit exceeded (HTTP 429). Configure an API key in Settings for dedicated allowance.
+[source=semantic_scholar] failed: Semantic Scholar rate limit exceeded (HTTP 429). Configure an API key in Settings for dedicated allowance.
+[orchestrator] Search summary: {
+  query: 'neural networks',
+  validSources: [ 'semantic_scholar' ],
+  rawTotal: 0,
+  stats: {
+    semantic_scholar: {
+      status: 'failed',
+      raw: 0,
+      count: 0,
+      error: 'Semantic Scholar rate limit exceeded (HTTP 429). Configure an API key in Settings for dedicated allowance.'
+    }
+  }
+}
+  ✓ Semantic Scholar unauthenticated pool handled gracefully without throwing
+  ℹ Note: Semantic Scholar public pool status: Semantic Scholar rate limit exceeded (HTTP 429). Configure an API key in Settings for dedicated allowance.
+
+═════ SECTION 3: Multi-Provider Search & Deduplication ═════
+
+--- Test 3.1: Biomedical overlap (Europe PMC + PubMed, N=3 each) ---
+[orchestrator] Search summary: {
+  query: 'mrna vaccine covid',
+  validSources: [ 'europe_pmc', 'pubmed' ],
+  rawTotal: 6,
+  stats: {
+    europe_pmc: { status: 'success', raw: 3, count: 3 },
+    pubmed: { status: 'success', raw: 3, count: 3 }
+  }
+}
+  ✓ Multi-provider search returned results
+  Sources present in results: europe_pmc, pubmed (total: 6)
+  ✓ No duplicate DOIs in combined results
+
+--- Test 3.2: Partial outage resilience (arxiv + invalid_provider) ---
+[orchestrator] unknown source: "invalid_provider" — skipping
+[orchestrator] Search summary: {
+  query: 'compiler optimization',
+  validSources: [ 'arxiv' ],
+  rawTotal: 2,
+  stats: { arxiv: { status: 'success', raw: 6, count: 2 } }
+}
+  ✓ Valid source succeeds despite invalid source
+
+--- Test 3.3: Registered source list contains all 6 sources ---
+  ✓ All 6 providers registered
+
+══════════════════════════════════════════
+🏁 Test Results: 36 passed, 0 failed
+══════════════════════════════════════════
+
+exit=0

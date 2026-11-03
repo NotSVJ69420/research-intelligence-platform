@@ -11,13 +11,14 @@ see `verification/module_usage_report.md`).
 | `experiments/` | Harness (`lib/`), experiment scripts `e0`–`e5`, `env_info.mjs`, and `run_all.sh` |
 | `results/` | Raw JSON of every emulated experiment (class **[S]**), plus `environment.json` |
 | `results_rerun/`, `logs_rerun/` | Raw JSON and logs of an independent, complete second execution of the final `run_all.sh` (for the verification report) |
-| `logs/` | Console logs of the runs and of the repository's own test scripts (class **[R]**) |
+| `logs/` | Console logs of the runs and of an earlier no-network execution of the repository's test scripts |
+| `logs_online/run1`, `run2` | Two executions of the repository's four test scripts with network access (class **[R]**): 78/78 assertions pass in both |
 | `verification/` | `EXPERIMENT_VERIFICATION.md`, `BIBLIOGRAPHIC_AUDIT.md`, `claims_report.*`, `module_usage_report.*`, and the audit scripts |
 
 ## Evidence classes (used throughout the paper)
 
 * **[S]** unmodified RIE modules against an emulated upstream (and a real local PostgreSQL) — reproducible here.
-* **[R]** the repository's own test scripts, run in the cloud sandbox (only the offline assertions are evaluable there).
+* **[R]** the repository's own test scripts, run in the cloud sandbox (78/78 pass with network access; needs `NODE_USE_ENV_PROXY=1` and `experiments/https_shim.mjs` in the sandbox, see `logs_online/`).
 * **[L]** one user-recorded live session of the Windows desktop application — recorded by the author from in-app logs;
   **not reproduced** and not a benchmark.
 * **[C]** code inspection only.

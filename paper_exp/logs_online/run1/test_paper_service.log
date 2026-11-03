@@ -1,0 +1,45 @@
+(node:687) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+═══ Setup: Initialize Database ═══
+[schema] Database initialized
+  ✓ Database initialized
+
+═══ Test 1: searchAndStore("compiler design", ["arxiv"], 5) ═══
+[orchestrator] Search summary: {
+  query: 'compiler design',
+  validSources: [ 'arxiv' ],
+  rawTotal: 5,
+  stats: { arxiv: { status: 'success', raw: 15, count: 5 } }
+}
+  ✓ Returns array
+  ✓ Returns ≤ 5 papers (got 5)
+  ✓ All papers have valid UUID IDs
+
+═══ Test 2: ID consistency (same search again) ═══
+[orchestrator] Search summary: {
+  query: 'compiler design',
+  validSources: [ 'arxiv' ],
+  rawTotal: 5,
+  stats: { arxiv: { status: 'success', raw: 15, count: 5 } }
+}
+  ✓ Same paper gets same DB ID across runs
+
+═══ Test 3: getAllPapers() ═══
+  ✓ Returns array
+  ✓ Returns ≤ 50 papers (got 5)
+  ✓ Papers have created_at field
+
+═══ Test 4: getPaperById ═══
+  ✓ Found paper by ID
+  ✓ Title matches
+  ✓ Returns null for non-existent ID
+
+═══ Test 5: deletePaper ═══
+  ✓ Delete returns true
+  ✓ Second delete returns false
+  ✓ Paper is gone after delete
+
+═══ Results: 14 passed, 0 failed ═══
+
+exit=0

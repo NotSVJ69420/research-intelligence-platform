@@ -1,0 +1,58 @@
+(node:745) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+═══ Test 1: Single provider (arxiv, limit 3) ═══
+[orchestrator] Search summary: {
+  query: 'quantum computing',
+  validSources: [ 'arxiv' ],
+  rawTotal: 3,
+  stats: { arxiv: { status: 'success', raw: 9, count: 3 } }
+}
+  Returned 3 papers
+  ✓ Count ≤ 3
+
+═══ Test 2: Multiple providers (openalex + arxiv, limit 3) ═══
+[source=openalex] failed: OpenAlex HTTP 429: Too Many Requests
+[source=openalex] failed: OpenAlex HTTP 429: Too Many Requests
+[orchestrator] Search summary: {
+  query: 'deep learning',
+  validSources: [ 'openalex', 'arxiv' ],
+  rawTotal: 3,
+  stats: {
+    openalex: {
+      status: 'failed',
+      raw: 0,
+      count: 0,
+      error: 'OpenAlex HTTP 429: Too Many Requests'
+    },
+    arxiv: { status: 'success', raw: 9, count: 3 }
+  }
+}
+  Returned 3 papers
+  ✓ Count ≤ 6 (up to 3 per provider)
+  ✓ All papers pass schema validation
+  ✓ No duplicate DOIs
+
+═══ Test 3: Partial failure (arxiv + nonexistent, limit 3) ═══
+[orchestrator] unknown source: "nonexistent" — skipping
+[orchestrator] Search summary: {
+  query: 'compiler design',
+  validSources: [ 'arxiv' ],
+  rawTotal: 3,
+  stats: { arxiv: { status: 'success', raw: 9, count: 3 } }
+}
+  ✓ Returned 3 papers (partial result ≤ 3)
+
+═══ Test 4: Cross-provider duplicate handling (deduplicate unit check) ═══
+  ✓ Duplicate collapsed properly across providers
+
+═══ Test 5: Total failure (no valid providers) ═══
+[orchestrator] unknown source: "nonexistent" — skipping
+[orchestrator] no valid sources provided — returning empty
+  ✓ Returned empty array for nonexistent provider
+[orchestrator] no valid sources provided — returning empty
+  ✓ Returned empty array for empty provider list
+
+═══ Results: 8 passed, 0 failed ═══
+
+exit=0

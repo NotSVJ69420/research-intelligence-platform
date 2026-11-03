@@ -107,11 +107,17 @@ claim('E5.4', 'VI-E', 'Null abstract -> literal "Abstract: null"; undefined -> "
 // ---------- E0 + repo tests ----------
 const e0 = R('e0_repo_stats.json');
 claim('E0.1', 'V / Tab. III', 'Code base 6 487 lines in 38 files; layer sizes as tabulated', `${e0.totalLines}, ${Object.values(e0.byLayer).reduce((a, v) => a + v.files, 0)} files`, e0.totalLines === 6487 && Object.values(e0.byLayer).reduce((a, v) => a + v.files, 0) === 38);
-const logDir = here + '../logs/';
-const cnt = (f, ch) => (fs.readFileSync(logDir + f, 'utf8').match(new RegExp(ch, 'g')) || []).length;
-const tests = { 'repo_test_all_providers.log': [22, 6], 'repo_test_ingestion.log': [8, 0], 'repo_test_paper_service.log': [7, 2], 'repo_test_workspace_library.log': [20, 0] };
-const tcounts = Object.entries(tests).map(([f, [p, fl2]]) => [f, cnt(f, '✓'), cnt(f, '✗')]);
-claim('R.1', 'V', 'Repository tests in sandbox: the 57 offline assertions all pass; the other 8 assertions need live providers and are not evaluable behind the egress policy (raw counts kept in the logs)', tcounts.map(([f, p, f2]) => `${f.replace('repo_test_', '').replace('.log', '')}:${p}/${f2}`).join(' '), tcounts.every(([f, p, f2]) => p === tests[f][0] && f2 === tests[f][1]) && tcounts.reduce((a, [, p]) => a + p, 0) === 57 && tcounts.reduce((a, [, , f2]) => a + f2, 0) === 8);
+const cntIn = (f, ch) => (fs.readFileSync(f, 'utf8').match(new RegExp(ch, 'g')) || []).length;
+const expected = { 'test_all_providers.log': 36, 'test_ingestion.log': 8, 'test_paper_service.log': 14, 'test_workspace_library.log': 20 };
+for (const run of ['run1', 'run2']) {
+  const d = here + `../logs_online/${run}/`;
+  const rows = Object.entries(expected).map(([f, n]) => [f, cntIn(d + f, '✓'), cntIn(d + f, '✗')]);
+  claim(`R.${run}`, 'V', `Repository tests with network access (${run}): all 78 assertions pass (36+8+14+20), none fail`, rows.map(([f, p, x]) => `${f.replace('test_', '').replace('.log', '')}:${p}/${x}`).join(' '), rows.every(([f, p, x]) => p === expected[f] && x === 0) && rows.reduce((a, [, p]) => a + p, 0) === 78);
+}
+const dOff = here + '../logs/';
+const offline = { 'repo_test_all_providers.log': [22, 6], 'repo_test_ingestion.log': [8, 0], 'repo_test_paper_service.log': [7, 2], 'repo_test_workspace_library.log': [20, 0] };
+const offC = Object.entries(offline).map(([f, [p, x]]) => [f, cntIn(dOff + f, '✓'), cntIn(dOff + f, '✗')]);
+claim('R.offline', 'V', 'Earlier no-network execution (preserved in logs/): 57 assertions evaluable and passing; 8 needing live providers not evaluable', offC.map(([f, p, x]) => `${f.replace('repo_test_', '').replace('.log', '')}:${p}/${x}`).join(' '), offC.every(([f, p, x]) => p === offline[f][0] && x === offline[f][1]));
 
 // ---------- (b) original vs independent re-run ----------
 const rerunRows = [];

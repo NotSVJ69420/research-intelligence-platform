@@ -8,7 +8,7 @@ Application baseline: commit `bf2d3a3`. Application source modified: **none** (s
 | Class | Meaning | Status in this report |
 |---|---|---|
 | **[S]** simulated | Unmodified RIE modules against a deterministic fetch emulator (+ real local PostgreSQL 16.15) | Audited and **independently re-run** (§2, §4) |
-| **[R]** repository tests | The repo's four test scripts executed in the cloud sandbox | Re-counted from logs (claim R.1) |
+| **[R]** repository tests | The repo's four test scripts executed in the cloud sandbox, twice with network access (`logs_online/run1`, `run2`: 78/78 assertions pass each time) and once earlier without network (`logs/`: 57 evaluable, all passing; 8 needing live providers not evaluable) | Re-counted from logs (claims R.run1, R.run2, R.offline) |
 | **[L]** live | One session of the real Windows desktop app, recorded by the author from in-app logs | **Taken as stated by the author; not reproducible or independently checked here**; reported separately in the paper |
 | **[C]** code inspection | Reading the source (file/line evidence) | Spot-checked against source; not executed |
 | *unverified* | Anything above that was not executed or measured | Listed in §6 |
@@ -89,3 +89,10 @@ Application baseline: commit `bf2d3a3`. Application source modified: **none** (s
 * The PDF-download path (no timeout / size limit), plaintext key storage and IPC surface: **[C] only**.
 * Absolute timings on other hardware or with a networked database.
 * The Electron GUI, editor behaviour and Pandoc export were not run in the cloud.
+
+## 7. Repository tests with network access (added after network was enabled)
+
+* Runs: `NODE_USE_ENV_PROXY=1 node --import experiments/https_shim.mjs test/<script>.js` for all four scripts, twice. Result both times: **36 + 8 + 14 + 20 = 78 assertions pass, 0 fail**.
+* Why two settings were needed: Node's built-in `fetch` ignores the sandbox's `HTTPS_PROXY` unless `NODE_USE_ENV_PROXY=1`; and `ingestion/sources/arxiv.js` uses the plain-HTTP URL `http://export.arxiv.org`, which the HTTPS-only proxy cannot carry, so `https_shim.mjs` upgrades `http://` to `https://` for outgoing `fetch` (test environment only; no test or application file changed). Without the shim, 4 arXiv-dependent assertions failed; without the proxy variable, 8.
+* Caveat: no API keys were configured. OpenAlex and Semantic Scholar answered HTTP 429 in both runs; the tests tolerate this, so a passing suite does not imply every provider responded. On a machine with keys these providers should respond.
+* The assertion total rose from 65 to 78 because several `test-paper-service.js` steps only execute when search returns results.
