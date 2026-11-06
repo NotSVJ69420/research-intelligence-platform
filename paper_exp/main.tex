@@ -34,13 +34,17 @@
 
 \author{\IEEEauthorblockN{Suryavansh Jaggi}
 \IEEEauthorblockA{IILM University, Greater Noida\\
-suryavansh.jaggi.cs27@iilm.edu}}
+suryavansh.jaggi.cs27@iilm.edu}
+\and
+\IEEEauthorblockN{Swati Vashisht}
+\IEEEauthorblockA{IILM University, Greater Noida\\
+msswativashisht@gmail.com}}
 
 \maketitle
 
 
 \begin{abstract}
-We characterize the Research Intelligence Engine (RIE), an open-source Electron/PostgreSQL desktop application that fans a query out to six scholarly-metadata providers, normalizes and deduplicates the results, stores them, and sends abstracts to a hosted LLM. Controlled experiments run RIE's unmodified modules against a deterministic emulator of the upstream APIs and a real PostgreSQL server. Search latency tracks the slowest adapter within 11\,ms, but provider throttles impose a 350\,ms floor and up to $\approx$2.6\,s of delay on back-to-back searches, a hung provider blocks all results until its 15--30\,s timeout, and arXiv failures are reported as empty successes. The deduplicator is order dependent (1\,000 or 2\,000 output records for identical inputs) and merges DOI-less records only when metadata strings match up to letter case. The AI client is serial, spaced by 2\,s, retries only HTTP~429, and sends the literal text ``null'' for missing abstracts. A separate, single, user-recorded live session on a Windows desktop (four providers returned two papers each, Semantic Scholar returned HTTP~429, eight papers analyzed and saved in 27\,s) is consistent with these findings but is not a benchmark. No retrieval-quality or LLM-quality claims are made.
+We characterize the Research Intelligence Engine (RIE), an open-source Electron/PostgreSQL desktop application that fans a query out to six scholarly-metadata providers, normalizes and deduplicates the results, stores them, and sends abstracts to a hosted LLM. Controlled experiments run RIE's unmodified modules against a deterministic emulator of the upstream APIs and a real PostgreSQL server. Search latency tracks the slowest adapter within 11\,ms, but provider throttles impose a 350\,ms floor and up to $\approx$2.6\,s of delay on back-to-back searches, a hung provider blocks all results until its 15--30\,s timeout, and arXiv failures are reported as empty successes. The deduplicator is order dependent (1\,000 or 2\,000 output records for identical inputs) and merges DOI-less records only when metadata strings match up to letter case. The AI client is serial, spaced by 2\,s, retries only HTTP~429, and sends the literal text ``null'' for missing abstracts. A single user-recorded live Windows session (Semantic Scholar returned HTTP~429; eight papers analyzed and saved in 27\,s) is consistent with these findings but is not a benchmark. No retrieval-quality or LLM-quality claims are made.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -464,12 +468,14 @@ The run worked end to end from four live providers to Groq reports, and the rate
 \section{Conclusion}
 \label{sec:concl}
 
-Running \RIE's unmodified modules against an emulated upstream and a real PostgreSQL server characterized its latency structure (slowest adapter plus throttles, no global deadline), its misreporting of arXiv failures, its order-dependent and DOI-reliant deduplication (fixable by union-find at equal cost), its small local costs, and its serial AI client that sends \code{null} for missing abstracts; a single live Windows session was consistent with these findings. Real latency distributions, overlap rates, retrieval effectiveness and LLM-output quality remain open.
+Running \RIE's unmodified modules against an emulated upstream and a real PostgreSQL server characterized its latency structure (slowest adapter plus throttles, no global deadline), its misreporting of arXiv failures, its order-dependent and DOI-reliant deduplication (fixable by union-find at equal cost), its small local costs, and its serial AI client that sends \code{null} for missing abstracts; a single live Windows session was consistent with these findings. Real latency distributions, overlap rates, retrieval and LLM-output quality remain open.
 
 \section*{Reproducibility and availability}
-\code{paper\_exp/} holds the sources, figures, harness (\code{run\_all.sh} reproduces every [S] result in about 25 minutes), raw results, logs and verification reports. No application file was modified (baseline \code{bf2d3a3}). Requirements: Node.js~$\ge$18, \code{npm ci --omit=dev --ignore-scripts}, and a local PostgreSQL database \code{rie\_bench}. The [R] runs need network access and, in the sandbox, the proxy variable and shim of \cref{sec:impl}; the [L] observations are reported as recorded by the author.
+\code{paper\_exp/} holds the sources, figures, harness (\code{run\_all.sh} reproduces every [S] result in about 25 minutes), raw results and logs; no application file was modified (baseline \code{bf2d3a3}). Needs Node.js~$\ge$18, a local PostgreSQL database \code{rie\_bench}, and network access for [R] runs.
 
+{\fontsize{7}{8.2}\selectfont
 \bibliographystyle{IEEEtran}
 \bibliography{references}
+}
 
 \end{document}
